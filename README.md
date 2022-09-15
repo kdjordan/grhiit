@@ -4,45 +4,21 @@ This project is based on an idea that I've had for a few years. It is an introdu
 
 The tech stack will be React on the frontend. The API will be built using NodeJS and the DB will be Postgres. All components of the app will be hosted on AWS.  
 
-The primary focus will be on the frontend and the admin section functionalities. Making the interface intuitive and easy to use will be very important for this project as well as giving good information about who and why this flavor of HIIT is advantageous.  
+This project will flush out v0.5 of this app. I will be focusing on the Interval Training builder functionality, which in essence will serve as the admin section for me to create the training sesssions. This is the guts of the application in reality and I have chosen to implement this portion of the app for the capstone project.
 
-I am aiming for users that already have some sort of fitness background and are likely already familiar with HIIT (High Intensity Interval Training). The demographic here is individuals between the ages of 15 - 55.
+This basic functionality will include :
+- ability for a user to register into the app
+- the user will then be able to create a workout
+- workouts consist of intervals 
+- intervals consist of : a movement, a work interval, and a rest interval
+- workouts can also have dedicated rest intervals, which will occur between intervals
+- the owner of the workout will then be able to 'play' the workout, which progresses through the intervals with a stopwath type function, cuing the athlete to 'work' and 'rest' within each interval - showing the movement on the screen as well
 
-The backend DB should be fairly straightforward, as I will only be recording basic information about the user and tracking their progress throughout the 10 workout cycle. Other information stored will be the 10 individual workouts. I will need to create my own API for this and have a couple of forms to gather information from the user and the admin.
+### ERD
+<img src="./interval-builder-erd.png" width="500px" height="500px">
 
-The Schema will look something like this :
+### UML 
 
-TABLE USER
-- Username - str
-- First name - str
-- Last name - str
-- Email - str
-- Begin date - date
-- End date - date
-- Session number (1-10) - int
-
-TABLE SESSION
-- Session number - int
-- Session Intervals - []
-
-TABLE INTERVALS
-- Id - int
-- Work - int 
-- Rest - int
-- Movement - str  
-
-The basic functionality will include giving the user the ability to sign up and participate in the training sessions. The only way to progress from one training session to the next is to fully ‘play’ a session. The ‘play’ functionality is basically a series of timed exercises where the user is encouraged to count the repetitions that they complete for each session. The app will act as an interval timer, cuing the user to begin a movement and then rest at specific times. The screen will display the current exercise meant to be performed and have a countdown function that alerts the user when to rest.  
-
-Also, an admin section will be available for me to enter the workouts into the DB, thus creating the individual workouts that a user can sign up and participate in.  
-
-When a user first visits the page, there will be a small set of pages that will describe how and why the training cycle is good and why they should participate in the program. At any point the user can opt out and sign up and begin, but they will be encourages to ready all of the information presented so they know what they are getting into.  
-
-
-
-
-
-
-
-
+Coming Soon :))
 
 
