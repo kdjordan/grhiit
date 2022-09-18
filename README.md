@@ -26,6 +26,9 @@ This basic functionality will include :
 &nbsp;
 &nbsp;
 <img src="./interval-builder-erd.png" width="500px" height="500px">
+&nbsp;
+&nbsp;
+<img src="./interval-builder-sequence.png" width="500px" height="500px">
 
 
 
