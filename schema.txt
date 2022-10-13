@@ -1,0 +1,23 @@
+const workout = [
+    {
+        interval_id: 1,
+        work: 20,
+        rest: 10,
+        move_id: 0,
+        rounds: 8
+    },
+    {
+        interval_id: 2,
+        work: 0,
+        rest: 30,
+        move: 'rest',
+        rounds: 1
+    },
+    {
+        interval_id: 3,
+        work: 10,
+        rest: 20,
+        move_id: 3,
+        rounds: 12
+    }
+]
