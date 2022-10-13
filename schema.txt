@@ -17,7 +17,7 @@ const workout = [
         interval_id: 3,
         work: 10,
         rest: 20,
-        move_id: 3,
+        move_id: 3, 
         rounds: 12
     }
 ]
