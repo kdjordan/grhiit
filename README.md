@@ -1,5 +1,4 @@
 ## PROJECT PROPOSAL - grHIIT  
-&nbsp;
 
 ### CONCEPT
 This is a portion of a larger project and based on an idea that I've had for a few years. The full application will be an introduction to a specific type of fitness training that I have personally been involved in for over a decade. The function of the complete app will be to introduce the principles behind the training methodology and give the user a 10 workout cycle to complete. 
