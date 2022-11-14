@@ -6,7 +6,7 @@ CREATE DATABASE grhiit;
 \connect grhiit
 
 \i grhiit-schema.sql
-\i grhiit-seed.sql
+-- \i grhiit-seed.sql
 
 \echo 'Delete and recreate grhiit_test db?'
 \prompt 'Return for yes or control-C to cancel > ' foo
