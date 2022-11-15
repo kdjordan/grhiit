@@ -1,7 +1,7 @@
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(25) NOT NULL,
-  password VARCHAR(25) NOT NULL,
+  password TEXT NOT NULL,
   first_name VARCHAR(25) NOT NULL,
   last_name VARCHAR(25) NOT NULL,
   email VARCHAR(25) NOT NULL,
@@ -11,7 +11,8 @@ CREATE TABLE users (
 
 CREATE TABLE movements (
   id SERIAL PRIMARY KEY,
-  movement_name VARCHAR(25) NOT NULL,
+  name VARCHAR(25) NOT NULL,
+  acronym VARCHAR(10),
   difficulty INTEGER
 );
 
