@@ -35,7 +35,7 @@ An interval is comprised of : a *movement*, a *work* period, and a *rest* period
 Each interval has *one* movement. If an interval is a *rest* interval, then the boolean is_rest will be true and the interval then does not have a movement or a work period.
 Intervals can be of type *continuous* where there are no rest breaks within the rounds and this is tracked by the is_continuous boolean.
 - The **MOVEMENTS** table stores each movement (like squat, burpee, etc...) and has a *name* and a difficulty on a scale of 1-10, with 10 being the most diffcult.
-- The **USER_WORKOUT_COMP** table tracks the workouts that a user completes and when that workout was completed. A user can complete *many* workouts.
+- The **COMPLETED_WORKOUTS** table tracks the workouts that a user completes and when that workout was completed. A user can complete *many* workouts.
 
 ### EXAMPLE WORKOUT 
 - 8CBB : 12r @ 5 X 3
