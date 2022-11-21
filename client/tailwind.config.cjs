@@ -4,7 +4,18 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        grred: '#E21D26',
+        grwhite: '#ffffff',
+        grblack: '#000000',
+        grgrey: '#E5E5E5'
+      },
+      fontFamily: {
+        'osPrimary': ['Oswald', 'sans-serif'],
+        'ssSecondary': ['Source Sans Pro', 'sans-serif']
+      }
+    },
   },
   plugins: [],
 }

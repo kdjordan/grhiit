@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="main container shadow-lg mx-auto bg-white mt-24 md:mt-16 h-screen"></div>
+      <div className="main container shadow-lg mx-auto bg-grblack mt-24 md:mt-16 h-screen"></div>
     </div>
   )
 }
