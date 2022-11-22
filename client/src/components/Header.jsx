@@ -1,21 +1,63 @@
-import { motion, useCycle } from "framer-motion"
+import { useState } from 'react';
 
 
 export default function Header() {
-    const [open, cycleOpen] = useCycle(false, true);
+    // const [open, cycleOpen] = useCycle(false, true);
+    const [open, setOpen] = useState(false)
+    
 
+
+    function toggleMenu() {
+        console.log('togglin ', open)
+        setOpen(o => !o)
+    }
+    
     // if(!isLoggedIn) {
         return (
-            <nav className="nav bg-grred p-2 mt-0 z-1 w-full top-0">
+            <nav className="nav bg-grred p-2 z-1 w-full flex flex-col justify-content-center">
                 <div className="container mx-auto flex items-center justify-between">
-                    <div className="text-grwhite font-osPrimary">
-                        <a className="no-underline hover:text-grgrey hover:no-underline text-2xl pl-2" href="#">
-                            GRHIIT
-                        </a>
+                    {/* grhiit */}
+                    <div className="text-grwhite font-osPrimary hover:text-grgrey hover:no-underline text-2xl pl-2">
+                        <a className="no-underline" href="#">GRHIIT</a>
                     </div>
+                    {/* button */}
                     <div>
-                        <button className="text-3xl z-99 md:hidden focus:outline-none text-grwhite cursor-pointer" onClick={cycleOpen}>{open ? 'Close' : "Open"}</button>
+                        <button 
+                            className="text-3xl md:hidden focus:outline-none text-grwhite cursor-pointer self-end" 
+                            onClick={toggleMenu}
+                        >
+                            {open ? (
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="w-6 h-6"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                ) : (
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="w-6 h-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        strokeWidth={2}
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M4 6h16M4 12h16M4 18h16"
+                                        />
+                                    </svg>
+                                )}
+                            </button>
                     </div>
+                    {/* not mobile */}
                     <div className="md:flex pt-2 items-center justify-between font-osPrimary hidden">
                         <ul className="list-none md:flex justify-between items-center hidden">
                             <li className="mr-3">
@@ -26,23 +68,17 @@ export default function Header() {
                             </li>
                         </ul>
                     </div>
-                    {open && 
-                    (<motion.aside intital={{height:0}} animate={{height:'100vh'}}>
-                        <div className="mobileMenu absolute left-0 top-0 bg-grred w-full text-grwhite flex flex-col">
-                            <div>
-                                <button className="text-3xl self-end"></button>
-                            </div>
-                            <ul className="list-none text-3xl flex flex-col justify-content-center w-full gap-3 items-center">
-                                <li>
-                                    <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/signup">SIGNUP</a>
-                                </li>
-                                    <li>
-                                    <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/login">LOGIN</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </motion.aside>
-                    )}
+                </div>
+                {/* mobile */}
+                <div className={`bg-grred md:hidden w-full self-end text-grwhite ${open ? 'block' : 'hidden'}`}>
+                    <ul className="list-none text-3xl flex flex-col justify-content-center w-full gap-3 items-center pb-2">
+                        <li>
+                            <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/signup">SIGNUP</a>
+                        </li>
+                            <li>
+                            <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/login">LOGIN</a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         )
