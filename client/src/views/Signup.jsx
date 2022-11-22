@@ -6,7 +6,7 @@ export default function Signup () {
             className="text-grwhite"
             initial={{opacity:0}}
             animate={{opacity:1}}
-            exit={{opacity:0, transition: {duration: 1}}} 
+            exit={{opacity:0, transition: {duration: 0.5}}}   
         >
             <h1>Sign UP</h1>
         </motion.div>

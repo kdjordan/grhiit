@@ -6,7 +6,7 @@ export default function Home() {
             className="lg:text-9xl text-5xl h-screen text-grwhite flex flex-col w-full items-center lg:mt-16 mt-16 gap-3"
             initial={{opacity:0}}
             animate={{opacity:1}}
-            exit={{opacity:0, transition: {duration: 1}}}    
+            exit={{opacity:0, transition: {duration: 0.5}}}    
         >
             <h2>ALL IT TAKES</h2>
             <h2>IS</h2>
