@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import { motion } from "framer-motion"
 
 export default function Header() {
     const [open, setOpen] = useState(false)
@@ -46,7 +46,12 @@ export default function Header() {
                     </div>
                 </div>
                 {/* mobile */}
-                <div className={`bg-grred md:hidden w-full self-end text-grwhite ${open ? 'block' : 'hidden'}`}>
+                <div 
+                    className={`bg-grred md:hidden w-full self-end text-grwhite ${open ? 'block' : 'hidden'}`}
+                    // initial={{opacity:0}}
+                    // animate={{opacity:1}}
+                    // exit={{opacity:0, transition: {duration: 0.5}}
+                >
                     <ul className="list-none text-xl flex flex-col justify-content-center w-full gap-2 items-center pb-1">
                         <li>
                             <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/signup">SIGNUP</a>
