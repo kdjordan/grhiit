@@ -24,7 +24,7 @@ export default function Header() {
                 <div className={`container mx-auto flex items-center justify-between pb-1`}>
                     {/* grhiit */}
                     <div className="text-grwhite font-osPrimary hover:text-grgrey hover:no-underline text-3xl">
-                        <a className="no-underline" href="#">GRHIIT</a>
+                        <a className="no-underline" href="/">GRHIIT</a>
                     </div>
                     {/* button */}
                     <button 
@@ -37,17 +37,17 @@ export default function Header() {
                     <div className="md:flex pt-2 items-center justify-between font-osPrimary hidden">
                         <ul className="list-none md:flex justify-between items-center hidden">
                             <li className="mr-3">
-                                <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline py-2 px-4" href="#">SIGNUP</a>
+                                <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline py-2 px-4" href="/signup">SIGNUP</a>
                             </li>
                             <li className="mr-3">
-                                <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline py-2 px-4" href="#">LOGIN</a>
+                                <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline py-2 px-4" href="/login">LOGIN</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 {/* mobile */}
                 <div className={`bg-grred md:hidden w-full self-end text-grwhite ${open ? 'block' : 'hidden'}`}>
-                    <ul className="list-none text-3xl flex flex-col justify-content-center w-full gap-3 items-center pb-2">
+                    <ul className="list-none text-xl flex flex-col justify-content-center w-full gap-2 items-center pb-1">
                         <li>
                             <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/signup">SIGNUP</a>
                         </li>

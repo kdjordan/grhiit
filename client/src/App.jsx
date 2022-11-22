@@ -5,9 +5,9 @@ import Routes from './AllRoutes'
 function App() {
 
   return (
-    <div className="Appflex">
+    <div className="App">
       <Header />
-      <div className="main">
+      <div className="main font-osPrimary">
         <Routes />
       </div>
       {/* <div className="main container mx-auto bg-grblack mt-24 md:mt-16 h-screen"></div> */}

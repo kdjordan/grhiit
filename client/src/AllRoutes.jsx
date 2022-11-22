@@ -4,6 +4,8 @@ import { Routes, Route } from "react-router-dom";
 // import CompanyDetail from "./companies/CompanyDetail";
 // import PrivateRoute from "./common/PrivateRoute";
 import Home from "./views/Home";
+import Signup from "./views/Signup";
+import Login from "./views/Login"
 // import JobList from "./jobs/JobList";
 // import Profile from "./Profile";
 // import Login from "./Login";
@@ -13,6 +15,8 @@ export default function AllRoutes({ login, signup }) {
     return (
         <Routes>
             <Route path="/" element={<Home/>} />
+            <Route path="/signup" element={<Signup/>} />
+            <Route path="/login" element={<Login/>} />
         </Routes>
     )
 }
