@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 
 export default function Header() {
-    // const [open, cycleOpen] = useCycle(false, true);
     const [open, setOpen] = useState(false)
     
     useEffect(() => {

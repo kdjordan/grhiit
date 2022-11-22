@@ -1,12 +1,16 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import Header from './components/Header'
+import Routes from './AllRoutes'
 
 function App() {
 
   return (
-    <div className="App">
+    <div className="Appflex">
       <Header />
-      <div className="main container mx-auto bg-grblack mt-24 md:mt-16 h-screen"></div>
+      <div className="main">
+        <Routes />
+      </div>
+      {/* <div className="main container mx-auto bg-grblack mt-24 md:mt-16 h-screen"></div> */}
     </div>
   )
 }
