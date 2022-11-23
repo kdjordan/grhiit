@@ -1,67 +1,54 @@
-import { useState, useEffect } from 'react';
-import { motion } from "framer-motion"
+import { motion, useCycle } from "framer-motion"
+import { MenuToggle } from "./MenuToggle";
 
 export default function Header() {
-    const [open, setOpen] = useState(false)
-    
-    useEffect(() => {
-        function handleResize() {
-          if (window.innerWidth > 640) {
-            setOpen(false)
-          }
+    const [isOpen, toggleOpen] = useCycle(false, true);
+    const sidebar = {
+        open: {
+            y: 10,
+            opacity: 1,
+            transition: {
+                y: { stiffness: 1000, velocity: -100 }
+            }
+        },
+        closed: {
+            y: -400,
+            opacity: 0,
+            transition: {
+                y: { stiffness: 1000 }
+            }
         }
-        window.addEventListener('resize', handleResize)
-    })
-
-
-    function toggleMenu() {
-        setOpen(o => !o)
-    }
+      };
+    
     
     // if(!isLoggedIn) {
         return (
-            <nav className={`nav bg-grred p-2 z-1 w-full flex flex-col justify-content-center`}>
+            <motion.nav className={`nav bg-grblack border-b border-grwhite  p-4 z-1 w-full flex flex-col justify-content-center`}
+                initial={false}
+                animate={isOpen ? 'open' : 'closed'}
+            >
                 <div className={`container mx-auto flex items-center justify-between pb-1`}>
                     {/* grhiit */}
                     <div className="text-grwhite font-osPrimary hover:text-grgrey hover:no-underline text-3xl">
                         <a className="no-underline" href="/">GRHIIT</a>
                     </div>
-                    {/* button */}
-                    <button 
-                        className="md:hidden focus:outline-none text-grwhite cursor-pointer self-end text-4xl" 
-                        onClick={toggleMenu}
+                    <MenuToggle toggle={() => toggleOpen()} />
+                    {/* mobile */}
+                    <motion.div 
+                        className="bg-transparent mx-auto w-full absolute top-16 left-0 z-[-1] overflow-auto border-b border-grwhite"
+                        variants={sidebar}
                     >
-                        {open ? <>&times;</> : <>&#9776;</>}
-                    </button>
-                    {/* not mobile */}
-                    <div className="md:flex pt-2 items-center justify-between font-osPrimary hidden">
-                        <ul className="list-none md:flex justify-between items-center hidden">
-                            <li className="mr-3">
-                                <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline py-2 px-4" href="/signup">SIGNUP</a>
+                        <ul className="list-none text-xl flex flex-col items-center justify-content-center gap-2 pt-2 pb-2">
+                            <li>
+                                <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/signup">SIGNUP</a>
                             </li>
-                            <li className="mr-3">
-                                <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline py-2 px-4" href="/login">LOGIN</a>
+                                <li>
+                                <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/login">LOGIN</a>
                             </li>
                         </ul>
-                    </div>
+                    </motion.div>
                 </div>
-                {/* mobile */}
-                <div 
-                    className={`bg-grred md:hidden w-full self-end text-grwhite ${open ? 'block' : 'hidden'}`}
-                    // initial={{opacity:0}}
-                    // animate={{opacity:1}}
-                    // exit={{opacity:0, transition: {duration: 0.5}}
-                >
-                    <ul className="list-none text-xl flex flex-col justify-content-center w-full gap-2 items-center pb-1">
-                        <li>
-                            <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/signup">SIGNUP</a>
-                        </li>
-                            <li>
-                            <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/login">LOGIN</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            </motion.nav>
         )
     }
     // else {
