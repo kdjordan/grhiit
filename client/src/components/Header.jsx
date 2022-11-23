@@ -8,14 +8,16 @@ export default function Header() {
             y: 10,
             opacity: 1,
             transition: {
-                y: { stiffness: 1000, velocity: -100 }
+                y: { stiffness: 1000, velocity: 10 },
+                duration: 1
             }
         },
         closed: {
             y: -400,
             opacity: 0,
             transition: {
-                y: { stiffness: 1000 }
+                y: { stiffness: 1000 },
+                duration: 2
             }
         }
       };
@@ -23,7 +25,7 @@ export default function Header() {
     
     // if(!isLoggedIn) {
         return (
-            <motion.nav className={`nav bg-grblack border-b border-grwhite  p-4 z-1 w-full flex flex-col justify-content-center`}
+            <motion.nav className={`nav bg-grblack border-b border-grwhite  p-4 z-2 w-full flex flex-col justify-content-center`}
                 initial={false}
                 animate={isOpen ? 'open' : 'closed'}
             >
@@ -35,7 +37,7 @@ export default function Header() {
                     <MenuToggle toggle={() => toggleOpen()} />
                     {/* mobile */}
                     <motion.div 
-                        className="bg-transparent mx-auto w-full absolute top-16 left-0 z-[-1] overflow-auto border-b border-grwhite"
+                        className="bg-transparent mx-auto w-full absolute top-16 left-0 z-1 overflow-auto border-b border-grwhite"
                         variants={sidebar}
                     >
                         <ul className="list-none text-xl flex flex-col items-center justify-content-center gap-2 pt-2 pb-2">
