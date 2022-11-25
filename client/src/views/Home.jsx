@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-
+import { useNavigate } from 'react-router-dom';
 export default function Home() {
+    const navigate = useNavigate();
     return (
         <motion.div 
             className="lg:text-9xl text-5xl h-screen text-grwhite flex flex-col w-full items-center mt-24 gap-3"
@@ -15,6 +16,7 @@ export default function Home() {
                 className="mt-8 text-2xl bg-grred text-grwhite rounded px-16 py-2"
                 style={{scale:1.0}}
                 whileHover={{scale:1.1}}
+                onClick={() => navigate('/signup')}
             >
                 SIGN UP
             </motion.button>
@@ -22,6 +24,7 @@ export default function Home() {
                 className="mt-8 text-2xl bg-grred text-grwhite rounded px-16 py-2"
                 style={{scale:1.0}}
                 whileHover={{scale:1.1}}
+                onClick={() => navigate('/login')}
             >
                 LOG IN
             </motion.button>

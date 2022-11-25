@@ -1,10 +1,10 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 // import React from "react";
 // import CompanyList from "./companies/CompanyList";
 // import CompanyDetail from "./companies/CompanyDetail";
 // import PrivateRoute from "./common/PrivateRoute";
 import Home from "./views/Home";
-import Signup from "./views/SignUp";
+import Signup from "./views/Signup";
 import Login from "./views/Login"
 // import JobList from "./jobs/JobList";
 // import Profile from "./Profile";
@@ -12,35 +12,19 @@ import Login from "./views/Login"
 // import Signup from "./Signup";
 import { AnimatePresence } from 'framer-motion'
 
-export default function AnimatedRoutes({ login, signup }) {  
+export default function AnimatedRoutes({ signup }) {  
   const location = useLocation()
+  console.log(location)
 
     return (
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home/>} />
-            <Route path="/signup" element={<Signup/>} />
             <Route path="/login" element={<Login/>} />
+            <Route path="/signup" element={<Signup signup={signup}/>} />
+            <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
     )
 }
 
- /* <Route exact path="/login">
-                <Login login={login}/>
-            </Route>
-            <Route exact path="/signup">
-              <Signup signup={signup}/>
-            </Route>
-            <PrivateRoute exact path="/companies">
-              <CompanyList />
-            </PrivateRoute>
-            <PrivateRoute exact path="/companies/:handle">
-              <CompanyDetail />
-            </PrivateRoute>
-            <PrivateRoute exact path="/jobs">
-              <JobList />
-            </PrivateRoute>
-            <PrivateRoute exact path="/profile">
-              <Profile />
-            </PrivateRoute> */
