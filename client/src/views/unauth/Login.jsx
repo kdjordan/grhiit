@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login({ login }) {
+    const navigate = useNavigate()
+
     const INITIAL_STATE = {
         username: '',
         password: ''
@@ -11,7 +14,6 @@ export default function Login({ login }) {
     const [error, setError] = useState(false)
 
     function handleChange(e) {
-        console.log(form)
         const { name, value } = e.target
         setForm(f => ({
             ...f,
@@ -22,9 +24,9 @@ export default function Login({ login }) {
     async function handleSubmit(e) {
         e.preventDefault()
         let res = await login(form)
-        console.log('got login ', res)
         if (res.success) {
-            console.log('push to profile')
+            console.log('got login redirecting', res.success)
+            navigate('/userhome')
         } else {
             setError(res.error)
         }
