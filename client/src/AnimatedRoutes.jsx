@@ -12,7 +12,7 @@ import Login from "./views/Login"
 // import Signup from "./Signup";
 import { AnimatePresence } from 'framer-motion'
 
-export default function AnimatedRoutes({ signup }) {  
+export default function AnimatedRoutes({ signup, login }) {  
   const location = useLocation()
   console.log(location)
 
@@ -20,7 +20,7 @@ export default function AnimatedRoutes({ signup }) {
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home/>} />
-            <Route path="/login" element={<Login/>} />
+            <Route path="/login" element={<Login login={login}/>} />
             <Route path="/signup" element={<Signup signup={signup}/>} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

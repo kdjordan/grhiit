@@ -1,17 +1,18 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { validate } from 'uuid'
 
 export default function Signup({ signup }) {
     const INTITAL_STATE = {
-        firstName: '',
-        lastName: '',
-        username: '',
-        email: '',
+        firstName: 'Kevin',
+        lastName: 'Jordan',
+        username: 'kdjordan',
+        email: 'test@test',
         password: '',
         passwordConfirm: ''
     }
     const [form, setForm] = useState(INTITAL_STATE)
-    const [error, setError] = useState(false)
+    const [errors, setErrors] = useState([])
 
     function handleChange(e) {
         const { name, value } = e.target
@@ -21,9 +22,37 @@ export default function Signup({ signup }) {
         }))
     }   
 
+    function validateEmail(email) {
+        return email.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+    }
+    
+    function checkPasswordForMatch(password, passwordConfirm) {
+        console.log('checkingpw ', password == passwordConfirm)
+        return (password == passwordConfirm)
+
+    }
+
     async function handleSubmit(e) {
         e.preventDefault()
-        let res = await signup(form)
+        if (validateEmail(form.email) && checkPasswordForMatch(form.password, form.confirmPassword)) {
+            let res = await signup(form)
+        }
+        //check form for entry errors : email
+        if (!validateEmail(form.email)) {
+            console.log('setting email error', errors)
+            setErrors(e => [...e, 'Invalid email address'])
+        }
+        if (!checkPasswordForMatch(form.password, form.passwordConfirm)) {
+            console.log('setting password error', errors)
+            setErrors(e => [...e, 'Passwords do not match'])
+        }
+
+    }
+
+    function handleFocus() {
+        setErrors([])
     }
 
 
@@ -35,10 +64,20 @@ export default function Signup({ signup }) {
         exit={{opacity:0, transition: {duration: 0.5}}}        
         >
         
-        <h1 className="mb-8 text-8xl text-center text-grwhite w-full">HERE WE GO...</h1> 
+        <h1 className="mb-8 text-6xl md:text-8xl text-center text-grwhite w-full">HERE WE GO...</h1> 
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center px-2">
             <div className="bg-grblack px-6 py-8 rounded shadow-md text-grgrey w-full">
-            {error.length ? <div className="text-center text-grred pb-4 text-xl">ERROR</div> : ''}
+            {/* set up error display */}
+            {errors.length ? 
+                <div className="text-center text-grred pb-4 text-xl">
+                    <ul>
+                        {errors.map((e, index) => {
+                            return <li key={index}>{e}</li>
+                        })}
+
+                    </ul>
+                </div> 
+                : ''}
                 <form onSubmit={handleSubmit}>
                     <input 
                         type="text"
@@ -46,6 +85,7 @@ export default function Signup({ signup }) {
                         name="firstName"
                         value={form.firstName}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         autoFocus
                         required
                         placeholder="First Name" />
@@ -56,6 +96,7 @@ export default function Signup({ signup }) {
                         name="lastName"
                         value={form.lastName}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         required
                         placeholder="Last Name" />
 
@@ -65,6 +106,7 @@ export default function Signup({ signup }) {
                         name="username"
                         value={form.username}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         required
                         placeholder="Username" />
 
@@ -74,6 +116,7 @@ export default function Signup({ signup }) {
                         name="email"
                         value={form.email}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         required
                         placeholder="Email" />
 
@@ -83,15 +126,17 @@ export default function Signup({ signup }) {
                         name="password"
                         value={form.password}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         required
                         placeholder="Password" />
 
                     <input 
                         type="password"
                         className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
-                        name="confirmPassword"
-                        value={form.confirmPassword}
+                        name="passwordConfirm"
+                        value={form.passwordConfirm}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         required
                         placeholder="Confirm Password" />
 

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
-export default function Login() {
+export default function Login({ login }) {
     const INITIAL_STATE = {
         username: '',
         password: ''
@@ -19,9 +19,19 @@ export default function Login() {
         }))
     }   
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
-        console.log('submittin ', form)
+        let res = await login(form)
+        console.log('got login ', res)
+        if (res.success) {
+            console.log('push to profile')
+        } else {
+            setError(res.error)
+        }
+    }
+
+    function handleFocus() {
+        setError(false)
     }
 
     return (
@@ -32,9 +42,13 @@ export default function Login() {
         exit={{opacity:0, transition: {duration: 0.5}}}        
         >
         
-        <h1 className="mb-8 text-8xl text-center text-grwhite ">LET'S GO...</h1>
+        <h1 className="mb-8 text-6xl md:text-8xl text-center text-grwhite ">LET'S GO...</h1>
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center px-2">
             <div className="bg-grblack px-6 py-8 rounded shadow-md text-grgrey w-full">
+            {/* set up error display */}
+            {error.length ? 
+                <div className="text-center text-grred pb-4 text-xl">{error}</div> 
+                : ''}
                 <form onSubmit={handleSubmit}>
                     <input 
                         type="text"
@@ -42,6 +56,7 @@ export default function Login() {
                         name="username"
                         value={form.username}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         autoFocus
                         required
                         placeholder="Username" />
@@ -52,6 +67,7 @@ export default function Login() {
                         name="password"
                         value={form.password}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         autoFocus
                         required
                         placeholder="Password" />
