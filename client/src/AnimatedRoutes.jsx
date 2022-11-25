@@ -6,7 +6,7 @@ import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Home from "./views/unauth/Home";
 import Signup from "./views/unauth/Signup";
 import Login from "./views/unauth/Login"
-import UserHome from "./views/unauth/auth/UserHome";
+import Dashboard from "./views/unauth/auth/Dashboard";
 // import JobList from "./jobs/JobList";
 // import Profile from "./Profile";
 // import Login from "./Login";
@@ -17,12 +17,12 @@ export default function AnimatedRoutes({ signup, login }) {
   const location = useLocation()
 
     return (
-      <AnimatePresence>
+      <AnimatePresence exitBeforeEnter>
         <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home/>} />
             <Route path="/login" element={<Login login={login}/>} />
             <Route path="/signup" element={<Signup signup={signup}/>} />
-            <Route path="/userhome" element={<UserHome />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>

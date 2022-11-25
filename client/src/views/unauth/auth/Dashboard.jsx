@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-export default function UserHome() {
+export default function Dashboard() {
     return (
         <motion.div 
             className="text-3xl md:text-5xl h-screen text-grwhite flex flex-col w-full items-center mt-24 gap-3"

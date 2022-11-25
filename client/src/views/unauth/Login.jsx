@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function Login({ login }) {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const INITIAL_STATE = {
         username: '',
@@ -25,8 +25,7 @@ export default function Login({ login }) {
         e.preventDefault()
         let res = await login(form)
         if (res.success) {
-            console.log('got login redirecting', res.success)
-            navigate('/userhome')
+            navigate("/dashboard")
         } else {
             setError(res.error)
         }
