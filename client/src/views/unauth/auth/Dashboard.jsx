@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion'
+import { useContext } from 'react'
+import UserContext from '../../../UserContext'
 
 export default function Dashboard() {
+    const { currentUser, setCurrentUser } = useContext(UserContext)
+    console.log('currentUser', currentUser)
+
     return (
         <motion.div 
             className="text-3xl md:text-5xl h-screen text-grwhite flex flex-col w-full items-center mt-24 gap-3"
