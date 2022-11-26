@@ -12,22 +12,18 @@ export default function Home() {
             <h2>ALL IT TAKES</h2>
             <h2>IS</h2>
             <h2>ALL YOU GOT</h2>
-            <motion.button 
-                className="mt-8 text-2xl bg-grred text-grwhite rounded px-16 py-2"
-                style={{scale:1.0}}
-                whileHover={{scale:1.1}}
+            <button 
+                className="mt-8 text-2xl  bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none rounded px-16 py-2"
                 onClick={() => navigate('/signup')}
             >
                 SIGN UP
-            </motion.button>
-            <motion.button 
-                className="mt-8 text-2xl bg-grred text-grwhite rounded px-16 py-2"
-                style={{scale:1.0}}
-                whileHover={{scale:1.1}}
+            </button>
+            <button 
+                className="mt-8 text-2xl  bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none rounded px-16 py-2"
                 onClick={() => navigate('/login')}
             >
                 LOG IN
-            </motion.button>
+            </button>
         </motion.div>
     )
 }

@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import AnimatedRoutes from './AnimatedRoutes'
 import LocalStorage from './LocalStorage'
-import Grhiit from './Api.js'
+import Auth from './Auth/Auth.js'
+import Grhiit from './Api'
 import UserContext from './UserContext'
 import { useJwt, isExpired, decodeToken } from "react-jwt";
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -14,13 +15,18 @@ function App() {
   async function login(form) {
     // got a user logging in  => grab their token and put in localstorage
     try {
-      let token = await Grhiit.login(form) 
+      let token = await Auth.login(form) 
       setToken(token)
       LocalStorage.setLocalStorage(token)
       return { success: true }
     } catch (error) {
       return { success: false, error }
     }
+  }
+
+  function logout() {
+    LocalStorage.setLocalStorage(null)
+    setCurrentUser(null)
   }
 
   useEffect(() => {
