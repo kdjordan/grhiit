@@ -18,6 +18,7 @@ class Grhiit {
 
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
+    
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${this.token}` }
     const params = (method === "get")
@@ -52,6 +53,8 @@ class Grhiit {
   }
 
   static async getUser(username) {
+    console.log('in API ', username)
+    // let res = await this.request(`users/${username}`)
     let res = await this.request(`users/${username}`)
     return res.user
   }
@@ -63,18 +66,6 @@ class Grhiit {
 
   static async applyToJob(username, id) {
     await this.request(`users/${username}/jobs/${id}`, {}, "post");
-  }
-
-
-  //unauth routes
-  //allows for login and signup -> returns token that is stored in this class
-  static async login(user) {
-    let res = await this.request(`auth/token`, user, 'POST')
-    return res.token;
-  }
-  static async signup(user) {
-    let res = await this.request(`auth/register`, user, 'POST')
-    return res.token;
   }
 }
 

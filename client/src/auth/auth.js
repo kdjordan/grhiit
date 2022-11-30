@@ -23,7 +23,7 @@ class Auth {
     const params = (method === "get")
         ? data
         : {}
-
+        
     try {
       return (await axios({ url, method, data, params, headers })).data
     } catch (err) {

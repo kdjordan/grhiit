@@ -124,6 +124,7 @@ class User {
    **/
 
   static async get(username) {
+    console.log('in sql ', username)
     const userRes = await db.query(
           `SELECT username,
                   first_name AS "firstName",
@@ -139,12 +140,12 @@ class User {
 
     if (!user) throw new NotFoundError(`No user: ${username}`);
 
-    const userApplicationsRes = await db.query(
-          `SELECT a.job_id
-           FROM applications AS a
-           WHERE a.username = $1`, [username]);
+    // const userApplicationsRes = await db.query(
+    //       `SELECT a.job_id
+    //        FROM applications AS a
+    //        WHERE a.username = $1`, [username]);
 
-    user.applications = userApplicationsRes.rows.map(a => a.job_id);
+    // user.applications = userApplicationsRes.rows.map(a => a.job_id);
     return user;
   }
 
@@ -217,28 +218,28 @@ class User {
    * - jobId: job id
    **/
 
-  static async applyToJob(username, jobId) {
-    const preCheck = await db.query(
-          `SELECT id
-           FROM jobs
-           WHERE id = $1`, [jobId]);
-    const job = preCheck.rows[0];
+  // static async applyToJob(username, jobId) {
+  //   const preCheck = await db.query(
+  //         `SELECT id
+  //          FROM jobs
+  //          WHERE id = $1`, [jobId]);
+  //   const job = preCheck.rows[0];
 
-    if (!job) throw new NotFoundError(`No job: ${jobId}`);
+  //   if (!job) throw new NotFoundError(`No job: ${jobId}`);
 
-    const preCheck2 = await db.query(
-          `SELECT username
-           FROM users
-           WHERE username = $1`, [username]);
-    const user = preCheck2.rows[0];
+  //   const preCheck2 = await db.query(
+  //         `SELECT username
+  //          FROM users
+  //          WHERE username = $1`, [username]);
+  //   const user = preCheck2.rows[0];
 
-    if (!user) throw new NotFoundError(`No username: ${username}`);
+  //   if (!user) throw new NotFoundError(`No username: ${username}`);
 
-    await db.query(
-          `INSERT INTO applications (job_id, username)
-           VALUES ($1, $2)`,
-        [jobId, username]);
-  }
+  //   await db.query(
+  //         `INSERT INTO applications (job_id, username)
+  //          VALUES ($1, $2)`,
+  //       [jobId, username]);
+  // }
 }
 
 

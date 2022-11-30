@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Header from './components/Header'
+import Header from './components/NavBar'
 import AnimatedRoutes from './AnimatedRoutes'
 import LocalStorage from './LocalStorage'
 import Auth from './Auth/Auth.js'
@@ -25,19 +25,19 @@ function App() {
   }
 
   function logout() {
+    console.log('logging out')
     LocalStorage.setLocalStorage(null)
     setCurrentUser(null)
   }
 
   useEffect(() => {
     async function getUser() {
-      // console.log(token)
       if (token) {
         let { username }  = decodeToken(token)
         Grhiit.token = token
         let curUser = await Grhiit.getUser(username)
         setCurrentUser(curUser)
-        console.log(curUser.applications)
+        console.log('gettUser in app ', curUser)
         // setApplicationIDs(curUser.applications)
       }
       // setIsLoading(false)
@@ -53,7 +53,7 @@ function App() {
   return (
     <UserContext.Provider value={{currentUser, setCurrentUser}}>
     <div className="App">
-        <Header />
+        <Header logout={logout}/>
       <Router>
         <div className="main font-osPrimary">
           <AnimatedRoutes signup={signup} login={login}/>
@@ -66,3 +66,5 @@ function App() {
 }
 
 export default App
+
+
