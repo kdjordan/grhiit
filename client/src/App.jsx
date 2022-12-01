@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Header from './components/NavBar'
+import Navbar from './components/NavBar'
 import AnimatedRoutes from './AnimatedRoutes'
 import LocalStorage from './LocalStorage'
 import Auth from './Auth/Auth.js'
@@ -53,10 +53,10 @@ function App() {
   return (
     <UserContext.Provider value={{currentUser, setCurrentUser}}>
     <div className="App">
-        <Header logout={logout}/>
+        <Navbar logout={logout}/>
       <Router>
         <div className="main font-osPrimary">
-          <AnimatedRoutes signup={signup} login={login}/>
+          <AnimatedRoutes signup={signup} login={login} user={currentUser}/>
         </div>
       </Router>
       {/* <div className="main container mx-auto bg-grblack mt-24 md:mt-16 h-screen"></div> */}
