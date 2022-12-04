@@ -1,10 +1,25 @@
 import { motion } from 'framer-motion'
 import { useContext } from 'react'
 import UserContext from '../../../UserContext'
-
+import Card from '../../../components/Card'
 
 export default function Dashboard() {
-    const { currentUser, setCurrentUser } = useContext(UserContext)
+    const { currentUser } = useContext(UserContext)
+
+    const data = [
+        {
+            id: 1,
+            description: 'Test description',
+            date: '1/1/2022',
+            name: 'Session 4'
+        },
+        {
+            id: 2,
+            description: 'Test description 2',
+            date: '1/4/2022',
+            name: 'Session 5'
+        },
+    ]
 
     return (
         <motion.div 
@@ -14,7 +29,14 @@ export default function Dashboard() {
             exit={{opacity:0, transition: {duration: 0.5}}}    
         >
             {currentUser ? (
-                <h2>WELCOME BACK {currentUser.username}</h2>
+                <>
+                    <h2>WELCOME BACK {currentUser.username}</h2>
+                    <div className="flex gap-2">
+                        {data.map(d => (
+                            <Card name={d.id} key={d.id} description={d.description} date={d.date}/>
+                        ))}
+                    </div>
+                </>
             ) : (
                 <h2>Loading</h2>
             )}
