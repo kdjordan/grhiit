@@ -58,7 +58,6 @@ function App() {
           <AnimatedRoutes signup={signup} login={login} />
         </div>
       </Router>
-      {/* <div className="main container mx-auto bg-grblack mt-24 md:mt-16 h-screen"></div> */}
     </div>
     </UserContext.Provider>
   )
