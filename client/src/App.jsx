@@ -25,7 +25,6 @@ function App() {
   }
 
   function logout() {
-    console.log('logging out')
     LocalStorage.setLocalStorage(null)
     setCurrentUser(null)
   }
@@ -35,9 +34,9 @@ function App() {
       if (token) {
         let { username }  = decodeToken(token)
         Grhiit.token = token
-        let curUser = await Grhiit.getUser(username)
-        setCurrentUser(curUser)
-        console.log('gettUser in app ', curUser)
+        let user = await Grhiit.getUser(username)
+        setCurrentUser(user)
+        console.log('gettUser in app ', user)
         // setApplicationIDs(curUser.applications)
       }
       // setIsLoading(false)
@@ -56,7 +55,7 @@ function App() {
         <Navbar logout={logout}/>
       <Router>
         <div className="main font-osPrimary">
-          <AnimatedRoutes signup={signup} login={login} user={currentUser}/>
+          <AnimatedRoutes signup={signup} login={login} />
         </div>
       </Router>
       {/* <div className="main container mx-auto bg-grblack mt-24 md:mt-16 h-screen"></div> */}

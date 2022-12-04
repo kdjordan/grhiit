@@ -2,8 +2,9 @@ import { motion } from 'framer-motion'
 import { useContext } from 'react'
 import UserContext from '../../../UserContext'
 
+
 export default function Dashboard() {
-    const { currentUser  } = useContext(UserContext)
+    const { currentUser, setCurrentUser } = useContext(UserContext)
 
     return (
         <motion.div 
@@ -12,7 +13,11 @@ export default function Dashboard() {
             animate={{opacity:1}}
             exit={{opacity:0, transition: {duration: 0.5}}}    
         >
-            <h2>WELCOME BACK {currentUser.username}</h2>
+            {currentUser ? (
+                <h2>WELCOME BACK {currentUser.username}</h2>
+            ) : (
+                <h2>Loading</h2>
+            )}
             
         </motion.div>
     )
