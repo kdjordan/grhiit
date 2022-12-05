@@ -54,7 +54,7 @@ function App() {
     <div className="App">
         <Navbar logout={logout}/>
       <Router>
-        <div className="main font-osPrimary">
+        <div className="main font-osPrimary min-h-screen">
           <AnimatedRoutes signup={signup} login={login} />
         </div>
       </Router>

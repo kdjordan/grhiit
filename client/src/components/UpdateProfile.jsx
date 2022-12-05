@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export default function UpdateProfile({user}) {
-    console.log('user in update ', user)
+export default function UpdateProfile({ user }) {
     const [form, setForm] = useState({
         firstName: `${user.firstName}`,
         lastName: `${user.lastName}`,
@@ -17,8 +16,13 @@ export default function UpdateProfile({user}) {
         // and update the form state with the user's information
       }, [])
     
-      const handleChange = (event) => {
-        // Update form state with new values
+      function handleChange(e) {
+        console.log(form)
+        const { name, value } = e.target
+        setForm(f => ({
+            ...f,
+            [name]: value
+        })) 
       }
     
       const handleFocus = (event) => {
@@ -27,13 +31,14 @@ export default function UpdateProfile({user}) {
     
       const handleSubmit = (event) => {
         // Prevent default form submission
+        console.log('updating')
         event.preventDefault()
       }
 
     return (
-        <div className="max-w-sm mx-auto flex flex-col items-center px-2 mt-4">
-            <div className="bg-grblack text-lg px-6 py-4 rounded shadow-md text-grgrey w-[1000px]">
-                <h4 className="text-xl text-center pb-4">YOUR PROFILE INFORMATION</h4>
+        <div className="flex flex-col px-2 mt-4 mb-8 w-2/3">
+            <div className="bg-grblack text-lg px-6 py-4 rounded shadow-md text-grgrey">
+                <h4 className="text-2xl text-center pb-4">YOUR PROFILE INFORMATION</h4>
                 {errors.length ? 
                     <div className="text-center text-grred pb-4 text-xl">
                         <ul>
@@ -47,7 +52,7 @@ export default function UpdateProfile({user}) {
                     <form onSubmit={handleSubmit}>
                         <div className="flex align-center gap-8">
                             <div className="flex flex-col align-start w-full">
-                                <label className="block text-grwhite text-left mb-2" 
+                                <label className="block text-grwhite text-left mb-2 text-bae" 
                                     htmlFor="firstName">First Name
                                 </label>
                                 <input 
@@ -57,7 +62,6 @@ export default function UpdateProfile({user}) {
                                     value={form.firstName}
                                     onChange={handleChange}
                                     onFocus={handleFocus}
-                                    autoFocus
                                     required
                                     placeholder="First Name" />
                             </div>
@@ -79,66 +83,69 @@ export default function UpdateProfile({user}) {
                         <div className="flex align-center gap-8">
                             <div className="flex flex-col align-start w-full">
                                 <label className="block text-grwhite text-left mb-2" 
-                                    htmlFor="username">Username
+                                    htmlFor="password">Username
                                 </label>
                                 <input 
                                     type="text"
-                                    className="block border bg-grgrey text-grred border-grred  w-full p-3 rounded mb-4"
+                                    className="block border bg-grred text-grgrey border-grred  w-full p-3 rounded mb-4"
                                     name="username"
                                     value={form.username}
                                     onChange={handleChange}
                                     onFocus={handleFocus}
-                                    required
                                     disabled
                                     placeholder="Username" />
                             </div>
                             <div className="flex flex-col align-start w-full">
                                 <label className="block text-grwhite text-left mb-2" 
-                                    htmlFor="email">Email
+                                    htmlFor="lastName">Email
                                 </label>
                                 <input 
-                                    type="text"
+                                    type="email"
                                     className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
                                     name="email"
                                     value={form.email}
                                     onChange={handleChange}
                                     onFocus={handleFocus}
                                     required
-                                    placeholder="Email" />
+                                    placeholder="email" />
                             </div>
-                        </div>
                         </div>
                         <div className="flex align-center gap-8">
                             <div className="flex flex-col align-start w-full">
                                 <label className="block text-grwhite text-left mb-2" 
-                                    htmlFor="username">Last Name
+                                    htmlFor="paswword">New Password
                                 </label>
                                 <input 
                                     type="password"
                                     className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
-                                    name="password"
+                                    name="username"
                                     value={form.password}
                                     onChange={handleChange}
                                     onFocus={handleFocus}
                                     required
-                                    placeholder="Password" />
+                                    placeholder="New Password" />
                             </div>
                             <div className="flex flex-col align-start w-full">
                                 <label className="block text-grwhite text-left mb-2" 
-                                    htmlFor="email">Email
+                                    htmlFor="confirmPassword">Confrim Password
                                 </label>
                                 <input 
-                                    type="text"
+                                    type="password"
                                     className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
-                                    name="email"
-                                    value={form.email}
+                                    name="confirmPassword"
+                                    value={form.confirmPassword}
                                     onChange={handleChange}
                                     onFocus={handleFocus}
                                     required
-                                    placeholder="Email" />
+                                    placeholder="Confrim New Password" />
                             </div>
                         </div>
-                        
+                        <div className="flex align-center">
+                            <button
+                                type="submit"
+                                className="w-1/3 mx-auto self-center text-center text-base sm:text-sm py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
+                            >UPDATE PROFILE</button>
+                        </div>
                     </form>
             </div>
         </div>

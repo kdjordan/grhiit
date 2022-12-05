@@ -45,7 +45,7 @@ export default function Header({ logout }) {
             </div>
                 {!currentUser ? (
                     <motion.aside 
-                        className="bg-grblack absolute w-full h-screen top-[5rem]  overflow-hidden z-1"
+                        className="bg-grblack fixed w-full h-screen top-[5rem]  overflow-hidden z-1"
                         variants={sidebar}
                     >
                         <ul className="list-none text-xl flex flex-col items-center justify-content-center gap-2 pt-2 pb-2">
@@ -59,7 +59,7 @@ export default function Header({ logout }) {
                     </motion.aside>
                 ) : (
                     <motion.aside 
-                    className="bg-grblack absolute w-full h-screen top-[5rem]  overflow-hidden z-1"
+                    className="bg-grblack fixed w-full h-screen top-[5rem]  overflow-hidden z-1"
                     variants={sidebar}
                     >
                     <ul className="list-none text-xl flex flex-col items-center justify-content-center gap-2 pt-2 pb-2">
