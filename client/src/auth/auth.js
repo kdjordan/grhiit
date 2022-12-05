@@ -38,6 +38,7 @@ class Auth {
     return res.token;
   }
   static async signup(user) {
+    console.log('signing up ', user)
     let res = await this.request(`auth/register`, user, 'POST')
     return res.token;
   }

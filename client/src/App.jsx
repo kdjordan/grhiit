@@ -24,6 +24,19 @@ function App() {
     }
   }
 
+  async function signup(form) {
+    // got a user signing up => grab their token and put in localstorage
+    console.log('firing in app ', form)
+    try {
+      let token = await Auth.signup(form) 
+      setToken(token)
+      LocalStorage.setLocalStorage(token)
+      return { success: true }
+    } catch (error) {
+      return { success: false, error }
+    }
+  }
+
   function logout() {
     LocalStorage.setLocalStorage(null)
     setCurrentUser(null)
@@ -44,10 +57,6 @@ function App() {
     }
     getUser()
   }, [token])
-
-  function signup(form) {
-    console.log('signup triggered in APP ', form)
-  }
 
   return (
     <UserContext.Provider value={{currentUser, setCurrentUser}}>

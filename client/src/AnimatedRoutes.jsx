@@ -8,6 +8,7 @@ import Home from "./views/unauth/Home";
 import Signup from "./views/unauth/Signup";
 import Login from "./views/unauth/Login"
 import Dashboard from "./views/unauth/auth/Dashboard";
+import Create from "./views/unauth/auth/Create";
 // import JobList from "./jobs/JobList";
 // import Profile from "./Profile";
 // import Login from "./Login";
@@ -28,6 +29,12 @@ export default function AnimatedRoutes({ signup, login }) {
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute> 
+            } />
+            <Route path="/create" 
+              element={
+                <ProtectedRoute>
+                  <Create />
                 </ProtectedRoute> 
             } />
             <Route path="*" element={<Navigate to="/" replace />} />

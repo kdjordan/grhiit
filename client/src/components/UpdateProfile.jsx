@@ -7,7 +7,7 @@ export default function UpdateProfile({ user }) {
         username: `${user.username}`,
         email: `${user.email}`,
         password: '',
-        passwordConfirm: ''
+        confirmPassword: ''
       })
       const [errors, setErrors] = useState([])
 
@@ -17,7 +17,7 @@ export default function UpdateProfile({ user }) {
       }, [])
     
       function handleChange(e) {
-        console.log(form)
+        console.log(e.target)
         const { name, value } = e.target
         setForm(f => ({
             ...f,
@@ -27,16 +27,41 @@ export default function UpdateProfile({ user }) {
     
       const handleFocus = (event) => {
         // Clear errors for the input field that was focused
+        setErrors([])
       }
     
-      const handleSubmit = (event) => {
+      async function handleSubmit(e) {
         // Prevent default form submission
-        console.log('updating')
-        event.preventDefault()
+        e.preventDefault()
+        // Make sure email is valid format and passwords match
+        if (validateEmail(form.email) && checkPasswordForMatch(form.password, form.confirmPassword)) {
+            let res = await signup(form)
+        }
+        //check form for entry errors : email
+        if (!validateEmail(form.email)) {
+            console.log('setting email error', errors)
+            setErrors(e => [...e, 'Invalid email address'])
+        }
+        if (!checkPasswordForMatch(form.password, form.confirmPassword)) {
+            console.log('setting password error', errors)
+            setErrors(e => [...e, 'Passwords do not match'])
+        }
       }
 
+      function validateEmail(email) {
+        return email.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+    }
+    
+    function checkPasswordForMatch(password, passwordConfirm) {
+        console.log('checkingpw ', password == passwordConfirm)
+        return (password == passwordConfirm)
+
+    }
+
     return (
-        <div className="flex flex-col px-2 mt-4 mb-8 w-2/3">
+        <div className="flex flex-col px-2 mt-4 mb-8 w-full lg:w-2/3">
             <div className="bg-grblack text-lg px-6 py-4 rounded shadow-md text-grgrey">
                 <h4 className="text-2xl text-center pb-4">YOUR PROFILE INFORMATION</h4>
                 {errors.length ? 
@@ -113,12 +138,12 @@ export default function UpdateProfile({ user }) {
                         <div className="flex align-center gap-8">
                             <div className="flex flex-col align-start w-full">
                                 <label className="block text-grwhite text-left mb-2" 
-                                    htmlFor="paswword">New Password
+                                    htmlFor="password">New Password
                                 </label>
                                 <input 
                                     type="password"
                                     className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
-                                    name="username"
+                                    name="password"
                                     value={form.password}
                                     onChange={handleChange}
                                     onFocus={handleFocus}
@@ -127,7 +152,7 @@ export default function UpdateProfile({ user }) {
                             </div>
                             <div className="flex flex-col align-start w-full">
                                 <label className="block text-grwhite text-left mb-2" 
-                                    htmlFor="confirmPassword">Confrim Password
+                                    htmlFor="confirmPassword">Confirm Password
                                 </label>
                                 <input 
                                     type="password"
@@ -137,7 +162,7 @@ export default function UpdateProfile({ user }) {
                                     onChange={handleChange}
                                     onFocus={handleFocus}
                                     required
-                                    placeholder="Confrim New Password" />
+                                    placeholder="Confirm New Password" />
                             </div>
                         </div>
                         <div className="flex align-center">

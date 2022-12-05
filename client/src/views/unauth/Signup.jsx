@@ -1,16 +1,17 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { validate } from 'uuid'
+import { useNavigate } from 'react-router-dom'
 
 export default function Signup({ signup }) {
     const INTITAL_STATE = {
         firstName: 'Kevin',
         lastName: 'Jordan',
         username: 'kdjordan',
-        email: 'test@test',
-        password: '',
-        passwordConfirm: ''
+        email: 'test@test.com',
+        password: 'test123',
+        passwordConfirm: 'test123'
     }
+    const navigate = useNavigate()
     const [form, setForm] = useState(INTITAL_STATE)
     const [errors, setErrors] = useState([])
 
@@ -29,26 +30,27 @@ export default function Signup({ signup }) {
     }
     
     function checkPasswordForMatch(password, passwordConfirm) {
-        console.log('checkingpw ', password == passwordConfirm)
         return (password == passwordConfirm)
-
     }
 
     async function handleSubmit(e) {
         e.preventDefault()
-        if (validateEmail(form.email) && checkPasswordForMatch(form.password, form.confirmPassword)) {
-            let res = await signup(form)
-        }
         //check form for entry errors : email
         if (!validateEmail(form.email)) {
-            console.log('setting email error', errors)
             setErrors(e => [...e, 'Invalid email address'])
         }
-        if (!checkPasswordForMatch(form.password, form.passwordConfirm)) {
-            console.log('setting password error', errors)
+        else if (!checkPasswordForMatch(form.password, form.passwordConfirm)) {
             setErrors(e => [...e, 'Passwords do not match'])
+        } else {
+            const newForm = Object.assign({}, form)
+            delete newForm.passwordConfirm
+            let res = await signup(newForm)
+            if(res.success) {
+                navigate('/dashboard')
+            } else {
+                setErrors(result.error)
+            }
         }
-
     }
 
     function handleFocus() {

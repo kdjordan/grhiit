@@ -35,8 +35,6 @@ class Grhiit {
   }
 
   // Individual API routes
-  /** Get details on a company by handle. */
-
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`)
     return res.company;
@@ -53,8 +51,6 @@ class Grhiit {
   }
 
   static async getUser(username) {
-    console.log('in API ', username)
-    // let res = await this.request(`users/${username}`)
     let res = await this.request(`users/${username}`)
     return res.user
   }
