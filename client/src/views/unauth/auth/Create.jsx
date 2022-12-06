@@ -4,7 +4,31 @@ import { useState } from 'react'
 import AddInterval from '../../../components/AddInterval'
 import Interval from '../../../components/Interval'
 
+import {
+    DndContext, 
+    closestCenter,
+    KeyboardSensor,
+    PointerSensor,
+    useSensor,
+    useSensors,
+  } from '@dnd-kit/core';
+  import {
+    arrayMove,
+    SortableContext,
+    sortableKeyboardCoordinates,
+    verticalListSortingStrategy,
+  } from '@dnd-kit/sortable';
+  
+  
+
 export default function Create() {
+
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(KeyboardSensor, {
+        coordinateGetter: sortableKeyboardCoordinates,
+    }))
+
     const [intervals, setIntervals] = useState([])
 
     function addInterval(form) {
@@ -16,6 +40,28 @@ export default function Create() {
         setIntervals(newIntervals)
     }
 
+    function handleDragEnd(event) {
+        const {active, over} = event;
+        
+        if (active.id !== over.id) {
+            console.log('switch ', active, over)
+            // setIntervals((int) => {
+            //     return array.map((item) => {
+            //         if (item.id === id1) {
+            //             return array.find((i) => i.id === id2);
+            //         } else if (item.id === id2) {
+            //             return array.find((i) => i.id === id1);
+            //         } else {
+            //             return item;
+            //         }
+            //     });
+            // });
+            // const oldIndex = int.indexOf(active.id);
+            // const newIndex = int.indexOf(over.id);
+            // console.log(oldIndex, newIndex)
+        }
+    }
+
     return (
         <motion.div 
         className="container mx-auto text-3xl md:text-5xl h-screen text-grwhite flex flex-col items-center mt-24"
@@ -25,9 +71,21 @@ export default function Create() {
         >
         <h1 className="mb-8 text-center text-grwhite w-full">TRAINING SESSION BUILDER</h1> 
         <AddInterval addInterval={addInterval}/>
+
+
+
+
         <h2 className="mb-8 text:xl md:text-3xl text-center text-grwhite w-full">INTERVALS</h2>
         {intervals.length > 0 ? (
-            <>
+            <DndContext 
+                sensors={sensors}
+                collisionDetection={closestCenter}
+                onDragEnd={handleDragEnd}
+            >
+                <SortableContext 
+                    items={intervals}
+                    strategy={verticalListSortingStrategy}
+                >
                 {intervals.map((i) => (
                     <Interval 
                         key={i.id} 
@@ -38,15 +96,11 @@ export default function Create() {
                         rest={i.rest} 
                         rounds={i.rounds}
                         deleteInterval={deleteInterval}/>
-                ))}
-                <div className="flex align-center w-64">
-                    <button
-                        type="submit"
-                        className="w-full mx-auto self-center text-center text-2xl py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
-                    >SAVE WORKOUT</button>
-                </div> 
-            </>
-        ) : (
+                ))} 
+                </SortableContext>
+            </DndContext> 
+        ) 
+        : (
             <h2>No intervals yet :(</h2>
         )}
         </motion.div>
