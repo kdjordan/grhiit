@@ -71,7 +71,7 @@ function App() {
     </UserContext.Provider>
   )
 }
-
+////background-image: linear-gradient(180deg, #000000 15%, rgb(226, 29, 38) 100%);min-height:100vh;
 export default App
 
 

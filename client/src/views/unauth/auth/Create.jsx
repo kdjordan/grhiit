@@ -12,7 +12,8 @@ export default function Create() {
     }
 
     function deleteInterval(id) {
-        console.log('should delete ', id)
+        const newIntervals = intervals.filter(int => int.id != id)
+        setIntervals(newIntervals)
     }
 
     return (

@@ -12,7 +12,6 @@ export default function AddInterval({ addInterval }) {
     const [errors, setErrors] = useState([])
 
     function handleChange(e) {
-        console.log(e.target)
         const { name, value } = e.target
         setForm(f => ({
             ...f,
@@ -42,7 +41,7 @@ export default function AddInterval({ addInterval }) {
 
     return (
         <div className="flex flex-col px-2 mt-4 mb-8 w-full lg:w-2/3">
-        <div className="bg-grblack text-lg px-6 py-4 rounded shadow-md text-grgrey">
+        <div className="bg-gradient-to-b from-grred to-transparent border border-grred text-lg px-6 py-4 rounded shadow-md text-grgrey">
             <h4 className="text-2xl text-grwhite text-center pb-4">ADD AN INTERVAL</h4>
             {errors.length ? 
                 <div className="text-center text-grred pb-4 text-xl">

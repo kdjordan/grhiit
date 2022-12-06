@@ -64,7 +64,7 @@ export default function Header({ logout }) {
                     >
                     <ul className="list-none text-xl flex flex-col items-center justify-content-center gap-2 pt-2 pb-2">
                         <li>
-                            <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/signup">CREATE</a>
+                            <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/create">CREATE</a>
                         </li>
                         <li>
                             <a className="inline-block text-grwhite no-underline hover:text-grgrey hover:text-underline" href="/dashboard">DASHBOARD</a>
