@@ -1,12 +1,13 @@
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid';
 
 export default function AddInterval({ addInterval }) {
     const [form, setForm] = useState({
-        movement: '',
-        abbreviation: '',
-        work: '',
-        rest: '',
-        rounds: ''
+        movement: 'Burpee',
+        abbreviation: 'BRP',
+        work: 20,
+        rest: 10,
+        rounds: 5
     })
     const [errors, setErrors] = useState([])
 
@@ -22,7 +23,10 @@ export default function AddInterval({ addInterval }) {
       async function handleSubmit(e) {
         // Prevent default form submission
         e.preventDefault()
-        addInterval(form)
+        const newForm = Object.assign({}, form)
+        //add unique id to object
+        newForm.id = uuidv4()
+        addInterval(newForm)
       }
 
       const handleFocus = (event) => {
@@ -39,7 +43,7 @@ export default function AddInterval({ addInterval }) {
     return (
         <div className="flex flex-col px-2 mt-4 mb-8 w-full lg:w-2/3">
         <div className="bg-grblack text-lg px-6 py-4 rounded shadow-md text-grgrey">
-            <h4 className="text-2xl text-center pb-4">ADD AN INTERVAL</h4>
+            <h4 className="text-2xl text-grwhite text-center pb-4">ADD AN INTERVAL</h4>
             {errors.length ? 
                 <div className="text-center text-grred pb-4 text-xl">
                     <ul>
@@ -53,7 +57,7 @@ export default function AddInterval({ addInterval }) {
                 <form onSubmit={handleSubmit}>
                     <div className="flex align-center gap-8">
                         <div className="flex flex-col align-start w-full">
-                            <label className="block text-grwhite text-left mb-2 text-bae" 
+                            <label className="block text-grgrey text-left mb-2 text-bae" 
                                 htmlFor="firstName">MOVEMENT NAME
                             </label>
                             <input 
@@ -67,7 +71,7 @@ export default function AddInterval({ addInterval }) {
                                 placeholder="Movement" />
                         </div>
                         <div className="flex flex-col align-start w-full">
-                            <label className="block text-grwhite text-left mb-2" 
+                            <label className="block text-grgrey text-left mb-2" 
                                 htmlFor="lastName">ABBREVIATION
                             </label>
                             <input 
@@ -83,7 +87,7 @@ export default function AddInterval({ addInterval }) {
                     </div>
                     <div className="flex align-center gap-8">
                         <div className="flex flex-col align-start w-full">
-                            <label className="block text-grwhite text-left mb-2" 
+                            <label className="block text-grgrey text-left mb-2" 
                                 htmlFor="password">Work
                             </label>
                             <input 
@@ -97,7 +101,7 @@ export default function AddInterval({ addInterval }) {
                                 placeholder="Seconds" />
                         </div>
                         <div className="flex flex-col align-start w-full">
-                            <label className="block text-grwhite text-left mb-2" 
+                            <label className="block text-grgrey text-left mb-2" 
                                 htmlFor="rest">Rest
                             </label>
                             <input 
@@ -112,7 +116,7 @@ export default function AddInterval({ addInterval }) {
                                 placeholder="Seconds" />
                         </div>
                         <div className="flex flex-col align-start w-full">
-                            <label className="block text-grwhite text-left mb-2" 
+                            <label className="block text-grgrey text-left mb-2" 
                                 htmlFor="rounds">Rounds
                             </label>
                             <input 
