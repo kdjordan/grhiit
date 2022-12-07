@@ -36,6 +36,7 @@ export default function Create() {
     }
 
     function deleteInterval(id) {
+        console.log('calling D interval')
         const newIntervals = intervals.filter(int => int.id != id)
         setIntervals(newIntervals)
     }
@@ -44,22 +45,20 @@ export default function Create() {
         const {active, over} = event;
         
         if (active.id !== over.id) {
-            console.log('switch ', active, over)
-            // setIntervals((int) => {
-            //     return array.map((item) => {
-            //         if (item.id === id1) {
-            //             return array.find((i) => i.id === id2);
-            //         } else if (item.id === id2) {
-            //             return array.find((i) => i.id === id1);
-            //         } else {
-            //             return item;
-            //         }
-            //     });
-            // });
-            // const oldIndex = int.indexOf(active.id);
-            // const newIndex = int.indexOf(over.id);
-            // console.log(oldIndex, newIndex)
+            setIntervals((int) => {
+                const oldIndex = findIndexInState(active.id)
+                const newIndex = findIndexInState(over.id)
+                return arrayMove(int, oldIndex, newIndex);
+            })
         }
+    }
+
+    function findIndexInState(id) {
+        let theIndex = -1
+        intervals.forEach((intv, i) => {
+            if(intv.id == id) theIndex = i
+        })
+        return theIndex
     }
 
     return (
@@ -71,9 +70,6 @@ export default function Create() {
         >
         <h1 className="mb-8 text-center text-grwhite w-full">TRAINING SESSION BUILDER</h1> 
         <AddInterval addInterval={addInterval}/>
-
-
-
 
         <h2 className="mb-8 text:xl md:text-3xl text-center text-grwhite w-full">INTERVALS</h2>
         {intervals.length > 0 ? (
@@ -95,7 +91,8 @@ export default function Create() {
                         work={i.work} 
                         rest={i.rest} 
                         rounds={i.rounds}
-                        deleteInterval={deleteInterval}/>
+                        deleteInterval={deleteInterval}
+                         />
                 ))} 
                 </SortableContext>
             </DndContext> 
