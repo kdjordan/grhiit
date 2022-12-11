@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import AddInterval from '../../../components/AddInterval'
-import Interval from '../../../components/Interval'
+import { SortableItem } from '../../../components/SortableItem'
 
 import {
     DndContext, 
@@ -29,23 +29,23 @@ export default function Create() {
         coordinateGetter: sortableKeyboardCoordinates,
     }))
 
-    const [intervals, setIntervals] = useState([])
+    const [items, setItems] = useState([])
 
     function addInterval(form) {
-        setIntervals(int => [...int, form])
+        setItems(int => [...int, form])
     }
 
     function deleteInterval(id) {
-        console.log('calling D interval')
-        const newIntervals = intervals.filter(int => int.id != id)
-        setIntervals(newIntervals)
+        console.log('calling D interval', id)
+        const newItems = items.filter(int => int.id != id)
+        setItems(newItems)
     }
 
     function handleDragEnd(event) {
         const {active, over} = event;
         
         if (active.id !== over.id) {
-            setIntervals((int) => {
+            setItems((int) => {
                 const oldIndex = findIndexInState(active.id)
                 const newIndex = findIndexInState(over.id)
                 return arrayMove(int, oldIndex, newIndex);
@@ -53,9 +53,11 @@ export default function Create() {
         }
     }
 
+    
+
     function findIndexInState(id) {
         let theIndex = -1
-        intervals.forEach((intv, i) => {
+        items.forEach((intv, i) => {
             if(intv.id == id) theIndex = i
         })
         return theIndex
@@ -72,18 +74,19 @@ export default function Create() {
         <AddInterval addInterval={addInterval}/>
 
         <h2 className="mb-8 text:xl md:text-3xl text-center text-grwhite w-full">INTERVALS</h2>
-        {intervals.length > 0 ? (
+        {items.length > 0 ? (
             <DndContext 
                 sensors={sensors}
                 collisionDetection={closestCenter}
                 onDragEnd={handleDragEnd}
+                
             >
                 <SortableContext 
-                    items={intervals}
+                    items={items}
                     strategy={verticalListSortingStrategy}
                 >
-                {intervals.map((i) => (
-                    <Interval 
+                {items.map((i) => (
+                    <SortableItem 
                         key={i.id} 
                         id={i.id} 
                         movement={i.movement} 
@@ -91,7 +94,7 @@ export default function Create() {
                         work={i.work} 
                         rest={i.rest} 
                         rounds={i.rounds}
-                        deleteInterval={deleteInterval}
+                        remove={deleteInterval}
                          />
                 ))} 
                 </SortableContext>
