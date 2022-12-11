@@ -115,7 +115,7 @@ export default function Create() {
         </>
         ) 
         : (
-            <h2>No intervals yet :(</h2>
+            <h2 className="text-2xl border border-grred p-3 uppercase text-center text-grwhite rounded">No intervals yet :(</h2>
         )}
         </motion.div>
     )
