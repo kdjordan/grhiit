@@ -145,7 +145,9 @@ export default function Signup({ signup }) {
                     <button
                         type="submit"
                         className="w-full text-center py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
-                    >CREATE ACCOUNT</button>
+                    >
+                        CREATE ACCOUNT
+                    </button>
                 </form>
                 <div className="text-center text-sm text-grgrey mt-4">
                     By signing up, you agree to the<br/> 

@@ -53,14 +53,16 @@ export default function Create() {
         }
     }
 
-    
-
     function findIndexInState(id) {
         let theIndex = -1
         items.forEach((intv, i) => {
             if(intv.id == id) theIndex = i
         })
         return theIndex
+    }
+
+    function saveSession() {
+        console.log('saving ', items)
     }
 
     return (
@@ -73,8 +75,12 @@ export default function Create() {
         <h1 className="mb-8 text-center text-grwhite w-full">TRAINING SESSION BUILDER</h1> 
         <AddInterval addInterval={addInterval}/>
 
-        <h2 className="mb-8 text:xl md:text-3xl text-center text-grwhite w-full">INTERVALS</h2>
+        <h2 className="text:xl md:text-3xl text-center text-grwhite w-full">INTERVALS</h2>
+        <h3 className="text-base md:text-xl text-center text-grwhite w-full">click/drag to reorder</h3>
+        <h3 className="mb-8 text-base md:text-xl text-center text-grwhite w-full">double click to delete</h3>
+
         {items.length > 0 ? (
+            <>
             <DndContext 
                 sensors={sensors}
                 collisionDetection={closestCenter}
@@ -99,6 +105,14 @@ export default function Create() {
                 ))} 
                 </SortableContext>
             </DndContext> 
+            
+        <button
+            onClick={saveSession}
+            className="w-1/6 text-bae md:text-base text-center py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
+        >
+            SAVE SESSION
+        </button>
+        </>
         ) 
         : (
             <h2>No intervals yet :(</h2>
