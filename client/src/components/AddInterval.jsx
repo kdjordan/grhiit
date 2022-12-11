@@ -5,9 +5,9 @@ export default function AddInterval({ addInterval }) {
     const [form, setForm] = useState({
         movement: 'Burpee',
         abbreviation: 'BRP',
-        work: 20,
-        rest: 10,
-        rounds: 5
+        work: 0,
+        rest: 30,
+        rounds: 1
     })
     const [errors, setErrors] = useState([])
 
