@@ -105,13 +105,12 @@ export default function Create() {
                 ))} 
                 </SortableContext>
             </DndContext> 
-            
-        <button
-            onClick={saveSession}
-            className="w-1/6 text-bae md:text-base text-center py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
-        >
-            SAVE SESSION
-        </button>
+            <button
+                onClick={saveSession}
+                className="w-1/6 text-bae md:text-base text-center py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
+            >
+                SAVE SESSION
+            </button>
         </>
         ) 
         : (

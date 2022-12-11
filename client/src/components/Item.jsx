@@ -1,17 +1,34 @@
 import { forwardRef } from "react";
+import { useState } from "react";
 
 export const Item = forwardRef((props, ref) => {
+  
   const {remove, ...rest } = props
-  console.log(rest.work == 0)
+  const [restInterval] = useState(rest.work===0?true:false)
+  
+  const restClasses = "dark:bg-green-600"
+  const regularClasses = "bg-grred border-gray-700"
+
   return (
     <div {...rest} ref={ref} 
-      className={`bg-gray-800 border-gray-700 hover:bg-gray-700 ${rest.work == 0 ? 'dark:bg-green-600' : ''} max-w-sm  p-4 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 mb-2
-        `}>
+      className={`${restInterval? restClasses: regularClasses} 
+        text-grgrey rounded-lg shadow-md hover:bg-gray-700 mb-2 max-w-sm p-4`}
+      >
+      
       <div onDoubleClick={() => {remove(rest.id)}}  className="flex align-center text-2xl">
-          <span className="font-normal text-gray-700 dark:text-gray-400">{rest.abbreviation}&nbsp;:&nbsp;</span>
-          <span className="font-normal text-gray-700 dark:text-gray-400">{rest.rounds}i</span>
-          <span className="font-normal text-gray-700 dark:text-gray-400">&nbsp;@&nbsp;{rest.work}</span>
-          <span className="font-normal text-gray-700 dark:text-gray-400">X{rest.rest}</span>
+        {restInterval? (
+          <>
+            <span>REST&nbsp;:&nbsp;</span>    
+            <span>{rest.rest} seconds</span>
+          </>
+        ) : (
+          <>
+            <span>{rest.abbreviation}&nbsp;:&nbsp;</span>
+            <span>{rest.rounds}i</span>
+            <span>&nbsp;@&nbsp;{rest.work}</span>
+            <span>X{rest.rest}</span>
+          </>
+        )}
       </div>
     </div>
   )
