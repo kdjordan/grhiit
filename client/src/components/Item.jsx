@@ -4,11 +4,11 @@ import { useState } from "react";
 export const Item = forwardRef((props, ref) => {
   
   const {remove, ...rest } = props
-  const [restInterval] = useState(rest.work===0?true:false)
+  const [restInterval] = useState(rest.work==='0'?true:false)
   
   const restClasses = "dark:bg-green-600"
   const regularClasses = "bg-grred border-gray-700"
-
+  console.log(props)
   return (
     <div {...rest} ref={ref} 
       className={`${restInterval? restClasses: regularClasses} 

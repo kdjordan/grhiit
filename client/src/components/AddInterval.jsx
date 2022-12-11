@@ -2,17 +2,20 @@ import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 export default function AddInterval({ addInterval }) {
-    const [form, setForm] = useState({
-        movement: 'Burpee',
-        abbreviation: 'BRP',
-        work: 0,
-        rest: 30,
-        rounds: 1
-    })
+    const INITIAL_STATE ={
+        movement: '',
+        abbreviation: '',
+        work: '',
+        rest: '',
+        rounds: ''
+    }
+    const [form, setForm] = useState(INITIAL_STATE)
+
     const [errors, setErrors] = useState([])
 
     function handleChange(e) {
         const { name, value } = e.target
+
         setForm(f => ({
             ...f,
             [name]: value
@@ -25,26 +28,21 @@ export default function AddInterval({ addInterval }) {
         const newForm = Object.assign({}, form)
         //add unique id to object
         newForm.id = uuidv4()
+        setForm(INITIAL_STATE)
         addInterval(newForm)
       }
 
-      const handleFocus = (event) => {
+      function handleFocus(event) {
         // Clear errors for the input field that was focused
         setErrors([])
       }
-
-      const preventMinus = (e) => {
-        if (e.code === 'Minus') {
-            e.preventDefault();
-        }
-    };
 
     return (
         <div className="flex flex-col px-2 mt-4 mb-8 w-full lg:w-2/3">
         <div className="bg-gradient-to-b from-grred to-transparent border border-grred text-lg px-6 py-4 rounded shadow-md text-grgrey">
             <h4 className="text-2xl text-grwhite text-center pb-4">ADD AN INTERVAL</h4>
             {errors.length ? 
-                <div className="text-center text-grred pb-4 text-xl">
+                <div className="text-center text-grgrey pb-4 text-xl">
                     <ul>
                         {errors.map((e, index) => {
                             return <li key={index}>{e}</li>
@@ -81,6 +79,7 @@ export default function AddInterval({ addInterval }) {
                                 onChange={handleChange}
                                 onFocus={handleFocus}
                                 required
+                                maxLength={8}
                                 placeholder="MAX 8 Letters" />
                         </div>
                     </div>
@@ -96,7 +95,7 @@ export default function AddInterval({ addInterval }) {
                                 value={form.work}
                                 onChange={handleChange}
                                 onFocus={handleFocus}
-                                onKeyPress={preventMinus}
+                                min={0}
                                 placeholder="Seconds" />
                         </div>
                         <div className="flex flex-col align-start w-full">
@@ -110,7 +109,7 @@ export default function AddInterval({ addInterval }) {
                                 value={form.rest}
                                 onChange={handleChange}
                                 onFocus={handleFocus}
-                                onKeyPress={preventMinus}
+                                min={1}
                                 required
                                 placeholder="Seconds" />
                         </div>
@@ -125,7 +124,7 @@ export default function AddInterval({ addInterval }) {
                                 value={form.rounds}
                                 onChange={handleChange}
                                 onFocus={handleFocus}
-                                onKeyPress={preventMinus}
+                                min={1}
                                 required
                                 placeholder="Rounds" />
                         </div>
