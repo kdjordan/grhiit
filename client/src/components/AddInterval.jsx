@@ -33,12 +33,6 @@ export default function AddInterval({ addInterval }) {
         setErrors([])
       }
 
-      const preventMinus = (e) => {
-        if (e.code === 'Minus') {
-            e.preventDefault();
-        }
-    };
-
     return (
         <div className="flex flex-col px-2 mt-4 mb-8 w-full lg:w-2/3">
         <div className="bg-gradient-to-b from-grred to-transparent border border-grred text-lg px-6 py-4 rounded shadow-md text-grgrey">
@@ -96,7 +90,6 @@ export default function AddInterval({ addInterval }) {
                                 value={form.work}
                                 onChange={handleChange}
                                 onFocus={handleFocus}
-                                onKeyPress={preventMinus}
                                 placeholder="Seconds" />
                         </div>
                         <div className="flex flex-col align-start w-full">
@@ -110,7 +103,6 @@ export default function AddInterval({ addInterval }) {
                                 value={form.rest}
                                 onChange={handleChange}
                                 onFocus={handleFocus}
-                                onKeyPress={preventMinus}
                                 required
                                 placeholder="Seconds" />
                         </div>
@@ -125,7 +117,6 @@ export default function AddInterval({ addInterval }) {
                                 value={form.rounds}
                                 onChange={handleChange}
                                 onFocus={handleFocus}
-                                onKeyPress={preventMinus}
                                 required
                                 placeholder="Rounds" />
                         </div>

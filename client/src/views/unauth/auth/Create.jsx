@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import AddInterval from '../../../components/AddInterval'
-import { SortableItem } from '../../../components/SortableItem'
+import Interval from '../../../components/Interval';
 
 import {
     DndContext, 
@@ -29,23 +29,23 @@ export default function Create() {
         coordinateGetter: sortableKeyboardCoordinates,
     }))
 
-    const [items, setItems] = useState([])
+    const [intervals, setIntervals] = useState([])
 
     function addInterval(form) {
-        setItems(int => [...int, form])
+        setIntervals(int => [...int, form])
     }
 
     function deleteInterval(id) {
         console.log('calling D interval', id)
-        const newItems = items.filter(int => int.id != id)
-        setItems(newItems)
+        const newIntervals = intervals.filter(int => int.id != id)
+        setIntervals(newIntervals)
     }
 
     function handleDragEnd(event) {
         const {active, over} = event;
         
         if (active.id !== over.id) {
-            setItems((int) => {
+            setIntervals((int) => {
                 const oldIndex = findIndexInState(active.id)
                 const newIndex = findIndexInState(over.id)
                 return arrayMove(int, oldIndex, newIndex);
@@ -57,7 +57,7 @@ export default function Create() {
 
     function findIndexInState(id) {
         let theIndex = -1
-        items.forEach((intv, i) => {
+        intervals.forEach((intv, i) => {
             if(intv.id == id) theIndex = i
         })
         return theIndex
@@ -74,7 +74,7 @@ export default function Create() {
         <AddInterval addInterval={addInterval}/>
 
         <h2 className="mb-8 text:xl md:text-3xl text-center text-grwhite w-full">INTERVALS</h2>
-        {items.length > 0 ? (
+        {intervals.length > 0 ? (
             <DndContext 
                 sensors={sensors}
                 collisionDetection={closestCenter}
@@ -82,11 +82,11 @@ export default function Create() {
                 
             >
                 <SortableContext 
-                    items={items}
+                    items={intervals}
                     strategy={verticalListSortingStrategy}
                 >
-                {items.map((i) => (
-                    <SortableItem 
+                {intervals.map((i) => (
+                    <Interval 
                         key={i.id} 
                         id={i.id} 
                         movement={i.movement} 
@@ -94,7 +94,7 @@ export default function Create() {
                         work={i.work} 
                         rest={i.rest} 
                         rounds={i.rounds}
-                        remove={deleteInterval}
+                        deleteinterval={deleteInterval}
                          />
                 ))} 
                 </SortableContext>
