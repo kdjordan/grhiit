@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useParams } from "react-router-dom"
 import UserContext from '../../../UserContext'
@@ -6,7 +7,14 @@ import { useContext } from 'react'
 
 export default function Play() {
     const { currentUser } = useContext(UserContext)
+    const { play, setPlay } = useState(false)
     const { id } = useParams()
+
+    function togglePlay() {
+        setPlay(p => p != p)
+    }
+
+
     console.log('in play ', currentUser)
     const data = [
         {
@@ -31,7 +39,7 @@ export default function Play() {
             rounds: '8'
           },
       ]    
-      
+
       return (
         <motion.div 
             className="container mx-auto text-3xl md:text-5xl h-screen text-grwhite flex flex-col items-center mt-24"
@@ -46,7 +54,10 @@ export default function Play() {
             {currentUser ? (
                 <>
                     {data.map(int => (
-                         <div className='mb-2 text-xl text-grgrey shadow-md hover:bg-gray-700'>
+                         <motion.div 
+                            className='mb-2 text-xl text-grgrey shadow-md hover:bg-gray-700'
+
+                        >
                             {int.work==='0'? (
                             <div className='max-w-sm p-4 dark:bg-green-600 rounded-lg'>
                                 <span>REST&nbsp;:&nbsp;</span>    
@@ -61,13 +72,17 @@ export default function Play() {
                                 </div>
                             )
                         }
-                        </div>
+                        </motion.div>
                     ))}
                        
                 </>
             ) : (
                 <h2>Loading</h2>
             )}
+            <button
+                type="submit"
+                className="w-1/6 mx-auto self-center text-center text-3xl sm:textxl py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
+            >GO</button>
             
         </motion.div>
     )
