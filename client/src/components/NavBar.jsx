@@ -5,7 +5,7 @@ import UserContext from "../UserContext";
 
 export default function Header({ logout }) {
     const { currentUser  } = useContext(UserContext)
-    const [isOpen, toggleOpen] = useCycle(false, true);
+    const [ isOpen, toggleOpen ] = useCycle(false, true);
     
     const sidebar = {
         open: {

@@ -83,24 +83,24 @@ export default function Play() {
                 onClick={togglePlay}
                 className="w-1/6 mx-auto self-center text-center text-3xl sm:textxl py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
             >GO</button>
-        {play && (
             <AnimatePresence>
-                <motion.div
-                className="w-full absolute top-0 text-3xl md:text-5xl h-screen bg-grred text-grwhite"
-                initial={{ y: '100vh' }}
-                animate={{ y: '0vh' }}
-                exit={{ y: '0vh' }}
-                transition={{duration: 1}}
-                key="overlay"
-                >
-                <h4>GOING</h4>
-                <button
-                    onClick={togglePlay}
-                    className="w-1/6 mx-auto self-center text-center text-3xl sm:textxl py-3 rounded bg-grwhite text-grred hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
-                >GO</button>
-                </motion.div>
-            </AnimatePresence>
-        )}
+            {play && (
+                    <motion.div
+                    className="w-full absolute top-0 text-3xl md:text-5xl bg-grred text-grwhite h-screen"
+                    initial={{ y: '100vh' }}
+                    animate={{ y: '0vh' }}
+                    exit={{ y: '100vh' }}
+                    transition={{duration: 1}}
+                    key="overlay"
+                    >
+                    <h4>GOING</h4>
+                    <button
+                        onClick={togglePlay}
+                        className="w-1/6 mx-auto self-center text-center text-3xl sm:textxl py-3 rounded bg-grwhite text-grred hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
+                    >GO</button>
+                    </motion.div>
+            )}
+        </AnimatePresence>
         </motion.div>
     )
 }
