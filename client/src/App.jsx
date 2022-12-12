@@ -49,7 +49,6 @@ function App() {
         Grhiit.token = token
         let user = await Grhiit.getUser(username)
         setCurrentUser(user)
-        console.log('gettUser in app ', user)
         // setApplicationIDs(curUser.applications)
       }
       // setIsLoading(false)

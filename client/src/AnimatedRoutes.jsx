@@ -3,6 +3,7 @@ import Home from "./views/unauth/Home";
 import Signup from "./views/unauth/Signup";
 import Login from "./views/unauth/Login"
 import Dashboard from "./views/unauth/auth/Dashboard";
+import Play from "./views/unauth/auth/Play";
 import Create from "./views/unauth/auth/Create";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AnimatePresence } from 'framer-motion'
@@ -26,6 +27,12 @@ export default function AnimatedRoutes({ signup, login }) {
               element={
                 <ProtectedRoute>
                   <Create />
+                </ProtectedRoute> 
+            } />
+            <Route path="/play/:id" 
+              element={
+                <ProtectedRoute>
+                  <Play />
                 </ProtectedRoute> 
             } />
             <Route path="*" element={<Navigate to="/" replace />} />

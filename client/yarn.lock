@@ -749,15 +749,14 @@
   "resolved" "https://registry.npmjs.org/fraction.js/-/fraction.js-4.2.0.tgz"
   "version" "4.2.0"
 
-"framer-motion@^7.6.9":
-  "integrity" "sha512-byPSPOqKApmVUvbtvmFCyL09dqBNLUwkXRQMeTsawtF6YpiB54yCVzk+9YXAnoswMSgsB7CQaA6ls7e8QL+C+g=="
-  "resolved" "https://registry.npmjs.org/framer-motion/-/framer-motion-7.6.9.tgz"
-  "version" "7.6.9"
+"framer-motion@^7.6.19":
+  "integrity" "sha512-U+ogwGwNw6Y+pdq6GZB5xvnvLDlq3FTmcKaG5MCUjXuqRLrjKbKTqN4iwZISv3ajwUfgNHM6+tu31LRbYfF9YQ=="
+  "resolved" "https://registry.npmjs.org/framer-motion/-/framer-motion-7.6.19.tgz"
+  "version" "7.6.19"
   dependencies:
     "@motionone/dom" "10.13.1"
     "framesync" "6.1.2"
     "hey-listen" "^1.0.8"
-    "popmotion" "11.0.5"
     "style-value-types" "5.1.2"
     "tslib" "2.4.0"
   optionalDependencies:
@@ -1011,16 +1010,6 @@
   "integrity" "sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog=="
   "resolved" "https://registry.npmjs.org/pify/-/pify-2.3.0.tgz"
   "version" "2.3.0"
-
-"popmotion@11.0.5":
-  "integrity" "sha512-la8gPM1WYeFznb/JqF4GiTkRRPZsfaj2+kCxqQgr2MJylMmIKUwBfWW8Wa5fml/8gmtlD5yI01MP1QCZPWmppA=="
-  "resolved" "https://registry.npmjs.org/popmotion/-/popmotion-11.0.5.tgz"
-  "version" "11.0.5"
-  dependencies:
-    "framesync" "6.1.2"
-    "hey-listen" "^1.0.8"
-    "style-value-types" "5.1.2"
-    "tslib" "2.4.0"
 
 "postcss-import@^14.1.0":
   "integrity" "sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw=="

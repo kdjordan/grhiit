@@ -8,7 +8,7 @@ export const Item = forwardRef((props, ref) => {
   
   const restClasses = "dark:bg-green-600"
   const regularClasses = "bg-grred border-gray-700"
-  console.log(props)
+  
   return (
     <div {...rest} ref={ref} 
       className={`${restInterval? restClasses: regularClasses} 
