@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useParams } from "react-router-dom"
 import UserContext from '../../../UserContext'
 import { useContext } from 'react'
@@ -7,11 +7,12 @@ import { useContext } from 'react'
 
 export default function Play() {
     const { currentUser } = useContext(UserContext)
-    const { play, setPlay } = useState(false)
+    const [ play, setPlay ] = useState(false)
     const { id } = useParams()
 
     function togglePlay() {
-        setPlay(p => p != p)
+        console.log('setting play', play)
+        setPlay(p => p = !p)
     }
 
 
@@ -45,7 +46,8 @@ export default function Play() {
             className="container mx-auto text-3xl md:text-5xl h-screen text-grwhite flex flex-col items-center mt-24"
             initial={{opacity:0}}
             animate={{opacity:1}}
-            exit={{opacity:0, transition: {duration: 0.5}}}    
+            exit={{opacity:0, transition: {duration: 0.5}}}  
+            key="page"
         >
             <div className="container mx-auto flex flex-col align-center justify-content-center gap-2 mb-8">
             <h2 className="mb-4 text-center">LET'S GO !</h2>
@@ -53,37 +55,52 @@ export default function Play() {
             </div>
             {currentUser ? (
                 <>
-                    {data.map(int => (
-                         <motion.div 
-                            className='mb-2 text-xl text-grgrey shadow-md hover:bg-gray-700'
-
-                        >
-                            {int.work==='0'? (
-                            <div className='max-w-sm p-4 dark:bg-green-600 rounded-lg'>
-                                <span>REST&nbsp;:&nbsp;</span>    
-                                <span>{int.rest} seconds</span>
+                {data.map(int => (
+                        <div 
+                        className='mb-2 text-xl text-grgrey shadow-md hover:bg-gray-700'
+                    >
+                        {int.work==='0'? (
+                        <div className='max-w-sm p-4 dark:bg-green-600 rounded-lg'>
+                            <span>REST&nbsp;:&nbsp;</span>    
+                            <span>{int.rest} seconds</span>
+                        </div>
+                        ) : (
+                            <div className='max-w-sm p-4 bg-grred border-gray-700 rounded-lg'>
+                            <span>{int.abbreviation}&nbsp;:&nbsp;</span>
+                            <span>{int.rounds}i</span>
+                            <span>&nbsp;@&nbsp;{int.work}</span>
+                            <span>X{int.rest}</span>
                             </div>
-                            ) : (
-                                <div className='max-w-sm p-4 bg-grred border-gray-700 rounded-lg'>
-                                <span>{int.abbreviation}&nbsp;:&nbsp;</span>
-                                <span>{int.rounds}i</span>
-                                <span>&nbsp;@&nbsp;{int.work}</span>
-                                <span>X{int.rest}</span>
-                                </div>
-                            )
-                        }
-                        </motion.div>
-                    ))}
-                       
+                        )
+                    }
+                    </div>
+                ))}  
                 </>
             ) : (
                 <h2>Loading</h2>
             )}
             <button
-                type="submit"
+                onClick={togglePlay}
                 className="w-1/6 mx-auto self-center text-center text-3xl sm:textxl py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
             >GO</button>
-            
+        {play && (
+            <AnimatePresence>
+                <motion.div
+                className="w-full absolute top-0 text-3xl md:text-5xl h-screen bg-grred text-grwhite"
+                initial={{ y: '100vh' }}
+                animate={{ y: '0vh' }}
+                exit={{ y: '0vh' }}
+                transition={{duration: 1}}
+                key="overlay"
+                >
+                <h4>GOING</h4>
+                <button
+                    onClick={togglePlay}
+                    className="w-1/6 mx-auto self-center text-center text-3xl sm:textxl py-3 rounded bg-grwhite text-grred hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
+                >GO</button>
+                </motion.div>
+            </AnimatePresence>
+        )}
         </motion.div>
     )
 }

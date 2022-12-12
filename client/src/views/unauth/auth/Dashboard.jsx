@@ -43,6 +43,7 @@ export default function Dashboard() {
       name: 'Session 5'
     },
   ]
+
     return (
         <motion.div 
             className="container mx-auto text-3xl md:text-5xl h-screen text-grwhite flex flex-col items-center mt-24"
@@ -57,7 +58,13 @@ export default function Dashboard() {
                         <h4 className="text-4xl text-center">YOUR TRAINING SESSIONS</h4>
                         <div className="flex gap-2 flex-wrap align-center justify-center">
                             {data.map(d => (
-                                <Card name={d.id} id={d.id} key={d.id} description={d.description} date={d.date}/>
+                                <Card 
+                                  name={d.id} 
+                                  id={d.id} 
+                                  key={d.id} 
+                                  description={d.description} 
+                                  date={d.date}
+                                  />
                             ))}
                         </div>
                         <button onClick={() => navigate("/create")}
