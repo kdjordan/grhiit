@@ -3,20 +3,14 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useParams } from "react-router-dom"
 import UserContext from '../../../UserContext'
 import { useContext } from 'react'
-
+import PlayDisplay from './PlayDisplay'
 
 export default function Play() {
     const { currentUser } = useContext(UserContext)
     const [ play, setPlay ] = useState(false)
+    const [ currentInterval, setCurrentInterval ] = useState(null)
     const { id } = useParams()
 
-    function togglePlay() {
-        console.log('setting play', play)
-        setPlay(p => p = !p)
-    }
-
-
-    console.log('in play ', currentUser)
     const data = [
         {
             movement: 'burpee',
@@ -41,6 +35,20 @@ export default function Play() {
           },
       ]    
 
+    function togglePlay() {
+        setPlay(p => p = !p)
+        runSession()
+    }
+    
+    function runSession() {
+        console.log('running session')
+        setCurrentInterval(data[1])
+        // for (let i=0 ; i < data.length ; i++) {
+        //     console.log(data[i])
+        // }
+        
+    }
+
       return (
         <motion.div 
             className="container mx-auto text-3xl md:text-5xl h-screen text-grwhite flex flex-col items-center mt-24"
@@ -55,15 +63,16 @@ export default function Play() {
             </div>
             {currentUser ? (
                 <>
-                {data.map(int => (
+                {data.map((int, i) => (
                         <div 
                         className='mb-2 text-xl text-grgrey shadow-md hover:bg-gray-700'
+                        key={i}
                     >
                         {int.work==='0'? (
-                        <div className='max-w-sm p-4 dark:bg-green-600 rounded-lg'>
-                            <span>REST&nbsp;:&nbsp;</span>    
-                            <span>{int.rest} seconds</span>
-                        </div>
+                            <div className='max-w-sm p-4 dark:bg-green-600 rounded-lg'>
+                                <span>REST&nbsp;:&nbsp;</span>    
+                                <span>{int.rest} seconds</span>
+                            </div>
                         ) : (
                             <div className='max-w-sm p-4 bg-grred border-gray-700 rounded-lg'>
                             <span>{int.abbreviation}&nbsp;:&nbsp;</span>
@@ -85,20 +94,7 @@ export default function Play() {
             >GO</button>
             <AnimatePresence>
             {play && (
-                    <motion.div
-                    className="w-full absolute top-0 text-3xl md:text-5xl bg-grred text-grwhite h-screen"
-                    initial={{ y: '100vh' }}
-                    animate={{ y: '0vh' }}
-                    exit={{ y: '100vh' }}
-                    transition={{duration: 1}}
-                    key="overlay"
-                    >
-                    <h4>GOING</h4>
-                    <button
-                        onClick={togglePlay}
-                        className="w-1/6 mx-auto self-center text-center text-3xl sm:textxl py-3 rounded bg-grwhite text-grred hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
-                    >GO</button>
-                    </motion.div>
+                    <PlayDisplay data={currentInterval} />
             )}
         </AnimatePresence>
         </motion.div>
