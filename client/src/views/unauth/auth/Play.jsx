@@ -13,32 +13,37 @@ export default function Play() {
     const { id } = useParams()
 
     const data = [
-        {
-            movement: 'rest',
-            work: '0',
-            rest: '5',
-            rounds: '1',
-            color: 'yellow',
-            type: 'start'
-        },
+        // {
+        //     movement: 'rest',
+        //     work: '0',
+        //     rest: '5',
+        //     rounds: '1',
+        //     type: 'wait'
+        // },
         {
             movement: 'burpee',
             abbreviation: 'BRP',
             work: '3',
             rest: '3',
             rounds: '2',
-            color: 'red',
             type: 'regular'
         },
-        {
-            movement: 'rest',
-            abbreviation: 'rest',
-            work: '0',
-            rest: '5',
-            rounds: '1',
-            color: 'green',
-            type: 'rest'
-        },
+        // {
+        //     movement: 'squat',
+        //     abbreviation: 'SQT',
+        //     work: '5',
+        //     rest: '10',
+        //     rounds: '2',
+        //     type: 'regular'
+        // },
+        // {
+        //     movement: 'rest',
+        //     abbreviation: 'rest',
+        //     work: '0',
+        //     rest: '5',
+        //     rounds: '1',
+        //     type: 'rest'
+        // },
       ]    
     
     function delay(ms) {
@@ -47,10 +52,10 @@ export default function Play() {
 
     async function runSession() {
         setPlay(true)
-        for (let i=1 ; i < data.length-1 ; i++) {
+        for (let i=0 ; i < data.length ; i++) {
             setCurrentInterval(data[i])
-            console.log('running ', currentInterval)
-            console.log('ms ', ((+data[i].work + +data[i].rest) * +data[i].rounds)* 1000)
+            // console.log('running ', currentInterval)
+            // console.log('ms ', ((+data[i].work + +data[i].rest) * +data[i].rounds)* 1000)
             await delay(((+data[i].work + +data[i].rest) * +data[i].rounds)* 1000) 
         }
         setPlay(false)
