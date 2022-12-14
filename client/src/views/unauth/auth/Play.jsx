@@ -4,12 +4,11 @@ import { useParams } from "react-router-dom"
 import UserContext from '../../../UserContext'
 import { useContext } from 'react'
 import PlayDisplay from './PlayDisplay'
-import { useEffect } from 'react'
+
 
 export default function Play() {
     const { currentUser } = useContext(UserContext)
     const [ play, setPlay ] = useState(false)
-    const [duration, setDuration] = useState('')
     const [ currentInterval, setCurrentInterval ] = useState(null)
     const { id } = useParams()
 
@@ -38,28 +37,22 @@ export default function Play() {
             color: 'green'
         },
       ]    
-
-    function togglePlay() {
-        setPlay(p => p = !p)
-        runSession()
-    }
     
     function delay(ms) {
         return new Promise(resolve => {
-            console.log('in promise')
             setTimeout(resolve, ms)
         })
     }
 
     async function runSession() {
+        setPlay(true)
         for (let i=0 ; i < data.length-1 ; i++) {
             setCurrentInterval(data[i])
-            let dur = ((+data[i].work + +data[i].rest) * +data[i].rounds) * 1000
-            console.log('setting duration', i, (+data[i].work + +data[i].rest) * +data[i].rounds)
-            setDuration((+data[i].work + +data[i].rest) * +data[i].rounds)
-            await delay(dur)
+            // let dur = (
+            await delay(((+data[i].work + +data[i].rest) * +data[i].rounds)* 1000) 
+
         }
-        togglePlay()
+        setPlay(false)
     }
 
       return (
@@ -102,12 +95,12 @@ export default function Play() {
                 <h2>Loading</h2>
             )}
             <button
-                onClick={togglePlay}
+                onClick={runSession}
                 className="w-1/6 mx-auto self-center text-center text-3xl sm:textxl py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
             >GO</button>
             <AnimatePresence>
             {play && (
-                    <PlayDisplay data={currentInterval} duration={duration}/>
+                    <PlayDisplay data={currentInterval} />
             )}
         </AnimatePresence>
         </motion.div>
