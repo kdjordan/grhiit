@@ -70,7 +70,7 @@ When a user visits the landing page they will presented with a 'sign in' or 'log
 **coming soon**
 
 ### UI MOCKS
-**coming soon**
+**click** [FIGMA](https://www.figma.com/file/pcIvHT8xAMQjuKClcKcBc8/GRHIIIT?node-id=0%3A1&t=y4f4fG4y97ipLAO8-1) to view
 
 
 
