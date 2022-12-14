@@ -9,48 +9,49 @@ import PlayDisplay from './PlayDisplay'
 export default function Play() {
     const { currentUser } = useContext(UserContext)
     const [ play, setPlay ] = useState(false)
-    const [ currentInterval, setCurrentInterval ] = useState(null)
+    const [ currentInterval, setCurrentInterval ] = useState({})
     const { id } = useParams()
 
     const data = [
         {
-            movement: 'get ready',
+            movement: 'rest',
             work: '0',
-            rest: '4',
+            rest: '5',
             rounds: '1',
-            color: 'yellow'
+            color: 'yellow',
+            type: 'start'
         },
         {
             movement: 'burpee',
             abbreviation: 'BRP',
-            work: '1',
-            rest: '1',
+            work: '3',
+            rest: '3',
             rounds: '2',
-            color: 'red'
+            color: 'red',
+            type: 'regular'
         },
         {
             movement: 'rest',
             abbreviation: 'rest',
             work: '0',
-            rest: '2',
+            rest: '5',
             rounds: '1',
-            color: 'green'
+            color: 'green',
+            type: 'rest'
         },
       ]    
     
     function delay(ms) {
-        return new Promise(resolve => {
-            setTimeout(resolve, ms)
-        })
+        return new Promise(resolve => setTimeout(resolve, ms))
     }
 
     async function runSession() {
         setPlay(true)
-        for (let i=0 ; i < data.length-1 ; i++) {
+        for (let i=1 ; i < data.length-1 ; i++) {
             setCurrentInterval(data[i])
-            // let dur = (
+            console.log('running ', currentInterval)
+            console.log('ms ', ((+data[i].work + +data[i].rest) * +data[i].rounds)* 1000)
             await delay(((+data[i].work + +data[i].rest) * +data[i].rounds)* 1000) 
-
         }
         setPlay(false)
     }
