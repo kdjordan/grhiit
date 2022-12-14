@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function Timer ({ duration }) {
-  const [timeLeft, setTimeLeft] = useState(null);
+  const [ timeLeft, setTimeLeft ] = useState(null);
 
   useEffect(() => {
     // exit early when we reach 0
@@ -13,7 +13,6 @@ export default function Timer ({ duration }) {
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
     }, 1000);
-    console.log('new timer ', intervalId)
 
     // clear interval on re-render to avoid memory leaks
     return () => clearInterval(intervalId);

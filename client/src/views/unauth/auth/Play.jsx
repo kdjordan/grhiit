@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import UserContext from '../../../UserContext'
 import { useContext } from 'react'
 import PlayDisplay from './PlayDisplay'
+import { useEffect } from 'react'
 
 export default function Play() {
     const { currentUser } = useContext(UserContext)
@@ -36,14 +37,6 @@ export default function Play() {
             rounds: '1',
             color: 'green'
         },
-        {
-            movement: 'squat',
-            abbreviation: 'SQT',
-            work: '1',
-            rest: '1',
-            rounds: '2',
-            color: 'red'
-          },
       ]    
 
     function togglePlay() {
@@ -52,15 +45,18 @@ export default function Play() {
     }
     
     function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms))
+        return new Promise(resolve => {
+            console.log('in promise')
+            setTimeout(resolve, ms)
+        })
     }
 
     async function runSession() {
-        for (let i=0 ; i < data.length ; i++) {
+        for (let i=0 ; i < data.length-1 ; i++) {
             setCurrentInterval(data[i])
             let dur = ((+data[i].work + +data[i].rest) * +data[i].rounds) * 1000
-            setDuration((+data[i].work + +data[i].rest) * +data[i].rounds)
             console.log('setting duration', i, (+data[i].work + +data[i].rest) * +data[i].rounds)
+            setDuration((+data[i].work + +data[i].rest) * +data[i].rounds)
             await delay(dur)
         }
         togglePlay()
