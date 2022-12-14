@@ -13,37 +13,37 @@ export default function Play() {
     const { id } = useParams()
 
     const data = [
-        // {
-        //     movement: 'rest',
-        //     work: '0',
-        //     rest: '5',
-        //     rounds: '1',
-        //     type: 'wait'
-        // },
+        {
+            movement: 'get ready',
+            work: '0',
+            rest: '5',
+            rounds: '1',
+            type: 'wait'
+        },
         {
             movement: 'burpee',
             abbreviation: 'BRP',
-            work: '3',
-            rest: '3',
+            work: '2',
+            rest: '2',
             rounds: '2',
             type: 'regular'
         },
-        // {
-        //     movement: 'squat',
-        //     abbreviation: 'SQT',
-        //     work: '5',
-        //     rest: '10',
-        //     rounds: '2',
-        //     type: 'regular'
-        // },
-        // {
-        //     movement: 'rest',
-        //     abbreviation: 'rest',
-        //     work: '0',
-        //     rest: '5',
-        //     rounds: '1',
-        //     type: 'rest'
-        // },
+        {
+            movement: 'rest',
+            abbreviation: '',
+            work: '0',
+            rest: '5',
+            rounds: '1',
+            type: 'rest'
+        },
+        {
+            movement: 'COOL DOWN',
+            abbreviation: 'rest',
+            work: '0',
+            rest: '10',
+            rounds: '1',
+            type: 'end'
+        },
       ]    
     
     function delay(ms) {
@@ -54,8 +54,6 @@ export default function Play() {
         setPlay(true)
         for (let i=0 ; i < data.length ; i++) {
             setCurrentInterval(data[i])
-            // console.log('running ', currentInterval)
-            // console.log('ms ', ((+data[i].work + +data[i].rest) * +data[i].rounds)* 1000)
             await delay(((+data[i].work + +data[i].rest) * +data[i].rounds)* 1000) 
         }
         setPlay(false)
@@ -80,19 +78,19 @@ export default function Play() {
                         className='mb-2 text-xl text-grgrey shadow-md hover:bg-gray-700'
                         key={i}
                     >
-                        {int.work==='0'? (
+                        {(int.type==='rest') ? (
                             <div className='max-w-sm p-4 dark:bg-green-600 rounded-lg'>
                                 <span>REST&nbsp;:&nbsp;</span>    
                                 <span>{int.rest} seconds</span>
                             </div>
-                        ) : (
+                        ) : (int.type==='regular') ? (
                             <div className='max-w-sm p-4 bg-grred border-gray-700 rounded-lg'>
                             <span>{int.abbreviation}&nbsp;:&nbsp;</span>
                             <span>{int.rounds}i</span>
                             <span>&nbsp;@&nbsp;{int.work}</span>
                             <span>X{int.rest}</span>
                             </div>
-                        )
+                        ) : ('')
                     }
                     </div>
                 ))}  
