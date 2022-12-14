@@ -8,30 +8,41 @@ import PlayDisplay from './PlayDisplay'
 export default function Play() {
     const { currentUser } = useContext(UserContext)
     const [ play, setPlay ] = useState(false)
+    const [duration, setDuration] = useState('')
     const [ currentInterval, setCurrentInterval ] = useState(null)
     const { id } = useParams()
 
     const data = [
         {
+            movement: 'get ready',
+            work: '0',
+            rest: '4',
+            rounds: '1',
+            color: 'yellow'
+        },
+        {
             movement: 'burpee',
             abbreviation: 'BRP',
-            work: '20',
-            rest: '10',
-            rounds: '8'
+            work: '1',
+            rest: '1',
+            rounds: '2',
+            color: 'red'
         },
         {
             movement: 'rest',
             abbreviation: 'rest',
             work: '0',
-            rest: '30',
-            rounds: '1'
+            rest: '2',
+            rounds: '1',
+            color: 'green'
         },
         {
-            movement: 'burpee',
-            abbreviation: 'BRP',
-            work: '20',
-            rest: '10',
-            rounds: '8'
+            movement: 'squat',
+            abbreviation: 'SQT',
+            work: '1',
+            rest: '1',
+            rounds: '2',
+            color: 'red'
           },
       ]    
 
@@ -40,13 +51,19 @@ export default function Play() {
         runSession()
     }
     
-    function runSession() {
-        console.log('running session')
-        setCurrentInterval(data[1])
-        // for (let i=0 ; i < data.length ; i++) {
-        //     console.log(data[i])
-        // }
-        
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
+    async function runSession() {
+        for (let i=0 ; i < data.length ; i++) {
+            setCurrentInterval(data[i])
+            let dur = ((+data[i].work + +data[i].rest) * +data[i].rounds) * 1000
+            setDuration((+data[i].work + +data[i].rest) * +data[i].rounds)
+            console.log('setting duration', i, (+data[i].work + +data[i].rest) * +data[i].rounds)
+            await delay(dur)
+        }
+        togglePlay()
     }
 
       return (
@@ -94,7 +111,7 @@ export default function Play() {
             >GO</button>
             <AnimatePresence>
             {play && (
-                    <PlayDisplay data={currentInterval} />
+                    <PlayDisplay data={currentInterval} duration={duration}/>
             )}
         </AnimatePresence>
         </motion.div>
