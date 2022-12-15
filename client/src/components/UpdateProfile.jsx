@@ -62,7 +62,7 @@ export default function UpdateProfile({ user }) {
 
     return (
         <div className="flex flex-col px-2 mt-4 mb-8 w-full lg:w-2/3">
-            <div className="bg-gradient-to-b from-grred to-transparent text-lg px-6 py-4 rounded shadow-md text-grgrey">
+            <div className="text-lg px-6 py-4 rounded text-grgrey shadow-black shadow-xl">
                 <h4 className="text-2xl text-center pb-4">YOUR PROFILE INFORMATION</h4>
                 {errors.length ? 
                     <div className="text-center text-grred pb-4 text-xl">

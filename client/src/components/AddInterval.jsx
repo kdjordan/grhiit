@@ -39,7 +39,7 @@ export default function AddInterval({ addInterval }) {
 
     return (
         <div className="flex flex-col px-2 mt-4 mb-8 w-full lg:w-2/3">
-        <div className="bg-gradient-to-b from-grred to-transparent border border-grred text-lg px-6 py-4 rounded shadow-md text-grgrey">
+        <div className="text-lg px-6 py-4 rounded text-grgrey shadow-black shadow-xl">
             <h4 className="text-2xl text-grwhite text-center pb-4">ADD AN INTERVAL</h4>
             {errors.length ? 
                 <div className="text-center text-grgrey pb-4 text-xl">

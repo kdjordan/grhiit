@@ -10,6 +10,7 @@ export default function Header({ logout }) {
     const sidebar = {
         open: {
             x: '-1rem',
+            // y: '-.5rem',
             opacity: 1,
             transition: {
                 duration: 1
@@ -17,6 +18,7 @@ export default function Header({ logout }) {
         },
         closed: {
             x: 2000,
+            // y: '-.5rem',
             opacity: 1,
             transition: {
                 duration: 1
@@ -35,7 +37,7 @@ export default function Header({ logout }) {
             initial={false}
             animate={isOpen ? 'open' : 'closed'}
             >
-            <div className={`container mx-auto flex items-center justify-between pb-1`}>
+            <div className={`container mx-auto flex items-center justify-between`}>
                 {/* grhiit */}
                 <div className="text-grwhite font-osPrimary hover:text-grgrey hover:no-underline text-3xl">
                     <a className="no-underline" href="/">GRHIIT</a>
@@ -59,7 +61,7 @@ export default function Header({ logout }) {
                     </motion.aside>
                 ) : (
                     <motion.aside 
-                    className="bg-grblack fixed w-full h-screen top-[5rem]  overflow-hidden z-1"
+                    className="bg-grblack fixed w-full h-screen top-[4.3rem]  overflow-hidden z-1"
                     variants={sidebar}
                     >
                     <ul className="list-none text-xl flex flex-col items-center justify-content-center gap-2 pt-2 pb-2">

@@ -103,7 +103,7 @@ export default function PlayDisplay({ data }) {
 
     return (
         <motion.div
-            className={`w-full absolute top-0 text-3xl md:text-5xl text-grblack h-screen ${background}`}
+            className={`w-full absolute top-0 text-3xl md:text-5xl text-grblack h-screen bg-gradient-to-t from-gray-500 to-${background}`}
             initial={{ y: '100vh' }}
             animate={{ backgroundColor:`${background}`, y: '0vh' }}
             exit={{ y: '100vh' }}
@@ -114,7 +114,7 @@ export default function PlayDisplay({ data }) {
                 <div 
                     className="container mx-auto flex flex-col w-full mt-16 items-center"
                 >
-                    <h4 className='uppercase text-8xl mb-2 p-8 border border-grblack rounded-lg bg-zinc-300 shadow-lg'>{data.movement}</h4>
+                    <h4 className='uppercase text-8xl mb-8 p-8 border border-grblack rounded-lg bg-zinc-300 shadow-2xl'>{data.movement}</h4>
                     <Timer duration={timeLeft} prompt={prompt} rounds={rounds} type={type}/>
                 </div>
             ) : (

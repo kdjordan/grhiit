@@ -61,21 +61,21 @@ export default function Play() {
 
       return (
         <motion.div 
-            className="container mx-auto text-3xl md:text-5xl h-screen text-grwhite flex flex-col items-center mt-24"
+            className="container mx-auto text-3xl md:text-5xl h-screen text-grwhite flex flex-col items-center mt-24 "
             initial={{opacity:0}}
             animate={{opacity:1}}
             exit={{opacity:0, transition: {duration: 0.5}}}  
             key="page"
         >
-            <div className="container mx-auto flex flex-col align-center justify-content-center gap-2 mb-8">
-            <h2 className="mb-4 text-center">LET'S GO !</h2>
+            <div className="flex flex-col items-center justify-content-center gap-2 mb-8 p-8 shadow-black shadow-xl">
+                <h2 className="mb-4 text-center">LET'S GO !</h2>
                 <h4 className="text-4xl text-center">YOUR TRAINING SESSION : {id}</h4>
-            </div>
+            
             {currentUser ? (
                 <>
                 {data.map((int, i) => (
                         <div 
-                        className='mb-2 text-xl text-grgrey shadow-md hover:bg-gray-700'
+                        className='text-center w-1/2 mb-2 text-xl text-grgrey shadow-2xl hover:bg-gray-700'
                         key={i}
                     >
                         {(int.type==='rest') ? (
@@ -100,8 +100,9 @@ export default function Play() {
             )}
             <button
                 onClick={runSession}
-                className="w-1/6 mx-auto self-center text-center text-3xl sm:textxl py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
-            >GO</button>
+                className="w-5/6 mx-auto text-center text-3xl sm:textxl py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
+            >START SESSION</button>
+            </div>
             <AnimatePresence>
             {play && (
                     <PlayDisplay data={currentInterval} />

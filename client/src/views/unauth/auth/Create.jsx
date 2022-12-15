@@ -67,7 +67,7 @@ export default function Create() {
 
     return (
         <motion.div 
-        className="container mx-auto text-3xl md:text-5xl h-screen text-grwhite flex flex-col items-center mt-24"
+        className="container mx-auto text-3xl md:text-5xl h-screen text-grwhite flex flex-col items-center mt-24 "
         initial={{opacity:0}}
         animate={{opacity:1}}
         exit={{opacity:0, transition: {duration: 0.5}}}        
@@ -107,7 +107,7 @@ export default function Create() {
             </DndContext> 
             <button
                 onClick={saveSession}
-                className="w-1/6 text-bae md:text-base text-center py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
+                className="w-1/6 text-base md:text-base text-center py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
             >
                 SAVE SESSION
             </button>
