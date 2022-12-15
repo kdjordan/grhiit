@@ -60,7 +60,7 @@ export default function Signup({ signup }) {
 
     return (
         <motion.div 
-        className="bg-grey-lighter flex flex-col mt-12"
+        className="bg-grey-lighter flex flex-col"
         initial={{opacity:0}}
         animate={{opacity:1}}
         exit={{opacity:0, transition: {duration: 0.5}}}        

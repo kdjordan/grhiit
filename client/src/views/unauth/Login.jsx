@@ -37,7 +37,7 @@ export default function Login({ login }) {
 
     return (
         <motion.div 
-        className="bg-grey-lighter flex flex-col mt-24 tracking-wider"
+        className="bg-grey-lighter flex flex-col tracking-wider"
         initial={{opacity:0}}
         animate={{opacity:1}}
         exit={{opacity:0, transition: {duration: 0.5}}}        

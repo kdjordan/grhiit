@@ -4,7 +4,7 @@ export default function Home() {
     const navigate = useNavigate();
     return (
         <motion.div 
-            className="container mx-auto flex flex-col md:flex-row md:mt-12 align-center shadow-black shadow-xl"
+            className="container relative mx-auto flex flex-col md:flex-row  align-center shadow-black shadow-xl z-0"
             initial={{opacity:0}}
             animate={{opacity:1}}
             exit={{opacity:0, transition: {duration: 0.5}}}    
@@ -31,7 +31,7 @@ export default function Home() {
                 </button>
                 </div>
             </div>
-            <div className="w-full md:w-1/2 bg-[url('/images/grhiit_cover2.jpg')] grayscale bg-cover bg-no-repeat bg-center z-0">
+            <div className="w-full md:w-1/2 bg-[url('/images/grhiit_cover2.jpg')] grayscale bg-cover bg-no-repeat bg-center">
             </div>
         </motion.div>
     )

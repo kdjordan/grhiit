@@ -62,7 +62,7 @@ function App() {
     <div className="App bg-gradient-to-b from-grred to-transparent">
         <Navbar logout={logout}/>
       <Router>
-        <div className="main font-osPrimary">
+        <div className="main font-osPrimary pt-32">
           <AnimatedRoutes signup={signup} login={login} />
         </div>
       </Router>

@@ -103,7 +103,7 @@ export default function PlayDisplay({ data }) {
 
     return (
         <motion.div
-            className={`w-full absolute top-0 text-3xl md:text-5xl text-grblack h-screen bg-gradient-to-t from-gray-500 to-${background}`}
+            className={`w-full fixed top-0 text-3xl md:text-5xl text-grblack h-screen bg-gradient-to-t from-gray-500 to-${background} z-999`}
             initial={{ y: '100vh' }}
             animate={{ backgroundColor:`${background}`, y: '0vh' }}
             exit={{ y: '100vh' }}

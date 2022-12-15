@@ -1,4 +1,4 @@
-import { motion, useCycle } from "framer-motion"
+import { motion, useCycle, AnimatePresence } from "framer-motion"
 import { MenuToggle } from "./MenuToggle";
 import { useContext } from 'react'
 import UserContext from "../UserContext";
@@ -19,7 +19,7 @@ export default function Header({ logout }) {
         closed: {
             x: 2000,
             // y: '-.5rem',
-            opacity: 1,
+            opacity: 0,
             transition: {
                 duration: 1
             }
@@ -33,7 +33,7 @@ export default function Header({ logout }) {
     
     
     return (
-        <motion.nav className={`nav bg-grblack border-b border-grred p-4 w-full flex flex-col justify-content-center`}
+        <motion.nav className="absolute top-0 bg-grblack border-b border-zinc-300 p-4 w-full flex flex-col justify-content-center z-50"
             initial={false}
             animate={isOpen ? 'open' : 'closed'}
             >
@@ -47,7 +47,7 @@ export default function Header({ logout }) {
             </div>
                 {!currentUser ? (
                     <motion.aside 
-                        className="bg-grblack relative w-full h-screen top-[4.2rem] overflow-auto"
+                        className="bg-grblack w-full h-screen overflow-auto hidden"
                         variants={sidebar}
                     >
                         <ul className="list-none text-xl flex flex-col items-center justify-content-center gap-2 pt-2 pb-2">
@@ -61,7 +61,7 @@ export default function Header({ logout }) {
                     </motion.aside>
                 ) : (
                     <motion.aside 
-                    className="bg-grblack fixed w-full h-screen top-[4.2rem] overflow-auto"
+                    className="bg-grblack w-full h-screen overflow-auto hidden"
                     variants={sidebar}
                     >
                     <ul className="list-none text-xl flex flex-col items-center justify-content-center gap-2 pt-2 pb-2">
