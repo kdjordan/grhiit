@@ -60,18 +60,18 @@ export default function Signup({ signup }) {
 
     return (
         <motion.div 
-        className="bg-grey-lighter min-h-screen flex flex-col mt-24"
+        className="bg-grey-lighter flex flex-col mt-12"
         initial={{opacity:0}}
         animate={{opacity:1}}
         exit={{opacity:0, transition: {duration: 0.5}}}        
         >
         
-        <h1 className="mb-8 text-6xl md:text-8xl text-center text-grwhite w-full">HERE WE GO...</h1> 
+        <h1 className="mb-8 text-6xl md:text-7xl text-center text-grwhite w-full bg-gradient-to-r from-slate-100 to-gray-400 bg-clip-text text-transparent ">HERE WE GO...</h1> 
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center px-2">
-            <div className="bg-grblack px-6 py-8 rounded shadow-md text-grgrey w-full">
+            <div className="shadow-black shadow-xl px-6 py-8 rounded text-zinc-300 w-full tracking-wide">
             {/* set up error display */}
             {errors.length ? 
-                <div className="text-center text-grred pb-4 text-xl">
+                <div className="text-center text-zinc-400 pb-4 text-xl">
                     <ul>
                         {errors.map((e, index) => {
                             return <li key={index}>{e}</li>
@@ -83,7 +83,7 @@ export default function Signup({ signup }) {
                 <form onSubmit={handleSubmit}>
                     <input 
                         type="text"
-                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
+                        className="block border bg-transparent border-grred w-full p-3 rounded mb-4 tracking-wider"
                         name="firstName"
                         value={form.firstName}
                         onChange={handleChange}
@@ -94,7 +94,7 @@ export default function Signup({ signup }) {
 
                     <input 
                         type="text"
-                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
+                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4 tracking-wider"
                         name="lastName"
                         value={form.lastName}
                         onChange={handleChange}
@@ -104,7 +104,7 @@ export default function Signup({ signup }) {
 
                     <input 
                         type="text"
-                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
+                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4 tracking-wider"
                         name="username"
                         value={form.username}
                         onChange={handleChange}
@@ -114,7 +114,7 @@ export default function Signup({ signup }) {
 
                     <input 
                         type="text"
-                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
+                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4 tracking-wider"
                         name="email"
                         value={form.email}
                         onChange={handleChange}
@@ -124,7 +124,7 @@ export default function Signup({ signup }) {
 
                     <input 
                         type="password"
-                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
+                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4 tracking-wider"
                         name="password"
                         value={form.password}
                         onChange={handleChange}
@@ -134,7 +134,7 @@ export default function Signup({ signup }) {
 
                     <input 
                         type="password"
-                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
+                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4 tracking-wider"
                         name="passwordConfirm"
                         value={form.passwordConfirm}
                         onChange={handleChange}

@@ -33,21 +33,21 @@ export default function Header({ logout }) {
     
     
     return (
-        <motion.nav className={`nav bg-grblack border-b border-grwhite  p-4 z-2 w-full flex flex-col justify-content-center`}
+        <motion.nav className={`nav bg-grblack border-b border-grred p-4 w-full flex flex-col justify-content-center`}
             initial={false}
             animate={isOpen ? 'open' : 'closed'}
             >
             <div className={`container mx-auto flex items-center justify-between`}>
                 {/* grhiit */}
                 <div className="text-grwhite font-osPrimary hover:text-grgrey hover:no-underline text-3xl">
-                    <a className="no-underline" href="/">GRHIIT</a>
+                    <a className="no-underline tracking-widest" href="/">GRHIIT</a>
                 </div>
                 <MenuToggle toggle={() => toggleOpen()} />
                 {/* mobile */}
             </div>
                 {!currentUser ? (
                     <motion.aside 
-                        className="bg-grblack fixed w-full h-screen top-[5rem]  overflow-hidden z-1"
+                        className="bg-grblack relative w-full h-screen top-[4.2rem] overflow-auto"
                         variants={sidebar}
                     >
                         <ul className="list-none text-xl flex flex-col items-center justify-content-center gap-2 pt-2 pb-2">
@@ -61,7 +61,7 @@ export default function Header({ logout }) {
                     </motion.aside>
                 ) : (
                     <motion.aside 
-                    className="bg-grblack fixed w-full h-screen top-[4.3rem]  overflow-hidden z-1"
+                    className="bg-grblack fixed w-full h-screen top-[4.2rem] overflow-auto"
                     variants={sidebar}
                     >
                     <ul className="list-none text-xl flex flex-col items-center justify-content-center gap-2 pt-2 pb-2">

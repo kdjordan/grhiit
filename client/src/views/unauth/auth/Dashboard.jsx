@@ -46,7 +46,7 @@ export default function Dashboard() {
 
     return (
         <motion.div 
-            className="container mx-auto text-3xl md:text-5xl h-screen text-grwhite flex flex-col items-center mt-24"
+            className="container mx-auto text-3xl md:text-5xl text-zinc-300 flex flex-col items-center mt-16"
             initial={{opacity:0}}
             animate={{opacity:1}}
             exit={{opacity:0, transition: {duration: 0.5}}}    

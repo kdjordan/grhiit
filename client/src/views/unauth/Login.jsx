@@ -37,15 +37,15 @@ export default function Login({ login }) {
 
     return (
         <motion.div 
-        className="bg-grey-lighter min-h-screen flex flex-col mt-24"
+        className="bg-grey-lighter flex flex-col mt-24 tracking-wider"
         initial={{opacity:0}}
         animate={{opacity:1}}
         exit={{opacity:0, transition: {duration: 0.5}}}        
         >
         
-        <h1 className="mb-8 text-6xl md:text-8xl text-center text-grwhite ">LET'S GO...</h1>
+        <h1 className="mb-8 text-6xl md:text-7xl text-center text-grwhite w-full bg-gradient-to-r from-slate-100 to-gray-400 bg-clip-text text-transparent ">READY ?</h1> 
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center px-2">
-            <div className="bg-grblack px-6 py-8 rounded shadow-md text-grgrey w-full">
+            <div className="shadow-black shadow-xl px-6 py-8 rounded text-grgrey w-full">
             {/* set up error display */}
             {error.length ? 
                 <div className="text-center text-grred pb-4 text-xl">{error}</div> 
@@ -53,7 +53,7 @@ export default function Login({ login }) {
                 <form onSubmit={handleSubmit}>
                     <input 
                         type="text"
-                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
+                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4 tracking-wider"
                         name="username"
                         value={form.username}
                         onChange={handleChange}
@@ -64,7 +64,7 @@ export default function Login({ login }) {
 
                     <input 
                         type="password"
-                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
+                        className="block border bg-transparent border-grred  w-full p-3 rounded mb-4 tracking-wider"
                         name="password"
                         value={form.password}
                         onChange={handleChange}
