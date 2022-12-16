@@ -53,8 +53,9 @@ export default function Dashboard() {
         >
             {currentUser ? (
                 <>
-                    <h2 className="mb-16">WELCOME BACK {currentUser.username}</h2>
-                    <div className="container mx-auto flex flex-col align-center justify-content-center gap-8 mb-16">
+                <div className="shadow-grblack shadow-lg p-4">
+                    <h2 className="mb-16 text-center">WELCOME BACK {currentUser.username}</h2>
+                    <div className="container mx-auto flex flex-col align-center justify-content-center gap-8">
                         <h4 className="text-4xl text-center">YOUR TRAINING SESSIONS</h4>
                         <div className="flex gap-2 flex-wrap align-center justify-center">
                             {data.map(d => (
@@ -68,8 +69,9 @@ export default function Dashboard() {
                             ))}
                         </div>
                         <button onClick={() => navigate("/create")}
-                            className="w-1/3 self-center text-center text-xl  py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
+                            className="w-1/2 md:w-1/3 self-center text-center text-xl  py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
                         >CREATE NEW SESSION</button>
+                  </div>
                     </div>
                     <UpdateProfile user={currentUser} />
                 </>

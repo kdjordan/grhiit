@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: (theme) => ({
+        'gradient-primary': `radial-gradient(circle, ${theme('colors.grred')}, ${theme('colors.grblack')})`
+      }),
       colors: {
         grred: '#E21D26',
         grwhite: '#ffffff',

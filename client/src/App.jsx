@@ -59,7 +59,7 @@ function App() {
 
   return (
     <UserContext.Provider value={{currentUser, setCurrentUser}}>
-    <div className="App bg-gradient-to-b from-grred to-transparent">
+    <div className="App h-screen bg-gradient-primary">
         <Navbar logout={logout}/>
       <Router>
         <div className="main font-osPrimary pt-32">
