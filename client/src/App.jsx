@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Navbar from './components/NavBar'
+import Navbar from './components/HeaderNav/NavBar'
 import AnimatedRoutes from './AnimatedRoutes'
 import LocalStorage from './LocalStorage'
 import Auth from './Auth/Auth.js'
