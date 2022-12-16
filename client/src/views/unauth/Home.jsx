@@ -1,15 +1,16 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom';
+
 export default function Home() {
     const navigate = useNavigate();
     return (
         <motion.div 
-            className="container relative mx-auto flex flex-col md:flex-row  align-center shadow-black shadow-xl"
+            className="container mx-auto flex flex-col md:flex-row align-center shadow-black shadow-xl"
             initial={{opacity:0}}
             animate={{opacity:1}}
             exit={{opacity:0, transition: {duration: 0.5}}}    
         >
-            <div className="w-full md:w-1/2">
+            <div className="w-full md:w-1/2 relative z-0">
                 <div className="flex flex-col gap-3 mx-auto items-center text-xl md:text-6xl w-full py-8 md:py-16 rounded text-zinc-300">
                     <div className='bg-gradient-to-r from-slate-100 to-gray-400 bg-clip-text text-transparent 
                                     text-xl md:text-4xl lg:text-4xl uppercase tracking-widest'>Bodyweight Interval Training</div>
@@ -31,7 +32,7 @@ export default function Home() {
                 </button>
                 </div>
             </div>
-            <div className="w-full md:w-1/2 bg-[url('/images/grhiit_cover2.jpg')] grayscale bg-cover bg-no-repeat bg-center">
+            <div className="md:w-1/2 bg-[url('/images/grhiit_cover2.jpg')] grayscale bg-no-repeat bg-cover bg-center">
             </div>
         </motion.div>
     )

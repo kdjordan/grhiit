@@ -53,7 +53,7 @@ export default function Dashboard() {
         >
             {currentUser ? (
                 <>
-                <div className="shadow-grblack shadow-lg p-4">
+                <div className="shadow-grblack shadow-lg p-4 w-4/5">
                     <h2 className="mb-16 text-center">WELCOME BACK {currentUser.username}</h2>
                     <div className="container mx-auto flex flex-col align-center justify-content-center gap-8">
                         <h4 className="text-4xl text-center">YOUR TRAINING SESSIONS</h4>

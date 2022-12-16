@@ -15,21 +15,19 @@ const variants = {
       y: { stiffness: 1000 }
     }
   }
-};
+}
 
-const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
-
-export const MenuItem = ({ i }) => {
-    console.log(colors)
-  const style = { border: `2px solid ${colors[i]}` };
+export const MenuItem = ({ name, path }) => {
   return (
     <motion.li
       variants={variants}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="mb-[20px] flex align-center justify-center"
+      className="mb-[20px] flex align-center justify-center cursor-pointer"
     >
-      <div className="w-full tex-center text-2xl" style={style}>{i}</div>
+      <div className="w-2/3 text-center text-zinc-300 text-2xl border border-zinc-300 shadow-xl py-2">
+        <a href={path}>{name}</a>
+      </div>
     </motion.li>
   );
 };

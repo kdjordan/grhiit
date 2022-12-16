@@ -1,14 +1,11 @@
-import { motion, useCycle, AnimatePresence } from "framer-motion";
-import { useState, useRef } from "react";
+import { motion, useCycle } from "framer-motion";
+import { useRef } from "react";
 import { MenuToggle } from "./MenuToggle";
-import { useContext } from 'react';
-import UserContext from "../../UserContext";
 import { useDimensions } from "./use-dimensions"
 import { Navigation } from "./Navigation";
 
 export default function Header({ logout }) {
-    const { currentUser  } = useContext(UserContext)
-    const [ isOpen, toggleOpen ] = useCycle(true, false);
+    const [ isOpen, toggleOpen ] = useCycle(false, true);
     const containerRef = useRef(null);
     const { height } = useDimensions(containerRef);
     
@@ -22,7 +19,7 @@ export default function Header({ logout }) {
           }
         }),
         closed: {
-          clipPath: "circle(30px at  4px 40px)",
+          clipPath: "circle(30px at  340px 40px)",
           transition: {
             delay: 0.5,
             type: "spring",
@@ -40,22 +37,23 @@ export default function Header({ logout }) {
     
     return (
         <nav>
-            <div className="absolute top-4 left-8 text-grwhite font-osPrimary hover:text-zinc-300 hover:no-underline text-5xl">
-                <a className="no-underline tracking-widest" href="/">GRHIIT</a>
+            <div className="absolute top-4 left-[30px] text-grwhite font-osPrimary hover:text-zinc-300 hover:no-underline text-5xl">
+                <a className="no-underline" href="/">GRHIIT</a>
             </div>
             <motion.nav 
-                className="absolute top-0 left-0 bottom-0"
+                className="absolute top-0 right-[400px] bottom-0 z-9"
                 initial={false}
                 animate={isOpen ? "open" : "closed"}
+                style={{zIndex:9}}
                 custom={height}
                 ref={containerRef}
                 >
-                <motion.div className="absolute top-0 bottom-0 w-[300px] bg-white z-99" variants={sidebar}>
+                <motion.div className="absolute top-0 right-[-400px] bottom-0 w-[400px] bg-gradient-to-b from-grred to-grblack" variants={sidebar}>
                     {/* grhiit */}
                     <Navigation />
                     <MenuToggle toggle={() => toggleOpen()} />
                 </motion.div>
             </motion.nav>
-    </nav>
+        </nav>
     )
   }

@@ -1,6 +1,8 @@
-import * as React from "react";
 import { motion } from "framer-motion";
 import { MenuItem } from "./MenuItem";
+import { useContext } from 'react';
+import UserContext from "../../UserContext";
+import React from "react";
 
 const variants = {
   open: {
@@ -11,12 +13,42 @@ const variants = {
   }
 };
 
-export const Navigation = () => (
-  <motion.ul variants={variants} className="p-[25px] absolute top-[100px] width-[250px]">
-    {items.map((it, i) => (
-      <MenuItem i={it} key={i} />
-    ))}
-  </motion.ul>
-);
+export const Navigation = () => {
+  const { currentUser  } = useContext(UserContext)
+  let items
+  if(!currentUser) {
+    items = [
+      {
+        name: "LOGIN",
+        path: "/login"
+      },
+      {
+        name: "LOGOUT",
+        path: "/logout"
+      }
+    ]
+  } else {
+    items = [
+      {
+        name: "DASHBOARD",
+        path: "/dashboard"
+      },
+      {
+        name: "CREATE",
+        path: "/create"
+      },
+      {
+        name: "PLAY",
+        path: "/play"
+      },
+    ]
+  }
+  return (
+    <motion.ul variants={variants} className="p-[25px] mt-16 width-[250px]">
+      {items.map((it, i) => (
+        <MenuItem name={it.name} path={it.path} key={i} />
+      ))}
+    </motion.ul>
+  );
+}
 
-const items = ['LOGIN', 'LOGOUT'];
