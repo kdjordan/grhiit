@@ -12,16 +12,11 @@ const variants = {
 };
 
 export const Navigation = () => (
-<>
-{/* <div className="text-grwhite font-osPrimary hover:text-grgrey hover:no-underline text-3xl">
-    <a className="no-underline tracking-widest" href="/">GRHIIT</a>
-</div> */}
-  <motion.ul variants={variants} className="p-[25px] mb-[20px] flex align-center cursor-pointer">
-    {itemIds.map(i => (
-      <MenuItem i={i} key={i} />
+  <motion.ul variants={variants} className="p-[25px] absolute top-[100px] width-[250px]">
+    {items.map((it, i) => (
+      <MenuItem i={it} key={i} />
     ))}
   </motion.ul>
-</>
 );
 
-const itemIds = [0, 1, 2, 3, 4];
+const items = ['LOGIN', 'LOGOUT'];

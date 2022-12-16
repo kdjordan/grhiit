@@ -4,7 +4,7 @@ export default function Home() {
     const navigate = useNavigate();
     return (
         <motion.div 
-            className="container relative mx-auto flex flex-col md:flex-row  align-center shadow-black shadow-xl z-0"
+            className="container relative mx-auto flex flex-col md:flex-row  align-center shadow-black shadow-xl"
             initial={{opacity:0}}
             animate={{opacity:1}}
             exit={{opacity:0, transition: {duration: 0.5}}}    
