@@ -27,7 +27,6 @@ export const MenuItem = ({ name, path, toggle }) => {
   const navigate = useNavigate()
 
   function handleClick(e) {
-    console.log('got ', e.target.id)
     toggle()
     switch (e.target.id) {
       case('LOGOUT'):

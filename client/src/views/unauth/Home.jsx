@@ -11,12 +11,12 @@ export default function Home() {
             exit={{opacity:0, transition: {duration: 0.5}}}    
         >
             <div className="w-full md:w-1/2 relative z-0">
-                <div className="flex flex-col gap-3 mx-auto items-center text-xl md:text-6xl w-full py-8 md:py-16 rounded text-zinc-300">
-                    <div className='bg-gradient-to-r from-slate-100 to-gray-400 bg-clip-text text-transparent 
-                                    text-xl md:text-4xl lg:text-4xl uppercase tracking-widest'>Bodyweight Interval Training</div>
+                <div className="flex flex-col  mx-auto items-center text-xl md:text-6xl w-full py-8 md:pt-4 md:pb-24 rounded text-zinc-300">
+                    <div className="bg-gradient-to-r from-slate-100 to-gray-400 bg-clip-text text-transparent 
+                                    text-xl md:text-4xl lg:text-4xl uppercase tracking-widest mb-4">Bodyweight Interval Training</div>
                     <h2 className="text-6xl md:text-8xl">ALL IT TAKES</h2>
                     <h2 className="text-6xl md:text-8xl">IS</h2>
-                    <h2 className='bg-gradient-to-b from-slate-100 to-gray-400 bg-clip-text text-transparent text-6xl md:text-8xl'>ALL YOU GOT</h2>
+                    <h2 className="bg-gradient-to-b from-slate-100 to-gray-400 bg-clip-text text-transparent text-6xl md:text-8xl mb-8">ALL YOU GOT</h2>
                 
                 <button 
                     className="mt-8 text-base md:text-xl bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none rounded px-8 py-2 md:px-16"

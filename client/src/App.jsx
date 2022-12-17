@@ -60,10 +60,10 @@ function App() {
 
   return (
     <UserContext.Provider value={{currentUser, setCurrentUser, logout}}>
-    <div className="App h-screen bg-gradient-primary">
+    <div className="App">
       <Router>
         <Navbar />
-        <div className="main font-osPrimary pt-32">
+        <div className="main h-screen font-osPrimary pt-32 bg-gradient-primary">
           <AnimatedRoutes signup={signup} login={login} logout={logout}/>
         </div>
       </Router>

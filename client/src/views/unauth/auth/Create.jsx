@@ -1,6 +1,6 @@
 // import { useDrag, useDrop } from 'react-dnd';
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AddInterval from '../../../components/AddInterval'
 import { SortableItem } from '../../../components/SortableItem'
 
@@ -16,7 +16,7 @@ import {
     arrayMove,
     SortableContext,
     sortableKeyboardCoordinates,
-    verticalListSortingStrategy,
+    verticalListSortingStrategy
   } from '@dnd-kit/sortable';
   
   
@@ -30,7 +30,7 @@ export default function Create() {
     }))
 
     const [items, setItems] = useState([])
-
+    
     function addInterval(form) {
         setItems(int => [...int, form])
     }
@@ -67,7 +67,7 @@ export default function Create() {
 
     return (
         <motion.div 
-        className="container mx-auto text-3xl md:text-5xl h-screen text-grwhite flex flex-col items-center"
+        className="container mx-auto text-3xl md:text-5xl  text-grwhite flex flex-col items-center"
         initial={{opacity:0}}
         animate={{opacity:1}}
         exit={{opacity:0, transition: {duration: 0.5}}}        
@@ -91,10 +91,11 @@ export default function Create() {
                     items={items}
                     strategy={verticalListSortingStrategy}
                 >
-                {items.map((i) => (
+                {items.map((i, index) => (
                     <SortableItem 
                         key={i.id} 
                         id={i.id} 
+                        index={index}
                         movement={i.movement} 
                         abbreviation={i.abbreviation} 
                         work={i.work} 

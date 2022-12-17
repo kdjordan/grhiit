@@ -15,7 +15,7 @@ export const Item = forwardRef((props, ref) => {
         text-grgrey rounded-lg shadow-md hover:bg-gray-700 mb-2 max-w-sm p-4`}
       >
       
-      <div onDoubleClick={() => {remove(rest.id)}}  className="flex align-center text-2xl">
+      <div onDoubleClick={() => {remove(rest.id)}}  className="flex text-2xl">
         {restInterval? (
           <>
             <span>REST&nbsp;:&nbsp;</span>    
