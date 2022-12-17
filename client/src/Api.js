@@ -56,6 +56,7 @@ class Grhiit {
   }
 
   static async patchUser(username, data) {
+    console.log('called ', username, data)
     let res = await this.request(`users/${username}`, data, 'patch')
     return res.user
   }

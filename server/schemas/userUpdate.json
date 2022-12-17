@@ -25,6 +25,6 @@
       "format": "email"
     }
   },
-  "additionalProperties": false,
+  "additionalProperties": true,
   "required": []
 }
