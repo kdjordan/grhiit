@@ -4,7 +4,7 @@ import { MenuToggle } from "./MenuToggle";
 import { useDimensions } from "./use-dimensions"
 import { Navigation } from "./Navigation";
 
-export default function Header({ logout }) {
+export default function Header() {
     const [ isOpen, toggleOpen ] = useCycle(false, true);
     const containerRef = useRef(null);
     const { height } = useDimensions(containerRef);
@@ -28,12 +28,6 @@ export default function Header({ logout }) {
           }
         }
       }
-
-      function doLogout() {
-        toggleOpen()
-        logout()
-      }
-    
     
     return (
         <nav>
@@ -50,7 +44,7 @@ export default function Header({ logout }) {
                 >
                 <motion.div className="absolute top-0 right-[-400px] bottom-0 w-[400px] bg-gradient-to-b from-grred to-grblack" variants={sidebar}>
                     {/* grhiit */}
-                    <Navigation />
+                    <Navigation toggle={() => toggleOpen()}/>
                     <MenuToggle toggle={() => toggleOpen()} />
                 </motion.div>
             </motion.nav>

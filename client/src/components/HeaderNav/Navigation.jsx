@@ -13,7 +13,7 @@ const variants = {
   }
 };
 
-export const Navigation = () => {
+export const Navigation = ({ toggle }) => {
   const { currentUser  } = useContext(UserContext)
   let items
   if(!currentUser) {
@@ -23,8 +23,8 @@ export const Navigation = () => {
         path: "/login"
       },
       {
-        name: "LOGOUT",
-        path: "/logout"
+        name: "SIGNUP",
+        path: "/signup"
       }
     ]
   } else {
@@ -38,15 +38,15 @@ export const Navigation = () => {
         path: "/create"
       },
       {
-        name: "PLAY",
-        path: "/play"
+        name: "LOGOUT",
+        path: "/logout"
       },
     ]
   }
   return (
     <motion.ul variants={variants} className="p-[25px] mt-16 width-[250px]">
       {items.map((it, i) => (
-        <MenuItem name={it.name} path={it.path} key={i} />
+        <MenuItem name={it.name} path={it.path} key={i} toggle={toggle} />
       ))}
     </motion.ul>
   );

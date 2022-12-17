@@ -8,6 +8,10 @@ export default function PlayDisplay({ data }) {
     const restBackground = "hsl(141,74%,37%)"
     const workBackground = "hsl(357,77%,50%)"
     const endBackground = "hsl(217,91%,60%)"
+    // const waitBackground = "from-grblack via-pink-600 to-blue-600"
+    // const restBackground = "hsl(141,74%,37%)"
+    // const workBackground = "hsl(357,77%,50%)"
+    // const endBackground = "hsl(217,91%,60%)"
 
     //state for all controls
     const [ background, setBackground ] = useState(waitBackground)
@@ -103,11 +107,12 @@ export default function PlayDisplay({ data }) {
 
     return (
         <motion.div
-            className={`w-full fixed top-0 text-3xl md:text-5xl text-grblack h-screen bg-gradient-to-t from-gray-500 to-${background} z-999`}
+            className={` w-full fixed top-0 text-3xl md:text-5xl text-grblack h-screen ${background}`}
             initial={{ y: '100vh' }}
             animate={{ backgroundColor:`${background}`, y: '0vh' }}
             exit={{ y: '100vh' }}
             transition={{duration: .5}}
+            style={{zIndex:99}}
             key="overlay"
             >
             {data ? (

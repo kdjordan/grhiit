@@ -8,6 +8,7 @@ import UserContext from './UserContext'
 import { useJwt, isExpired, decodeToken } from "react-jwt";
 import { BrowserRouter as Router } from 'react-router-dom'
 
+
 function App() {
   const [token, setToken] = useState(LocalStorage.getLocalStorage());
   const [currentUser, setCurrentUser] = useState(null);
@@ -26,7 +27,6 @@ function App() {
 
   async function signup(form) {
     // got a user signing up => grab their token and put in localstorage
-    console.log('firing in app ', form)
     try {
       let token = await Auth.signup(form) 
       setToken(token)
@@ -36,10 +36,11 @@ function App() {
       return { success: false, error }
     }
   }
-
+  
   function logout() {
     LocalStorage.setLocalStorage(null)
     setCurrentUser(null)
+
   }
 
   useEffect(() => {
@@ -58,12 +59,12 @@ function App() {
   }, [token])
 
   return (
-    <UserContext.Provider value={{currentUser, setCurrentUser}}>
+    <UserContext.Provider value={{currentUser, setCurrentUser, logout}}>
     <div className="App h-screen bg-gradient-primary">
-        <Navbar logout={logout}/>
       <Router>
+        <Navbar />
         <div className="main font-osPrimary pt-32">
-          <AnimatedRoutes signup={signup} login={login} />
+          <AnimatedRoutes signup={signup} login={login} logout={logout}/>
         </div>
       </Router>
     </div>
