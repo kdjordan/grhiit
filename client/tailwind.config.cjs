@@ -17,6 +17,10 @@ module.exports = {
       fontFamily: {
         'osPrimary': ['Oswald', 'sans-serif'],
         'ssSecondary': ['Source Sans Pro', 'sans-serif']
+      },
+      fontSize: {
+        'dynamicSmall': 'clamp(1rem, 5vw, 2rem)',
+        'dynamicLarge': 'clamp(3rem, 3vw, 8rem)',
       }
     },
   },

@@ -63,7 +63,7 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-        <div className="main h-screen font-osPrimary pt-32 bg-gradient-primary">
+        <div className="main min-h-screen font-osPrimary py-32 bg-gradient-primary">
           <AnimatedRoutes signup={signup} login={login} logout={logout}/>
         </div>
       </Router>
