@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import UserContext from '../UserContext';
 import Grhiit from '../Api';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import './UpdateProfileToast.css'
 
@@ -73,7 +73,7 @@ export default function UpdateProfile({ user }) {
 
     return (
         <>
-        <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true}/>
+        
         <div className="px-2 content-center mt-4 w-full lg:w-4/5 ">
             <div className="flex flex-col content-center text-lg 
                     px-6 py-4 rounded text-grgrey shadow-black shadow-xl"

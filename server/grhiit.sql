@@ -5,7 +5,7 @@ DROP DATABASE grhiit;
 CREATE DATABASE grhiit;
 \connect grhiit
 
-\i grhiit-schema.sql
+\i grhiit-schema2.sql
 -- \i grhiit-seed.sql
 
 -- \echo 'Delete and recreate grhiit_test db?'

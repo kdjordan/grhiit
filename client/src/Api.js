@@ -56,14 +56,28 @@ class Grhiit {
   }
 
   static async patchUser(username, data) {
-    console.log('called ', username, data)
     let res = await this.request(`users/${username}`, data, 'patch')
     return res.user
   }
 
-  static async applyToJob(username, id) {
-    await this.request(`users/${username}/jobs/${id}`, {}, "post");
+  static async addWorkout(username, data) {
+    let res = await this.request(`users/${username}`, data, 'post')
+    return res.user
   }
+
+  static async addSession(username, data) {
+    let res = await this.request(`users/${username}`, data, 'post')
+    return res.user
+  }
+
+  static async addInteral(username, data) {
+    let res = await this.request(`users/${username}`, data, 'post')
+    return res.user
+  }
+
+  // static async applyToJob(username, id) {
+  //   await this.request(`users/${username}/jobs/${id}`, {}, "post");
+  // }
 }
 
 export default Grhiit;

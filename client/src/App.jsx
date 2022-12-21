@@ -7,6 +7,7 @@ import Grhiit from './Api'
 import UserContext from './UserContext'
 import { useJwt, isExpired, decodeToken } from "react-jwt";
 import { BrowserRouter as Router } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
   return (
     <UserContext.Provider value={{currentUser, setCurrentUser, logout}}>
     <div className="App">
+      <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true}/>
       <Router>
         <Navbar />
         <div className="main min-h-screen font-osPrimary py-32 bg-gradient-primary">
@@ -72,7 +74,6 @@ function App() {
     </UserContext.Provider>
   )
 }
-////background-image: linear-gradient(180deg, #000000 15%, rgb(226, 29, 38) 100%);min-height:100vh;
 export default App
 
 
