@@ -6,12 +6,11 @@ const jsonschema = require("jsonschema");
 const express = require("express");
 
 const { BadRequestError } = require("../expressError");
-const { ensureAdmin } = require("../middleware/auth");
-const Company = require("../models/company");
+const { ensureAdmin, ensureCorrectUserOrAdmin, ensureLoggedIn } = require("../middleware/auth");
+const Workout = require("../models/workout");
 
-const companyNewSchema = require("../schemas/companyNew.json");
-const companyUpdateSchema = require("../schemas/companyUpdate.json");
-const companySearchSchema = require("../schemas/companySearch.json");
+const workoutNewSchema = require("../schemas/workoutNew.json");
+
 
 const router = new express.Router();
 
@@ -25,16 +24,18 @@ const router = new express.Router();
  * Authorization required: admin
  */
 
-router.post("/", ensureAdmin, async function (req, res, next) {
+router.post("/", ensureLoggedIn, async function (req, res, next) {
+  console.log('got post in route')
+  const defaultDifficulty = 1
   try {
-    const validator = jsonschema.validate(req.body, companyNewSchema);
+    const validator = jsonschema.validate(req.body, workoutNewSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
       throw new BadRequestError(errs);
     }
 
-    const company = await Company.create(req.body);
-    return res.status(201).json({ company });
+    const workout = await Workout.create({userId: req.body.userId, difficulty: defaultDifficulty});
+    return res.status(201).json({ workout });
   } catch (err) {
     return next(err);
   }
@@ -107,7 +108,7 @@ router.patch("/:handle", ensureAdmin, async function (req, res, next) {
       throw new BadRequestError(errs);
     }
 
-    const company = await Company.update(req.params.handle, req.body);
+    const company = await Session.update(req.params.handle, req.body);
     return res.json({ company });
   } catch (err) {
     return next(err);
@@ -121,7 +122,7 @@ router.patch("/:handle", ensureAdmin, async function (req, res, next) {
 
 router.delete("/:handle", ensureAdmin, async function (req, res, next) {
   try {
-    await Company.remove(req.params.handle);
+    await Session.remove(req.params.handle);
     return res.json({ deleted: req.params.handle });
   } catch (err) {
     return next(err);

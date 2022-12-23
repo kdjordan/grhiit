@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function AddInterval({ addInterval }) {
     const INITIAL_STATE ={
-        movement: '',
-        abbreviation: '',
-        work: '',
-        rest: '',
-        rounds: ''
+        movement: 'burpee',
+        abbreviation: 'BRP',
+        work: '20',
+        rest: '10',
+        rounds: '8'
     }
     const [form, setForm] = useState(INITIAL_STATE)
 

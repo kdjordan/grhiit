@@ -6,42 +6,30 @@ const { sqlForPartialUpdate } = require("../helpers/sql");
 
 /** Related functions for companies. */
 
-class Company {
-  /** Create a company (from data), update db, return new company data.
+class Workout {
+  /** Create a workout (from userId), update db, return new workout ID.
    *
-   * data should be { handle, name, description, numEmployees, logoUrl }
+   * data should be { userId, difficulty }
    *
-   * Returns { handle, name, description, numEmployees, logoUrl }
+   * Returns { workoutId }
    *
-   * Throws BadRequestError if company already in database.
    * */
 
-  static async create({ handle, name, description, numEmployees, logoUrl }) {
-    const duplicateCheck = await db.query(
-          `SELECT handle
-           FROM companies
-           WHERE handle = $1`,
-        [handle]);
-
-    if (duplicateCheck.rows[0])
-      throw new BadRequestError(`Duplicate company: ${handle}`);
-
+  static async create({ userId, difficulty }) {
+    console.log('creating', userId, difficulty)
     const result = await db.query(
-          `INSERT INTO companies
-           (handle, name, description, num_employees, logo_url)
-           VALUES ($1, $2, $3, $4, $5)
-           RETURNING handle, name, description, num_employees AS "numEmployees", logo_url AS "logoUrl"`,
+          `INSERT INTO user_workouts
+           (user_id, difficulty)
+           VALUES ($1, $2)
+           RETURNING id AS "workoutId", user_id AS "userId"`,
         [
-          handle,
-          name,
-          description,
-          numEmployees,
-          logoUrl,
+          userId,
+          difficulty
         ],
     );
-    const company = result.rows[0];
+    const workout = result.rows[0];
 
-    return company;
+    return workout;
   }
 
   /** Find all companies (optional filter on searchFilters).
@@ -108,7 +96,7 @@ class Company {
    **/
 
   static async get(handle) {
-    const companyRes = await db.query(
+    const sessionRes = await db.query(
           `SELECT handle,
                   name,
                   description,
@@ -118,9 +106,9 @@ class Company {
            WHERE handle = $1`,
         [handle]);
 
-    const company = companyRes.rows[0];
+    const session = sessionRes.rows[0];
 
-    if (!company) throw new NotFoundError(`No company: ${handle}`);
+    if (!session) throw new NotFoundError(`No session: ${handle}`);
 
     const jobsRes = await db.query(
           `SELECT id, title, salary, equity
@@ -130,9 +118,9 @@ class Company {
         [handle],
     );
 
-    company.jobs = jobsRes.rows;
+    session.jobs = jobsRes.rows;
 
-    return company;
+    return session;
   }
 
   /** Update company data with `data`.
@@ -191,4 +179,4 @@ class Company {
 }
 
 
-module.exports = Company;
+module.exports = Workout;

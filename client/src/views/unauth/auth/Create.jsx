@@ -1,8 +1,9 @@
-// import { useDrag, useDrop } from 'react-dnd';
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useState, useContext } from 'react'
 import AddInterval from '../../../components/AddInterval'
 import { SortableItem } from '../../../components/SortableItem'
+import UserContext from '../../../UserContext'
+import Grhiit from '../../../Api'
 
 import {
     DndContext, 
@@ -22,7 +23,8 @@ import {
   
 
 export default function Create() {
-
+    const { currentUser } = useContext(UserContext)
+    console.log(currentUser)
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(KeyboardSensor, {
@@ -61,8 +63,15 @@ export default function Create() {
         return theIndex
     }
 
-    function saveSession() {
-        console.log('saving ', items)
+    async function saveSession() {
+        try {
+            console.log('saving ', currentUser.id)
+            const id =  await Grhiit.addWorkout(currentUser.id)
+            console.log('received id ', id)
+        } catch (error) {
+            console.log('error ', error)
+            
+        }
     }
 
     return (

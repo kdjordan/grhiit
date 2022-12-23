@@ -8,6 +8,7 @@ function createToken(user) {
       "createToken passed user without isAdmin property");
 
   let payload = {
+    userId: user.id,
     username: user.username,
     isAdmin: user.isAdmin || false,
   };

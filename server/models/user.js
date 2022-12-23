@@ -24,7 +24,8 @@ class User {
   static async authenticate(username, password) {
     // try to find the user first
     const result = await db.query(
-          `SELECT username,
+          `SELECT id,
+                  username,
                   password,
                   first_name AS "firstName",
                   last_name AS "lastName",
@@ -80,7 +81,7 @@ class User {
             email,
             is_admin)
            VALUES ($1, $2, $3, $4, $5, $6)
-           RETURNING username, first_name AS "firstName", last_name AS "lastName", email, is_admin AS "isAdmin"`,
+           RETURNING id AS "userId", username, first_name AS "firstName", last_name AS "lastName", email, is_admin AS "isAdmin"`,
         [
           username,
           hashedPassword,
@@ -101,19 +102,19 @@ class User {
    * Returns [{ username, first_name, last_name, email, is_admin }, ...]
    **/
 
-  static async findAll() {
-    const result = await db.query(
-          `SELECT username,
-                  first_name AS "firstName",
-                  last_name AS "lastName",
-                  email,
-                  is_admin AS "isAdmin"
-           FROM users
-           ORDER BY username`,
-    );
+  // static async findAll() {
+  //   const result = await db.query(
+  //         `SELECT username,
+  //                 first_name AS "firstName",
+  //                 last_name AS "lastName",
+  //                 email,
+  //                 is_admin AS "isAdmin"
+  //          FROM users
+  //          ORDER BY username`,
+  //   );
 
-    return result.rows;
-  }
+  //   return result.rows;
+  // }
 
   /** Given a username, return data about user.
    *
@@ -124,9 +125,9 @@ class User {
    **/
 
   static async get(username) {
-    console.log('in sql ', username)
     const userRes = await db.query(
-          `SELECT username,
+          `SELECT id,
+                  username,
                   first_name AS "firstName",
                   last_name AS "lastName",
                   email,
@@ -183,7 +184,8 @@ class User {
     const querySql = `UPDATE users 
                       SET ${setCols} 
                       WHERE username = ${usernameVarIdx} 
-                      RETURNING username,
+                      RETURNING id AS "userId",
+                                username,
                                 first_name AS "firstName",
                                 last_name AS "lastName",
                                 email,
