@@ -25,27 +25,19 @@ const router = express.Router({ mergeParams: true });
  */
 
 router.post("/",  async function (req, res, next) {
+  console.log('received in ', req.body)
   try {
-    console.log('received in ', req.body)
-    let data = {...req.body}
-    console.log(data)
-    
-  } catch (error) {
-    console.log('er*****', error)
+    const validator = jsonschema.validate(req.body, intervalNewSchema);
+    if (!validator.valid) {
+      const errs = validator.errors.map(e => e.stack);
+      throw new BadRequestError(errs);
+    }
+    return true
+    // const job = await Interval.create(req.body);
+    // return res.status(201).json({ job });
+  } catch (err) {
+    return next(err);
   }
-  return true
-  // try {
-  //   const validator = jsonschema.validate(req.body, intervalNewSchema);
-  //   if (!validator.valid) {
-  //     const errs = validator.errors.map(e => e.stack);
-  //     throw new BadRequestError(errs);
-  //   }
-
-  //   const job = await Interval.create(req.body);
-  //   return res.status(201).json({ job });
-  // } catch (err) {
-  //   return next(err);
-  // }
 });
 
 /** GET / =>
@@ -137,3 +129,5 @@ router.delete("/:id", ensureAdmin, async function (req, res, next) {
 
 
 module.exports = router;
+
+

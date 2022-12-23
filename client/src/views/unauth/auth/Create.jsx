@@ -64,12 +64,8 @@ export default function Create() {
 
     async function saveSession() {
         try {
-            // const id =  await Grhiit.addWorkout(currentUser.id)
-            const workoutId =  10 
-            items.forEach((intv, index) => {
-                // console.log('***', id)
-                processIntervalAndSave(intv, index, workoutId)
-            })
+            const res = await Grhiit.saveIntervals(items)
+           
         } catch (error) {
             console.log('error ', error)
             
@@ -125,11 +121,11 @@ export default function Create() {
                 >
                 {items.map((i, index) => (
                     <SortableItem 
-                        key={i.id} 
+                        key={i.sortId} 
                         id={i.id} 
                         index={index}
-                        movement={i.movement} 
-                        abbreviation={i.abbreviation} 
+                        movement={i.movementName} 
+                        abbreviation={i.movementAbbrv} 
                         work={i.work} 
                         rest={i.rest} 
                         rounds={i.rounds}

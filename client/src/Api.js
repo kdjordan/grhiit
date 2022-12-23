@@ -60,7 +60,7 @@ class Grhiit {
     return res.user
   }
 
-  static async saveInterval(data) {
+  static async saveIntervals(data) {
     console.log('adding interval in API ', data)
     // console.log('adding id in API ', userId)
 

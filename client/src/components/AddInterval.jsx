@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function AddInterval({ addInterval }) {
     const INITIAL_STATE ={
-        movement: 'burpee',
-        abbreviation: 'BRP',
-        work: '20',
-        rest: '10',
-        rounds: '8'
+        movementName: 'burpee',
+        movementAbbrv: 'BRP',
+        work: +'20',
+        rest: +'10',
+        rounds: +'8'
     }
     const [form, setForm] = useState(INITIAL_STATE)
 
@@ -27,7 +27,7 @@ export default function AddInterval({ addInterval }) {
         e.preventDefault()
         const newForm = Object.assign({}, form)
         //add unique id to object
-        newForm.id = uuidv4()
+        newForm.sortId = uuidv4()
         setForm(INITIAL_STATE)
         addInterval(newForm)
       }
@@ -60,8 +60,8 @@ export default function AddInterval({ addInterval }) {
                             <input 
                                 type="text"
                                 className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
-                                name="movement"
-                                value={form.movement}
+                                name="movementName"
+                                value={form.movementName}
                                 onChange={handleChange}
                                 onFocus={handleFocus}
                                 required
@@ -74,8 +74,8 @@ export default function AddInterval({ addInterval }) {
                             <input 
                                 type="text"
                                 className="block border bg-transparent border-grred  w-full p-3 rounded mb-4"
-                                name="abbreviation"
-                                value={form.abbreviation}
+                                name="movementAbbrv"
+                                value={form.movementAbbrv}
                                 onChange={handleChange}
                                 onFocus={handleFocus}
                                 required
