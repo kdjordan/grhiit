@@ -23,10 +23,11 @@ CREATE TABLE intervals (
   workout_id INTEGER NOT NULL
     REFERENCES user_workouts(id) ON DELETE CASCADE,
   sequence_id INTEGER NOT NULL,
+  sort_id VARCHAR(50) NOT NULL,
   movement_name VARCHAR(30),
+  movement_abbrv VARCHAR(10),
   work INTEGER,
   rest INTEGER,
   rounds INTEGER
 );
-
 

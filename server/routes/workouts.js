@@ -15,17 +15,16 @@ const workoutNewSchema = require("../schemas/workoutNew.json");
 const router = new express.Router();
 
 
-/** POST / { company } =>  { company }
+/** POST / { workout } =>  { workout }
  *
- * company should be { handle, name, description, numEmployees, logoUrl }
+ * workout should be {  }
  *
- * Returns { handle, name, description, numEmployees, logoUrl }
+ * Returns {  }
  *
- * Authorization required: admin
+ * Authorization required: loggedin
  */
 
 router.post("/", ensureLoggedIn, async function (req, res, next) {
-  console.log('got post in route')
   const defaultDifficulty = 1
   try {
     const validator = jsonschema.validate(req.body, workoutNewSchema);

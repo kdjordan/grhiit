@@ -60,11 +60,17 @@ class Grhiit {
     return res.user
   }
 
+  static async saveInterval(data) {
+    console.log('adding interval in API ', data)
+    // console.log('adding id in API ', userId)
+
+    let res = await this.request(`intervals`, data, 'post')
+    return true
+  }
   static async addWorkout(userId) {
     console.log('adding workout in API ', userId)
     let res = await this.request(`workouts`, { userId }, 'post')
-    console.log('got res ', res)
-    return true
+    return res.workout
   }
 
   static async addSession(username, data) {

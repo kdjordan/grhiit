@@ -1,42 +1,51 @@
 "use strict";
 
-/** Routes for jobs. */
+/** Routes for intervals. */
 
 const jsonschema = require("jsonschema");
 
 const express = require("express");
 const { BadRequestError } = require("../expressError");
-const { ensureAdmin } = require("../middleware/auth");
-const Job = require("../models/job");
-const jobNewSchema = require("../schemas/jobNew.json");
-const jobUpdateSchema = require("../schemas/jobUpdate.json");
-const jobSearchSchema = require("../schemas/jobSearch.json");
+const { ensureAdmin, ensureLoggedIn } = require("../middleware/auth");
+const Interval = require("../models/interval");
+// const jobNewSchema = require("../schemas/jobNew.json");
+const intervalNewSchema = require("../schemas/intervalNew.json");
+// const jobSearchSchema = require("../schemas/jobSearch.json");
 
 const router = express.Router({ mergeParams: true });
 
 
-/** POST / { job } => { job }
+/** POST / { interval } => { interval }
  *
- * job should be { title, salary, equity, companyHandle }
+ * interval should be {  }
  *
- * Returns { id, title, salary, equity, companyHandle }
+ * Returns {  }
  *
- * Authorization required: admin
+ * Authorization required: loggedin
  */
 
-router.post("/", ensureAdmin, async function (req, res, next) {
+router.post("/",  async function (req, res, next) {
   try {
-    const validator = jsonschema.validate(req.body, jobNewSchema);
-    if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
-      throw new BadRequestError(errs);
-    }
-
-    const job = await Job.create(req.body);
-    return res.status(201).json({ job });
-  } catch (err) {
-    return next(err);
+    console.log('received in ', req.body)
+    let data = {...req.body}
+    console.log(data)
+    
+  } catch (error) {
+    console.log('er*****', error)
   }
+  return true
+  // try {
+  //   const validator = jsonschema.validate(req.body, intervalNewSchema);
+  //   if (!validator.valid) {
+  //     const errs = validator.errors.map(e => e.stack);
+  //     throw new BadRequestError(errs);
+  //   }
+
+  //   const job = await Interval.create(req.body);
+  //   return res.status(201).json({ job });
+  // } catch (err) {
+  //   return next(err);
+  // }
 });
 
 /** GET / =>

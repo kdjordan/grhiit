@@ -5,33 +5,44 @@ const { NotFoundError} = require("../expressError");
 const { sqlForPartialUpdate } = require("../helpers/sql");
 
 
-/** Related functions for companies. */
+/** Related functions for intervals. */
 
-class Job {
-  /** Create a job (from data), update db, return new job data.
+class Interval {
+  /** Create an interval (from data), update db, return new interval data.
    *
-   * data should be { title, salary, equity, companyHandle }
+   * data should be { workout_id, sequence_id, movement_name, work, rest, rounds }
    *
-   * Returns { id, title, salary, equity, companyHandle }
+   * Returns { workout_id, sequence_id, movement_name, work, rest, rounds }
    **/
 
   static async create(data) {
+    console.log('called SQL')
+    return true
     const result = await db.query(
-          `INSERT INTO jobs (title,
-                             salary,
-                             equity,
-                             company_handle)
-           VALUES ($1, $2, $3, $4)
-           RETURNING id, title, salary, equity, company_handle AS "companyHandle"`,
+          `INSERT INTO intervals (workout_id,
+                             sequence_id,
+                             movement_name,
+                             work,
+                             rest,
+                             rounds)
+           VALUES ($1, $2, $3, $4, $5, $6)
+           RETURNING workout_id AS "workoutId", 
+           sequence_id AS "sequenceId", 
+           movement_name AS "movementName", 
+           work,
+           rest,
+           rounds`,
         [
-          data.title,
-          data.salary,
-          data.equity,
-          data.companyHandle,
+          data.workoutId,
+          data.sequenceId,
+          data.movementName,
+          data.work,
+          data.rest,
+          data.rounds,
         ]);
-    let job = result.rows[0];
+    let interval = result.rows[0];
 
-    return job;
+    return interval;
   }
 
   /** Find all jobs (optional filter on searchFilters).
@@ -172,4 +183,4 @@ class Job {
   }
 }
 
-module.exports = Job;
+module.exports = Interval;

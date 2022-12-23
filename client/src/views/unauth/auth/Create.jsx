@@ -38,7 +38,6 @@ export default function Create() {
     }
 
     function deleteInterval(id) {
-        console.log('calling D interval', id)
         const newItems = items.filter(int => int.id != id)
         setItems(newItems)
     }
@@ -65,12 +64,36 @@ export default function Create() {
 
     async function saveSession() {
         try {
-            console.log('saving ', currentUser.id)
-            const id =  await Grhiit.addWorkout(currentUser.id)
-            console.log('received id ', id)
+            // const id =  await Grhiit.addWorkout(currentUser.id)
+            const workoutId =  10 
+            items.forEach((intv, index) => {
+                // console.log('***', id)
+                processIntervalAndSave(intv, index, workoutId)
+            })
         } catch (error) {
             console.log('error ', error)
             
+        }
+    }
+
+    async function processIntervalAndSave(intv, index, workoutId) {
+        let data = {...intv, 
+            sequenceId: index, 
+            movementName : intv.movement, 
+            workoutId: workoutId,
+            movementAbbr: intv.abbreviation,
+            sortId: intv.id
+
+        }
+        delete data.movement
+        delete data.abbreviation
+        delete data.id
+        // console.log('data ', data)
+        try {
+            await Grhiit.saveInterval(data)
+            
+        } catch (error) {
+            console.log('error saving interval ', error)
         }
     }
 

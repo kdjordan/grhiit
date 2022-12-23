@@ -16,7 +16,6 @@ class Workout {
    * */
 
   static async create({ userId, difficulty }) {
-    console.log('creating', userId, difficulty)
     const result = await db.query(
           `INSERT INTO user_workouts
            (user_id, difficulty)
