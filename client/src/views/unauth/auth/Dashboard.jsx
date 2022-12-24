@@ -4,10 +4,13 @@ import { motion } from 'framer-motion'
 import UserContext from '../../../UserContext'
 import Card from '../../../components/Card'
 import UpdateProfile from '../../../components/UpdateProfile'
+import { useEffect } from 'react';
+import Grhiit from '../../../Api';
 
 export default function Dashboard() {
   
   const { currentUser } = useContext(UserContext)
+  console.log(currentUser)
   const navigate = useNavigate()
 
 
@@ -43,6 +46,17 @@ export default function Dashboard() {
       name: 'Session 5'
     },
   ]
+
+  useEffect(() => { 
+    if(currentUser) {
+      function getWorkouts() {
+        console.log('in dashboard got workouts ', currentUser.id)
+        const workouts = Grhiit.getAllWorkouts(currentUser.id)
+        console.log('in dashboard got workouts ', workouts)
+      }
+      getWorkouts()
+    }
+  }, [data])
 
     return (
         <motion.div 

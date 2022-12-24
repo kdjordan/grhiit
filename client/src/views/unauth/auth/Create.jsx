@@ -24,7 +24,6 @@ import {
 
 export default function Create() {
     const { currentUser } = useContext(UserContext)
-    console.log(currentUser)
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(KeyboardSensor, {
@@ -62,10 +61,10 @@ export default function Create() {
         return theIndex
     }
 
-    async function saveSession() {
+    async function saveWorkout() {
         try {
-            const res = await Grhiit.saveIntervals(items)
-           
+            const res = await Grhiit.saveWorkout(currentUser.id, items)
+           console.log('received ', res)
         } catch (error) {
             console.log('error ', error)
             
@@ -135,7 +134,7 @@ export default function Create() {
                 </SortableContext>
             </DndContext> 
             <button
-                onClick={saveSession}
+                onClick={saveWorkout}
                 className="w-1/6 text-base md:text-base text-center py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
             >
                 SAVE SESSION

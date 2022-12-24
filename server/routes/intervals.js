@@ -24,8 +24,8 @@ const router = express.Router({ mergeParams: true });
  * Authorization required: loggedin
  */
 
-router.post("/",  async function (req, res, next) {
-  console.log('received in ', req.body)
+router.post("/:userId",  async function (req, res, next) {
+  console.log('received in ', req.body, req.params.userId)
   try {
     const validator = jsonschema.validate(req.body, intervalNewSchema);
     if (!validator.valid) {

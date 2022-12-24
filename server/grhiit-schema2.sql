@@ -11,7 +11,7 @@ CREATE TABLE users (
 
 CREATE TABLE workouts (
   id SERIAL PRIMARY KEY,
-  workout_id INTEGER NOT NULL
+  user_id INTEGER NOT NULL
     REFERENCES users(id) ON DELETE CASCADE,
   created_at timestamptz DEFAULT NOW(),
   data jsonb

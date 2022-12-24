@@ -6,7 +6,7 @@ const jsonschema = require("jsonschema");
 const express = require("express");
 
 const { BadRequestError } = require("../expressError");
-const { ensureAdmin, ensureCorrectUserOrAdmin, ensureLoggedIn } = require("../middleware/auth");
+const { ensureAdmin, ensureCorrectUserOrAdmin, ensureLoggedIn, authenticateJWT } = require("../middleware/auth");
 const Workout = require("../models/workout");
 
 const workoutNewSchema = require("../schemas/workoutNew.json");
@@ -24,16 +24,16 @@ const router = new express.Router();
  * Authorization required: loggedin
  */
 
-router.post("/", ensureLoggedIn, async function (req, res, next) {
-  const defaultDifficulty = 1
+router.post("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
+  console.log('received in ', req.body, req.params.id)
   try {
     const validator = jsonschema.validate(req.body, workoutNewSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
       throw new BadRequestError(errs);
     }
-
-    const workout = await Workout.create({userId: req.body.userId, difficulty: defaultDifficulty});
+    
+    const workout = await Workout.create(req.params.id, req.body);
     return res.status(201).json({ workout });
   } catch (err) {
     return next(err);
@@ -41,31 +41,20 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
 });
 
 /** GET /  =>
- *   { companies: [ { handle, name, description, numEmployees, logoUrl }, ...] }
+ *   all workouts by userId to populate dashboard
  *
- * Can filter on provided search filters:
- * - minEmployees
- * - maxEmployees
- * - nameLike (will find case-insensitive, partial matches)
- *
- * Authorization required: none
+ * Authorization required: loggedin / user only gets theor workouts
  */
 
-router.get("/", async function (req, res, next) {
-  const q = req.query;
-  // arrive as strings from querystring, but we want as ints
-  if (q.minEmployees !== undefined) q.minEmployees = +q.minEmployees;
-  if (q.maxEmployees !== undefined) q.maxEmployees = +q.maxEmployees;
+router.get("/:id", async function (req, res, next) {
+  console.log('getting workouts...')
 
   try {
-    const validator = jsonschema.validate(q, companySearchSchema);
-    if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
-      throw new BadRequestError(errs);
-    }
+    const workouts = await Workout.findAll(req.params.id);
+    console.log('got workouts ', workouts)
+    return true
+    return res.json({ workouts });
 
-    const companies = await Company.findAll(q);
-    return res.json({ companies });
   } catch (err) {
     return next(err);
   }

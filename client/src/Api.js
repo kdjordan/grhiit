@@ -60,28 +60,32 @@ class Grhiit {
     return res.user
   }
 
-  static async saveIntervals(data) {
-    console.log('adding interval in API ', data)
-    // console.log('adding id in API ', userId)
-
-    let res = await this.request(`intervals`, data, 'post')
-    return true
-  }
-  static async addWorkout(userId) {
-    console.log('adding workout in API ', userId)
-    let res = await this.request(`workouts`, { userId }, 'post')
+  static async saveWorkout(userId, data) {
+    console.log('adding workout in API ', userId, data)
+    let res = await this.request(`workouts/${userId}`, data, 'post')
     return res.workout
   }
 
-  static async addSession(username, data) {
-    let res = await this.request(`users/${username}`, data, 'post')
-    return res.user
+  static async getAllWorkouts(userId) {
+    console.log('getting workouts in API ', userId)
+    let res = await this.request(`workouts/${userId}`)
+    return res.workout
   }
+  // static async addWorkout(userId) {
+  //   console.log('adding workout in API ', userId)
+  //   let res = await this.request(`workouts`, { userId }, 'post')
+  //   return res.workout
+  // }
 
-  static async addInteral(username, data) {
-    let res = await this.request(`users/${username}`, data, 'post')
-    return res.user
-  }
+  // static async addSession(username, data) {
+  //   let res = await this.request(`users/${username}`, data, 'post')
+  //   return res.user
+  // }
+
+  // static async addInteral(username, data) {
+  //   let res = await this.request(`users/${username}`, data, 'post')
+  //   return res.user
+  // }
 
   // static async applyToJob(username, id) {
   //   await this.request(`users/${username}/jobs/${id}`, {}, "post");

@@ -14,22 +14,24 @@ class Workout {
    * Returns { workoutId }
    *
    * */
+  static async create(userId, data) {
+    console.log('adding in SQL', userId, data)
 
-  static async create({ userId, difficulty }) {
     const result = await db.query(
-          `INSERT INTO user_workouts
-           (user_id, difficulty)
-           VALUES ($1, $2)
-           RETURNING id AS "workoutId", user_id AS "userId"`,
-        [
-          userId,
-          difficulty
-        ],
+      `INSERT INTO workouts
+       (user_id, data)
+       VALUES ($1, $2)
+       RETURNING id AS "workoutId", created_at AS "createdAt"`,
+      [
+        userId,
+        data
+      ],
     );
     const workout = result.rows[0];
-
+  
     return workout;
   }
+  
 
   /** Find all companies (optional filter on searchFilters).
    *
@@ -41,49 +43,19 @@ class Workout {
    * Returns [{ handle, name, description, numEmployees, logoUrl }, ...]
    * */
 
-  static async findAll(searchFilters = {}) {
-    let query = `SELECT handle,
-                        name,
-                        description,
-                        num_employees AS "numEmployees",
-                        logo_url AS "logoUrl"
-                 FROM companies`;
-    let whereExpressions = [];
-    let queryValues = [];
+  static async findAll(id) {
+    console.log('searching for workouts ', id)
 
-    const { minEmployees, maxEmployees, name } = searchFilters;
+    let workouts = await db.query(
+        `SELECT *
+          FROM workouts
+          WHERE id=$1`, 
+          [3]);
+    
 
-    if (minEmployees > maxEmployees) {
-      throw new BadRequestError("Min employees cannot be greater than max");
-    }
-
-    // For each possible search term, add to whereExpressions and queryValues so
-    // we can generate the right SQL
-
-    if (minEmployees !== undefined) {
-      queryValues.push(minEmployees);
-      whereExpressions.push(`num_employees >= $${queryValues.length}`);
-    }
-
-    if (maxEmployees !== undefined) {
-      queryValues.push(maxEmployees);
-      whereExpressions.push(`num_employees <= $${queryValues.length}`);
-    }
-
-    if (name) {
-      queryValues.push(`%${name}%`);
-      whereExpressions.push(`name ILIKE $${queryValues.length}`);
-    }
-
-    if (whereExpressions.length > 0) {
-      query += " WHERE " + whereExpressions.join(" AND ");
-    }
-
-    // Finalize query and return results
-
-    query += " ORDER BY name";
-    const companiesRes = await db.query(query, queryValues);
-    return companiesRes.rows;
+    console.log('got workouts ', workouts)
+    
+    return true
   }
 
   /** Given a company handle, return data about company.
