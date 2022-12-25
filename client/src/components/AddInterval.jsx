@@ -27,7 +27,7 @@ export default function AddInterval({ addInterval }) {
         e.preventDefault()
         const newForm = Object.assign({}, form)
         //add unique id to object
-        newForm.sortId = uuidv4()
+        newForm.id = uuidv4()
         setForm(INITIAL_STATE)
         addInterval(newForm)
       }

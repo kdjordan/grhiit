@@ -71,14 +71,13 @@ export default function Modal({ handleWorkoutAdd, toggleOpen, open }) {
                     >
                         SAVE WORKOUT
                     </button>
+                    </form>
                     <button
-                        type="submit"
                         onClick={toggleOpen}
                         className="w-full text-center py-3 rounded border border-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
                     >
                         CANCEL SAVE
                     </button>
-                </form>
             </div>
             </motion.div>
         )}
