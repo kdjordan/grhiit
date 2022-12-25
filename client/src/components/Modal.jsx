@@ -24,7 +24,6 @@ export default function Modal({ handleWorkoutAdd, toggleOpen, open }) {
     async function handleSubmit(e) {
         e.preventDefault()
         handleWorkoutAdd(form)
-        setIsOpen(false)
     }
 
     return (

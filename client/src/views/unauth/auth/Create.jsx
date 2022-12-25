@@ -32,10 +32,9 @@ export default function Create() {
     }))
 
     const [items, setItems] = useState([])
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
 
     function toggleOpen() {
-        console.log('toggling open')
         setIsOpen((op) => !op)
     }
     
@@ -68,19 +67,24 @@ export default function Create() {
         return theIndex
     }
 
-    async function saveWorkout() {
-        toggleOpen()
-        // try {
-        //     const res = await Grhiit.saveWorkout(currentUser.id, items)
-        //    console.log('received ', res)
-        // } catch (error) {
-        //     console.log('error ', error)
+    async function saveWorkout(obj) {
+        try {
+            const res = await Grhiit.saveWorkout(currentUser.id, obj)
+           console.log('received ', res)
+        } catch (error) {
+            console.log('error ', error)
             
-        // }
+        }
     }
 
     function handleWorkoutAdd(form) {
-        console.log('got form ', form)
+        toggleOpen()
+        const workoutObj = {
+            workoutName: form.workoutName,
+            workoutDesc: form.workoutDescription,
+            data: items
+        }
+        saveWorkout(workoutObj)
 
     }
 
@@ -128,7 +132,7 @@ export default function Create() {
                     </SortableContext>
                 </DndContext> 
                 <button
-                    onClick={saveWorkout}
+                    onClick={toggleOpen}
                     className="w-1/6 text-base md:text-base text-center py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
                 >
                     SAVE SESSION

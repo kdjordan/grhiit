@@ -1,45 +1,42 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://our.company.com/jobNew.schema.json",
-  "type": "array",
-  "items": {
-    "type": "object",
-    "properties": {
-      "workoutId": {
-        "type": "integer"
-      },
-      "sequenceId": {
-        "type": "integer"
-      },
-      "sortId": {
-        "type": "string"
-      },
-      "movementName": {
-        "type": "string"
-      },
-      "movementAbbrv": {
-        "type": "string"
-      },
-      "work": {
-        "type": "integer"
-      },
-      "rest": {
-        "type": "integer"
-      },
-      "rounds": {
-        "type": "integer"
+  "type": "object",
+  "properties": {
+    "workoutName": {
+      "type": "string"
+    },
+    "workoutDesc": {
+      "type": "string"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "movementName": {
+            "type": "string"
+          },
+          "movementAbbrv": {
+            "type": "string"
+          },
+          "work": {
+            "type": "number"
+          },
+          "rest": {
+            "type": "number"
+          },
+          "rounds": {
+            "type": "number"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": ["movementName", "movementAbbrv", "work", "rest", "rounds", "id"]
       }
     }
   },
-  "additionalProperties": false,
-  "required": [
-    "workoutId",
-    "sequenceId",
-    "sortId",
-    "movementName",
-    "movementAbbrv",
-    "work",
-    "rest",
-    "rounds"
-  ]
+  "required": ["workoutName", "workoutDesc", "data"]
 }
