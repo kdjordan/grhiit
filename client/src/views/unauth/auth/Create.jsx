@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState, useContext } from 'react'
+import Modal from '../../../components/Modal'
 import AddInterval from '../../../components/AddInterval'
 import { SortableItem } from '../../../components/SortableItem'
 import UserContext from '../../../UserContext'
@@ -31,6 +32,12 @@ export default function Create() {
     }))
 
     const [items, setItems] = useState([])
+    const [isOpen, setIsOpen] = useState(true)
+
+    function toggleOpen() {
+        console.log('toggling open')
+        setIsOpen((op) => !op)
+    }
     
     function addInterval(form) {
         setItems(int => [...int, form])
@@ -62,88 +69,76 @@ export default function Create() {
     }
 
     async function saveWorkout() {
-        try {
-            const res = await Grhiit.saveWorkout(currentUser.id, items)
-           console.log('received ', res)
-        } catch (error) {
-            console.log('error ', error)
+        toggleOpen()
+        // try {
+        //     const res = await Grhiit.saveWorkout(currentUser.id, items)
+        //    console.log('received ', res)
+        // } catch (error) {
+        //     console.log('error ', error)
             
-        }
+        // }
     }
 
-    async function processIntervalAndSave(intv, index, workoutId) {
-        let data = {...intv, 
-            sequenceId: index, 
-            movementName : intv.movement, 
-            workoutId: workoutId,
-            movementAbbr: intv.abbreviation,
-            sortId: intv.id
+    function handleWorkoutAdd(form) {
+        console.log('got form ', form)
 
-        }
-        delete data.movement
-        delete data.abbreviation
-        delete data.id
-        // console.log('data ', data)
-        try {
-            await Grhiit.saveInterval(data)
-            
-        } catch (error) {
-            console.log('error saving interval ', error)
-        }
     }
 
     return (
-        <motion.div 
-        className="container mx-auto text-3xl md:text-5xl  text-grwhite flex flex-col items-center"
-        initial={{opacity:0}}
-        animate={{opacity:1}}
-        exit={{opacity:0, transition: {duration: 0.5}}}        
-        >
-        <h1 className="mb-8 text-center text-grwhite w-full">TRAINING SESSION BUILDER</h1> 
-        <AddInterval addInterval={addInterval}/>
-
-        <h2 className="text:xl md:text-3xl text-center text-grwhite w-full">INTERVALS</h2>
-        <h3 className="text-base md:text-xl text-center text-grwhite w-full">click/drag to reorder</h3>
-        <h3 className="mb-8 text-base md:text-xl text-center text-grwhite w-full">double click to delete</h3>
-
-        {items.length > 0 ? (
-            <>
-            <DndContext 
-                sensors={sensors}
-                collisionDetection={closestCenter}
-                onDragEnd={handleDragEnd}
-                
+        <> 
+            {/* <Modal handleWorkoutAdd={handleWorkoutAdd} toggleOpen={toggleOpen} open={isOpen} />  */}
+            <motion.div 
+            className="container mx-auto text-3xl md:text-5xl  text-grwhite flex flex-col items-center"
+            initial={{opacity:0}}
+            animate={{opacity:1}}
+            exit={{opacity:0, transition: {duration: 0.5}}}        
             >
-                <SortableContext 
-                    items={items}
-                    strategy={verticalListSortingStrategy}
+            <h1 className="mb-8 text-center text-grwhite w-full">TRAINING SESSION BUILDER</h1> 
+            <AddInterval addInterval={addInterval}/>
+
+            <h2 className="text:xl md:text-3xl text-center text-grwhite w-full">INTERVALS</h2>
+            <h3 className="text-base md:text-xl text-center text-grwhite w-full">click/drag to reorder</h3>
+            <h3 className="mb-8 text-base md:text-xl text-center text-grwhite w-full">double click to delete</h3>
+
+            {items.length > 0 ? (
+                <>
+                <DndContext 
+                    sensors={sensors}
+                    collisionDetection={closestCenter}
+                    onDragEnd={handleDragEnd}
+                    
                 >
-                {items.map((i, index) => (
-                    <SortableItem 
-                        key={i.sortId} 
-                        id={i.id} 
-                        index={index}
-                        movement={i.movementName} 
-                        abbreviation={i.movementAbbrv} 
-                        work={i.work} 
-                        rest={i.rest} 
-                        rounds={i.rounds}
-                        remove={deleteInterval}
-                         />
-                ))} 
-                </SortableContext>
-            </DndContext> 
-            <button
-                onClick={saveWorkout}
-                className="w-1/6 text-base md:text-base text-center py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
-            >
-                SAVE SESSION
-            </button>
+                    <SortableContext 
+                        items={items}
+                        strategy={verticalListSortingStrategy}
+                    >
+                    {items.map((i, index) => (
+                        <SortableItem 
+                            key={i.sortId} 
+                            id={i.id} 
+                            index={index}
+                            movement={i.movementName} 
+                            abbreviation={i.movementAbbrv} 
+                            work={i.work} 
+                            rest={i.rest} 
+                            rounds={i.rounds}
+                            remove={deleteInterval}
+                            />
+                    ))} 
+                    </SortableContext>
+                </DndContext> 
+                <button
+                    onClick={saveWorkout}
+                    className="w-1/6 text-base md:text-base text-center py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
+                >
+                    SAVE SESSION
+                </button>
+            </>
+            ) 
+            : (
+                <h2 className="text-2xl border border-grred p-3 uppercase text-center text-grwhite rounded">No intervals yet :(</h2>
+            )}
+            </motion.div>
         </>
-        ) 
-        : (
-            <h2 className="text-2xl border border-grred p-3 uppercase text-center text-grwhite rounded">No intervals yet :(</h2>
-        )}
-        </motion.div>
     )
 }

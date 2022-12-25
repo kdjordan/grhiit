@@ -24,7 +24,7 @@ const router = new express.Router();
  * Authorization required: loggedin
  */
 
-router.post("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
+router.post("/:id", async function (req, res, next) {
   console.log('received in ', req.body, req.params.id)
   try {
     const validator = jsonschema.validate(req.body, workoutNewSchema);
@@ -47,12 +47,9 @@ router.post("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
  */
 
 router.get("/:id", async function (req, res, next) {
-  console.log('getting workouts...')
-
   try {
     const workouts = await Workout.findAll(req.params.id);
     console.log('got workouts ', workouts)
-    return true
     return res.json({ workouts });
 
   } catch (err) {

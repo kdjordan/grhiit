@@ -1,16 +1,16 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'
 import UserContext from '../../../UserContext'
 import Card from '../../../components/Card'
 import UpdateProfile from '../../../components/UpdateProfile'
-import { useEffect } from 'react';
 import Grhiit from '../../../Api';
 
 export default function Dashboard() {
   
   const { currentUser } = useContext(UserContext)
   console.log(currentUser)
+  const [workouts, setWorkouts] = useState([])
   const navigate = useNavigate()
 
 
@@ -49,14 +49,15 @@ export default function Dashboard() {
 
   useEffect(() => { 
     if(currentUser) {
-      function getWorkouts() {
+      async function getWorkouts() {
         console.log('in dashboard got workouts ', currentUser.id)
-        const workouts = Grhiit.getAllWorkouts(currentUser.id)
-        console.log('in dashboard got workouts ', workouts)
+        const workouts = await Grhiit.getAllWorkouts(currentUser.id)
+        console.log('in dashboard got workouts ', workouts.data)
+        setWorkouts(workouts.data)
       }
       getWorkouts()
     }
-  }, [data])
+  }, [])
 
     return (
         <motion.div 
@@ -72,7 +73,7 @@ export default function Dashboard() {
                     <div className="container mx-auto flex flex-col align-center justify-content-center gap-8">
                         <h4 className="text-4xl text-center">YOUR TRAINING SESSIONS</h4>
                         <div className="flex gap-2 flex-wrap align-center justify-center">
-                            {data.map(d => (
+                            {workouts.map(d => (
                                 <Card 
                                   name={d.id} 
                                   id={d.id} 

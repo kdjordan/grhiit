@@ -27,6 +27,7 @@ class Workout {
         data
       ],
     );
+    
     const workout = result.rows[0];
   
     return workout;
@@ -44,18 +45,15 @@ class Workout {
    * */
 
   static async findAll(id) {
-    console.log('searching for workouts ', id)
-
-    let workouts = await db.query(
-        `SELECT *
-          FROM workouts
-          WHERE id=$1`, 
-          [3]);
-    
-
-    console.log('got workouts ', workouts)
-    
-    return true
+    const result = await db.query(
+      `SELECT * 
+        FROM workouts 
+        WHERE user_id = $1`,
+      [id]
+    );
+    const workouts = result.rows[0];
+  
+    return workouts;
   }
 
   /** Given a company handle, return data about company.
