@@ -85,8 +85,7 @@ export default function Create() {
     }
 
     return (
-        <> 
-            {/* <Modal handleWorkoutAdd={handleWorkoutAdd} toggleOpen={toggleOpen} open={isOpen} />  */}
+       
             <motion.div 
             className="container mx-auto text-3xl md:text-5xl  text-grwhite flex flex-col items-center"
             initial={{opacity:0}}
@@ -139,6 +138,5 @@ export default function Create() {
                 <h2 className="text-2xl border border-grred p-3 uppercase text-center text-grwhite rounded">No intervals yet :(</h2>
             )}
             </motion.div>
-        </>
     )
 }
