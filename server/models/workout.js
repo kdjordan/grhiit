@@ -14,19 +14,22 @@ class Workout {
    * Returns { workoutId }
    *
    * */
-  static async create(userId, data) {
-    console.log('adding in SQL', userId, data)
-
+  static async create(userId, obj) {
+    console.log('adding in SQL', userId, obj.data)
+    
     const result = await db.query(
       `INSERT INTO workouts
-       (user_id, data)
-       VALUES ($1, $2)
+       (user_id, name, description, data)
+       VALUES ($1, $2, $3, $4)
        RETURNING id AS "workoutId", created_at AS "createdAt"`,
       [
         userId,
-        data
-      ],
+        obj.workoutName,
+        obj.workoutDesc,
+        obj.data
+      ]
     );
+    console.log('in SQL got ', result)
     
     const workout = result.rows[0];
   

@@ -13,6 +13,8 @@ CREATE TABLE workouts (
   id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL
     REFERENCES users(id) ON DELETE CASCADE,
+  name VARCHAR(50) NOT NULL,
+  description VARCHAR(50) NOT NULL,
   created_at timestamptz DEFAULT NOW(),
   data jsonb
 );
