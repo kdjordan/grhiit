@@ -80,9 +80,9 @@ export default function Create() {
     function handleWorkoutAdd(form) {
         toggleOpen()
         const workoutObj = {
-            workoutName: form.workoutName,
-            workoutDesc: form.workoutDescription,
-            data: items
+            "workoutName": form.workoutName,
+            "workoutDesc": form.workoutDescription,
+            "data": items
         }
         saveWorkout(workoutObj)
 

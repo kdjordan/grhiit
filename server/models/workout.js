@@ -15,7 +15,7 @@ class Workout {
    *
    * */
   static async create(userId, obj) {
-    console.log('adding in SQL', userId, obj.data)
+    const newData = JSON.stringify(obj.data)
     
     const result = await db.query(
       `INSERT INTO workouts
@@ -26,10 +26,10 @@ class Workout {
         userId,
         obj.workoutName,
         obj.workoutDesc,
-        obj.data
+        newData
       ]
     );
-    console.log('in SQL got ', result)
+    
     
     const workout = result.rows[0];
   

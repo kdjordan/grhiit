@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function AddInterval({ addInterval }) {
     const INITIAL_STATE ={
-        movementName: 'burpee',
-        movementAbbrv: 'BRP',
-        work: +'20',
-        rest: +'10',
-        rounds: +'8'
+        "movementName": "burpee",
+        "movementAbbrv": "BRP",
+        "work": +'20',
+        "rest": +'10',
+        "rounds": +'8'
     }
     const [form, setForm] = useState(INITIAL_STATE)
 
@@ -32,7 +32,7 @@ export default function AddInterval({ addInterval }) {
         addInterval(newForm)
       }
 
-      function handleFocus(event) {
+      function handleFocus() {
         // Clear errors for the input field that was focused
         setErrors([])
       }

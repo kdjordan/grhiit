@@ -61,14 +61,13 @@ class Grhiit {
   }
 
   static async saveWorkout(userId, data) {
-    console.log('adding workout in API ', userId, data)
     let res = await this.request(`workouts/${userId}`, data, 'post')
     return res.workout
   }
 
   static async getAllWorkouts(userId) {
-    console.log('getting workouts in API ', userId)
     let res = await this.request(`workouts/${userId}`)
+    console.log('*** getting workouts in API ', res)
     return res.workouts
   }
   // static async addWorkout(userId) {

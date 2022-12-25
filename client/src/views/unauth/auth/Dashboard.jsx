@@ -52,12 +52,12 @@ export default function Dashboard() {
       async function getWorkouts() {
         console.log('in dashboard got workouts ', currentUser.id)
         const workouts = await Grhiit.getAllWorkouts(currentUser.id)
-        console.log('in dashboard got workouts ', workouts.data)
-        setWorkouts(workouts.data)
+        console.log('in dashboard got workouts ', workouts)
+        setWorkouts(workouts)
       }
       getWorkouts()
     }
-  }, [])
+  }, [currentUser])
 
     return (
         <motion.div 
@@ -73,7 +73,7 @@ export default function Dashboard() {
                     <div className="container mx-auto flex flex-col align-center justify-content-center gap-8">
                         <h4 className="text-4xl text-center">YOUR TRAINING SESSIONS</h4>
                         <div className="flex gap-2 flex-wrap align-center justify-center">
-                            {workouts.map(d => (
+                            {workouts.length > 0 ? (workouts.map(d => (
                                 <Card 
                                   name={d.id} 
                                   id={d.id} 
@@ -81,7 +81,8 @@ export default function Dashboard() {
                                   description={d.description} 
                                   date={d.date}
                                   />
-                            ))}
+                            ))) : (<h4>No workouts !</h4>)
+                            }
                         </div>
                         <button onClick={() => navigate("/create")}
                             className="w-1/2 md:w-1/3 self-center text-center text-xl  py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
