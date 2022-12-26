@@ -41,7 +41,6 @@ export default function UpdateProfile({ user }) {
                 const newForm = Object.assign({}, form)
                 delete newForm.confirmPassword
                 let user = await Grhiit.patchUser(form.username, newForm)
-                console.log('back', user)
                 toast("Profile Updated")
                 setCurrentUser(user)
             } catch(err) {

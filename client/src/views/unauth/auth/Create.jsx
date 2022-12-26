@@ -1,10 +1,14 @@
 import { motion } from 'framer-motion'
 import { useState, useContext } from 'react'
+import { useNavigate } from "react-router-dom";
 import Modal from '../../../components/Modal'
 import AddInterval from '../../../components/AddInterval'
 import { SortableItem } from '../../../components/SortableItem'
 import UserContext from '../../../UserContext'
 import Grhiit from '../../../Api'
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import '../../../components/UpdateProfileToast.css'
 
 import {
     DndContext, 
@@ -25,6 +29,8 @@ import {
 
 export default function Create() {
     const { currentUser } = useContext(UserContext)
+    const navigate = useNavigate()
+
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(KeyboardSensor, {
@@ -69,11 +75,13 @@ export default function Create() {
 
     async function saveWorkout(obj) {
         try {
-            const res = await Grhiit.saveWorkout(currentUser.id, obj)
-           console.log('received ', res)
+            await Grhiit.saveWorkout(currentUser.id, obj)
+            setTimeout(() => {
+                toast("Workout Saved !")
+                navigate('/dashboard')
+            }, 1000)
         } catch (error) {
             console.log('error ', error)
-            
         }
     }
 

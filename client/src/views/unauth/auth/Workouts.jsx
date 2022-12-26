@@ -9,18 +9,17 @@ export default function Workouts() {
 
     async function getWorkouts() {
       const res = await Grhiit.getAllWorkouts(currentUser.id);
-      console.log('received ', res)
-      return [res]
+      return res
     }
 
     const { data, status } = useQuery('workouts', getWorkouts)
     
     return (
-        <div className="flex gap-2 flex-wrap align-center justify-center">
+        <>
           {status === "error" && <p>Error fetching data</p>}
           {status === "loading" && <p>Fetching data...</p>}
           {status === "success" && (
-            <div>
+            <div className="flex gap-2 flex-wrap align-center justify-center">
               {data.map((d) => (
                 <Card 
                 name={d.id} 
@@ -32,7 +31,7 @@ export default function Workouts() {
               ))}
             </div>
           )}
-        </div>
+        </>
     )
           
 }

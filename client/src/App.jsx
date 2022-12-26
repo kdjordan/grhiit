@@ -63,17 +63,17 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-    <UserContext.Provider value={{currentUser, setCurrentUser, logout}}>
-    <div className="App">
-      <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true}/>
-      <Router>
-        <Navbar />
-        <div className="main min-h-screen font-osPrimary py-32 bg-gradient-primary">
-          <AnimatedRoutes signup={signup} login={login} logout={logout}/>
-        </div>
-      </Router>
-    </div>
-    </UserContext.Provider>
+      <UserContext.Provider value={{currentUser, setCurrentUser, logout}}>
+      <div className="App">
+        <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true}/>
+        <Router>
+          <Navbar />
+          <div className="main min-h-screen font-osPrimary py-32 bg-gradient-primary">
+            <AnimatedRoutes signup={signup} login={login} logout={logout}/>
+          </div>
+        </Router>
+      </div>
+      </UserContext.Provider>
     </QueryClientProvider>
   )
 }

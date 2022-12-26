@@ -54,7 +54,7 @@ class Workout {
         WHERE user_id = $1`,
       [id]
     );
-    const workouts = result.rows[0];
+    const workouts = result.rows;
   
     return workouts;
   }

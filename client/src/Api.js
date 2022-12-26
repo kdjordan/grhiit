@@ -67,6 +67,7 @@ class Grhiit {
 
   static async getAllWorkouts(userId) {
     let res = await this.request(`workouts/${userId}`)
+    console.log('in api ', res)
     return res.workouts
   }
   // static async addWorkout(userId) {
