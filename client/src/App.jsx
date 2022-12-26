@@ -1,3 +1,5 @@
+import { QueryClient, QueryClientProvider } from 'react-query';
+const queryClient = new QueryClient();
 import { useState, useEffect } from 'react'
 import Navbar from './components/HeaderNav/NavBar'
 import AnimatedRoutes from './AnimatedRoutes'
@@ -52,7 +54,6 @@ function App() {
         Grhiit.token = token
         let user = await Grhiit.getUser(username)
         setCurrentUser(user)
-        // setApplicationIDs(curUser.applications)
       }
       // setIsLoading(false)
   
@@ -61,6 +62,7 @@ function App() {
   }, [token])
 
   return (
+    <QueryClientProvider client={queryClient}>
     <UserContext.Provider value={{currentUser, setCurrentUser, logout}}>
     <div className="App">
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true}/>
@@ -72,6 +74,7 @@ function App() {
       </Router>
     </div>
     </UserContext.Provider>
+    </QueryClientProvider>
   )
 }
 export default App
