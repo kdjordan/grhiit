@@ -9,8 +9,7 @@ import Grhiit from '../../../Api';
 export default function Dashboard() {
   
   const { currentUser } = useContext(UserContext)
-  console.log(currentUser)
-  const [workouts, setWorkouts] = useState([])
+  const [workouts, setWorkouts] = useState(new Set())
   const navigate = useNavigate()
 
 
@@ -48,17 +47,27 @@ export default function Dashboard() {
   ]
 
   useEffect(() => { 
+    setWorkouts(new Set())
+
     if(currentUser) {
       async function getWorkouts() {
-        console.log('in dashboard got workouts ', currentUser.id)
-        const workouts = await Grhiit.getAllWorkouts(currentUser.id)
-        console.log('in dashboard got workouts ', workouts)
-        setWorkouts(workouts)
+        const res = await Grhiit.getAllWorkouts(currentUser.id)
+        setWorkouts(workouts => new Set(workouts.add(res)))
+        // console.log('got workout ', res.id)
+        // let dupes = workouts.filter(wrkout => wrkout.id == res.id)
+        // console.log('got dupes ', dupes.length)
+        // if(dupes.length === 0) {
+        // }
       }
       getWorkouts()
     }
   }, [currentUser])
 
+  useEffect(() => {
+    setWorkouts(new Set())
+  },[])
+
+  
     return (
         <motion.div 
             className="container mx-auto text-3xl md:text-5xl text-zinc-300 flex flex-col items-center"
@@ -73,7 +82,10 @@ export default function Dashboard() {
                     <div className="container mx-auto flex flex-col align-center justify-content-center gap-8">
                         <h4 className="text-4xl text-center">YOUR TRAINING SESSIONS</h4>
                         <div className="flex gap-2 flex-wrap align-center justify-center">
-                            {workouts.length > 0 ? (workouts.map(d => (
+                            {workouts ? (
+                              
+                              <>
+                              {Array.from(workouts).map(d => (
                                 <Card 
                                   name={d.id} 
                                   id={d.id} 
@@ -81,7 +93,9 @@ export default function Dashboard() {
                                   description={d.description} 
                                   date={d.date}
                                   />
-                            ))) : (<h4>No workouts !</h4>)
+                              ))}
+                              </>
+                            ) : (<h4>No workouts !</h4>)
                             }
                         </div>
                         <button onClick={() => navigate("/create")}
