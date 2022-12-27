@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { useQuery } from 'react-query';
 import { AnimatePresence, motion } from 'framer-motion'
 import { useParams } from "react-router-dom"
-import UserContext from '../../../UserContext'
+import UserContext from '../../../UserContext';
 import PlayDisplay from './PlayDisplay'
 import Grhiit from '../../../Api';
 

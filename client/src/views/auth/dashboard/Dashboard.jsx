@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'
-import UserContext from '../../../UserContext'
+import UserContext from '../../../UserContext';
 import Workouts from './Workouts';
-import UpdateProfile from '../../../components/UpdateProfile'
+import UpdateProfile from './UpdateProfile';
 
 
 export default function Dashboard() {

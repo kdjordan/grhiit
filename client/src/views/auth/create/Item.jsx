@@ -1,10 +1,18 @@
+/**
+ * component to render the intervals based on AddInterval 
+ * contorls the color of the interval :
+ * reset intervals are green / work intervals are red
+ * PROPS => ref for controlling DND
+ * props are spread to break out the remove FN which deletes the display and interval on double click
+ * NOTE - couldn't use single click becuase that's the listener for rearranging in DND
+ */
 import { forwardRef } from "react";
 import { useState } from "react";
 
 export const Item = forwardRef((props, ref) => {
   
   const {remove, ...rest } = props
-  const [restInterval] = useState(rest.work==='0'?true:false)
+  const [restInterval] = useState(rest.work ===0 ? true:false)
   
   const restClasses = "dark:bg-green-600"
   const regularClasses = "bg-grred border-gray-700"

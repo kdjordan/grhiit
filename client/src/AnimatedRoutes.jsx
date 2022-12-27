@@ -1,11 +1,11 @@
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
-import Home from "./views/unauth/Home";
-import Signup from "./views/unauth/Signup";
-import Login from "./views/unauth/Login"
-import Logout from "./views/unauth/Logout";
-import Dashboard from "./views/unauth/auth/Dashboard";
-import Play from "./views/unauth/auth/Play";
-import Create from "./views/unauth/auth/Create";
+import Home from "./views/Home";
+import Signup from "./views/Signup"
+import Login from "./views/Login"
+import Logout from "./views/Logout";
+import Dashboard from "./views/auth/Dashboard/Dashboard";
+import Play from "./views/auth/play/Play";
+import Create from "./views/auth/create/Create";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AnimatePresence } from 'framer-motion'
 

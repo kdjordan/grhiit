@@ -1,12 +1,11 @@
 import { useState, useContext } from 'react';
-import UserContext from '../UserContext';
-import Grhiit from '../Api';
+import UserContext from '../../../UserContext';
+import Grhiit from '../../../Api';
 import { toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
-import './UpdateProfileToast.css'
 
 export default function UpdateProfile({ user }) {
     const { setCurrentUser } = useContext(UserContext)
+    const [errors, setErrors] = useState([])
 
     const [form, setForm] = useState({
         firstName: `${user.firstName}`,
@@ -16,8 +15,6 @@ export default function UpdateProfile({ user }) {
         password: `${user.email}`,
         confirmPassword: `${user.email}`
       })
-      const [errors, setErrors] = useState([])
-
 
       function handleChange(e) {
         const { name, value } = e.target

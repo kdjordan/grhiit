@@ -10,6 +10,8 @@ import UserContext from './UserContext'
 import { useJwt, isExpired, decodeToken } from "react-jwt";
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './ToastChildTheme.css';
 
 
 function App() {

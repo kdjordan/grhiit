@@ -1,14 +1,13 @@
 import { motion } from 'framer-motion'
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
-import Modal from '../../../components/Modal';
-import AddInterval from '../../../components/AddInterval';
-import { SortableItem } from '../../../components/SortableItem';
 import UserContext from '../../../UserContext';
+import Modal from './Modal';
+import AddInterval from './AddInterval';
+import { SortableItem } from './SortableItem';
 import Grhiit from '../../../Api';
 import { toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
-import '../../../components/UpdateProfileToast.css'
+
 
 import {
     DndContext, 
@@ -24,6 +23,7 @@ import {
     sortableKeyboardCoordinates,
     verticalListSortingStrategy
   } from '@dnd-kit/sortable';
+
   
   
 
