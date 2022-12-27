@@ -8,17 +8,18 @@ export default function Workouts() {
     const { currentUser } = useContext(UserContext)
 
     async function getWorkouts() {
+      console.log('getting ', currentUser.id)
       const res = await Grhiit.getAllWorkouts(currentUser.id);
       return res
     }
 
     const { data, status } = useQuery('workouts', getWorkouts)
-    
+
     return (
         <>
           {status === "error" && <p>Error fetching data</p>}
           {status === "loading" && <p>Fetching data...</p>}
-          {status === "success" && (
+          {status === "success" && data.length > 0 ? (
             <div className="flex gap-2 flex-wrap align-center justify-center">
               {data.map((d) => (
                 <Card 
@@ -30,8 +31,10 @@ export default function Workouts() {
                 />
               ))}
             </div>
-          )}
+          ) : 
+          (<h3 className="w-1/3 mx-auto text-center bg-grblack text-xl py-2 border">No Workouts yet !</h3>)
+        
+        }
         </>
-    )
-          
+    )   
 }

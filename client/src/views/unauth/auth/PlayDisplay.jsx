@@ -119,7 +119,7 @@ export default function PlayDisplay({ data }) {
                 <div 
                     className="container mx-auto flex flex-col w-full mt-16 items-center"
                 >
-                    <h4 className='uppercase text-8xl mb-8 p-8 border border-grblack rounded-lg bg-zinc-300 shadow-2xl'>{data.movement}</h4>
+                    <h4 className='uppercase text-8xl mb-8 p-8 border border-grblack rounded-lg bg-zinc-300 shadow-2xl'>{data.movementName}</h4>
                     <Timer duration={timeLeft} prompt={prompt} rounds={rounds} type={type}/>
                 </div>
             ) : (

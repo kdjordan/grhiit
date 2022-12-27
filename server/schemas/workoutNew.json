@@ -20,6 +20,9 @@
           "movementAbbrv": {
             "type": "string"
           },
+          "type": {
+            "type": "string"
+          },
           "work": {
             "type": "number"
           },

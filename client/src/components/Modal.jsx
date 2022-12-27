@@ -1,12 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect } from "react";
+
+/** *
+ * component to render pop modal to save Workout Name and desription
+ * PARENT COMPONENT Create.jsx
+ * PROPS :
+ * handleWorkout => fn that takes the workout name and description and adds the intervals 
+ * from AddInterval into 1 object
+ * toggleOpen => function that triggers the Modal open
+ * open => the state of the Modal (open || !open)
+ * 
+ * We need both open and !open and the function as well because we can close the modal here
+ * if we want to adjust the intervals in the workout, but also need to close the modal
+ * from the parent when the Workout is being saved.
+*/
+
 
 export default function Modal({ handleWorkoutAdd, toggleOpen, open }) {
     const [isOpen, setIsOpen] = useState(open)
+
     const [form, setForm] = useState({
-        workoutName: 'Test',
-        workoutDescription: 'Test Description'
+        workoutName: '',
+        workoutDescription: ''
     })
 
     useEffect(() => {
@@ -61,8 +76,9 @@ export default function Modal({ handleWorkoutAdd, toggleOpen, open }) {
                         name="workoutDescription"
                         value={form.workoutDescription}
                         onChange={handleChange}
+                        maxLength="50"
                         required
-                        placeholder="Description" />
+                        placeholder="Description MAX(50)" />
 
                     <button
                         type="submit"

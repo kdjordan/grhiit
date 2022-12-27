@@ -67,28 +67,13 @@ class Grhiit {
 
   static async getAllWorkouts(userId) {
     let res = await this.request(`workouts/${userId}`)
-    console.log('in api ', res)
     return res.workouts
   }
-  // static async addWorkout(userId) {
-  //   console.log('adding workout in API ', userId)
-  //   let res = await this.request(`workouts`, { userId }, 'post')
-  //   return res.workout
-  // }
 
-  // static async addSession(username, data) {
-  //   let res = await this.request(`users/${username}`, data, 'post')
-  //   return res.user
-  // }
-
-  // static async addInteral(username, data) {
-  //   let res = await this.request(`users/${username}`, data, 'post')
-  //   return res.user
-  // }
-
-  // static async applyToJob(username, id) {
-  //   await this.request(`users/${username}/jobs/${id}`, {}, "post");
-  // }
+  static async getWorkoutById(id) {
+    let res = await this.request(`workouts/workout/${id}`)
+    return res.workout
+  }
 }
 
 export default Grhiit;

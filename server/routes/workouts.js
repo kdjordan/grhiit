@@ -25,7 +25,6 @@ const router = new express.Router();
  */
 
 router.post("/:id", async function (req, res, next) {
-  console.log('received in ', req.body, req.params.id)
   try {
     const validator = jsonschema.validate(req.body, workoutNewSchema);
     if (!validator.valid) {
@@ -49,8 +48,24 @@ router.post("/:id", async function (req, res, next) {
 router.get("/:id", async function (req, res, next) {
   try {
     const workouts = await Workout.findAll(req.params.id);
-    console.log('got workouts ', workouts)
     return res.json({ workouts });
+
+  } catch (err) {
+    return next(err);
+  }
+});
+
+/** GET /  =>
+ *   all workouts by userId to populate dashboard
+ *
+ * Authorization required: loggedin / user only gets theor workouts
+ */
+
+router.get("/workout/:id", async function (req, res, next) {
+  try {
+    const workout = await Workout.getWorkout(req.params.id);
+    console.log('got workouts ', workout)
+    return res.json({ workout });
 
   } catch (err) {
     return next(err);

@@ -1,11 +1,10 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'
 import UserContext from '../../../UserContext'
 import Workouts from './Workouts';
-
 import UpdateProfile from '../../../components/UpdateProfile'
-import Grhiit from '../../../Api';
+
 
 export default function Dashboard() {
   
@@ -25,11 +24,8 @@ export default function Dashboard() {
                     <h2 className="mb-8 text-center">WELCOME BACK {currentUser.username}</h2>
                     <div className="container mx-auto flex flex-col align-center justify-content-center gap-8">
                         <h4 className="text-4xl text-center">YOUR TRAINING SESSIONS</h4>
-                        {currentUser ?  (
-                          <Workouts />
-
-                        ) : (
-                          ''
+                        {currentUser && (
+                            <Workouts />
                         )}
                         <button onClick={() => navigate("/create")}
                             className="w-1/2 md:w-1/3 self-center text-center text-xl  py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"

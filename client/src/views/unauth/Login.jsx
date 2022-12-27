@@ -2,6 +2,11 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+/**
+ * 
+ * 
+ * 
+ */
 export default function Login({ login }) {
     const navigate = useNavigate();
 

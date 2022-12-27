@@ -3,11 +3,12 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function AddInterval({ addInterval }) {
     const INITIAL_STATE ={
-        "movementName": "burpee",
-        "movementAbbrv": "BRP",
-        "work": +'20',
-        "rest": +'10',
-        "rounds": +'8'
+        movementName: "",
+        movementAbbrv: "",
+        work: '',
+        rest: '',
+        rounds: '',
+        type: ''
     }
     const [form, setForm] = useState(INITIAL_STATE)
 
@@ -25,11 +26,29 @@ export default function AddInterval({ addInterval }) {
       async function handleSubmit(e) {
         // Prevent default form submission
         e.preventDefault()
-        const newForm = Object.assign({}, form)
-        //add unique id to object
-        newForm.id = uuidv4()
+        //make sure from(interval) is ready for DB
+        const formattedForm = formatForm()
         setForm(INITIAL_STATE)
-        addInterval(newForm)
+        addInterval(formattedForm)
+      }
+
+      function formatForm() {
+        //add a type based on movement type for Play function
+        if (form.movementName.toLowerCase() === 'rest') {
+            form.type = 'rest'
+        } else {
+            form.type = 'regular'
+        }
+
+        //convert string inputs for work, rest, and rounds into integers
+        form.work = Number(form.work)
+        form.rest = Number(form.rest)
+        form.rounds = Number(form.rounds)
+        
+        //add unique id to object
+        const newForm = Object.assign({}, form)
+        newForm.id = uuidv4()
+        return newForm
       }
 
       function handleFocus() {

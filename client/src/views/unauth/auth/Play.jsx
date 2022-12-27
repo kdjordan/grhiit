@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { useQuery } from 'react-query';
 import { AnimatePresence, motion } from 'framer-motion'
 import { useParams } from "react-router-dom"
 import UserContext from '../../../UserContext'
-import { useContext } from 'react'
 import PlayDisplay from './PlayDisplay'
-
+import Grhiit from '../../../Api';
 
 export default function Play() {
     const { currentUser } = useContext(UserContext)
@@ -12,40 +12,14 @@ export default function Play() {
     const [ currentInterval, setCurrentInterval ] = useState({})
     const { id } = useParams()
 
-    const data = [
-        {
-            movement: 'get ready',
-            work: '0',
-            rest: '5',
-            rounds: '1',
-            type: 'wait'
-        },
-        {
-            movement: 'burpee',
-            abbreviation: 'BRP',
-            work: '2',
-            rest: '2',
-            rounds: '2',
-            type: 'regular'
-        },
-        {
-            movement: 'rest',
-            abbreviation: '',
-            work: '0',
-            rest: '5',
-            rounds: '1',
-            type: 'rest'
-        },
-        {
-            movement: 'COOL DOWN',
-            abbreviation: 'rest',
-            work: '0',
-            rest: '10',
-            rounds: '1',
-            type: 'end'
-        },
-      ]    
-    
+    async function getWorkout() {
+        const res = await Grhiit.getWorkoutById(id);
+        console.log('got res ', res)
+        return res
+      }
+
+    const { data, status } = useQuery('workouts', getWorkout)
+
     function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms))
     }
@@ -85,7 +59,7 @@ export default function Play() {
                             </div>
                         ) : (int.type==='regular') ? (
                             <div className='max-w-sm p-4 bg-grred border-gray-700 rounded-lg'>
-                            <span>{int.abbreviation}&nbsp;:&nbsp;</span>
+                            <span>{int.movementAbbrv}&nbsp;:&nbsp;</span>
                             <span>{int.rounds}i</span>
                             <span>&nbsp;@&nbsp;{int.work}</span>
                             <span>X{int.rest}</span>

@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion'
 import { useState, useContext } from 'react'
-import { useNavigate } from "react-router-dom";
-import Modal from '../../../components/Modal'
-import AddInterval from '../../../components/AddInterval'
-import { SortableItem } from '../../../components/SortableItem'
-import UserContext from '../../../UserContext'
-import Grhiit from '../../../Api'
+import { useNavigate } from 'react-router-dom';
+import Modal from '../../../components/Modal';
+import AddInterval from '../../../components/AddInterval';
+import { SortableItem } from '../../../components/SortableItem';
+import UserContext from '../../../UserContext';
+import Grhiit from '../../../Api';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import '../../../components/UpdateProfileToast.css'

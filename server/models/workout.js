@@ -30,7 +30,6 @@ class Workout {
       ]
     );
     
-    
     const workout = result.rows[0];
   
     return workout;
@@ -57,6 +56,29 @@ class Workout {
     const workouts = result.rows;
   
     return workouts;
+  }
+
+  /** Find all companies (optional filter on searchFilters).
+   *
+   * searchFilters (all optional):
+   * - minEmployees
+   * - maxEmployees
+   * - name (will find case-insensitive, partial matches)
+   *
+   * Returns [{ handle, name, description, numEmployees, logoUrl }, ...]
+   * */
+
+  static async getWorkout(id) {
+    const result = await db.query(
+      `SELECT data 
+        FROM workouts 
+        WHERE id = $1`,
+      [id]
+    );
+    console.log('in SQL ', result)
+    const workout = result.rows[0].data;
+  
+    return workout;
   }
 
   /** Given a company handle, return data about company.
