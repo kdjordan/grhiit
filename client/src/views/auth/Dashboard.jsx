@@ -1,15 +1,15 @@
 import { useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'
-import UserContext from '../../../UserContext';
-import Workouts from './Workouts';
-import UpdateProfile from './UpdateProfile';
+import UserContext from '../../UserContext';
+import Workouts from '../../components/dashboard/Workouts';
+import UpdateProfile from '../../components/dashboard/UpdateProfile';
 
 
 export default function Dashboard() {
-    
   const { currentUser } = useContext(UserContext)
   const navigate = useNavigate()
+  
 
     return (
         <motion.div 

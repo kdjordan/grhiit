@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 const queryClient = new QueryClient();
 import { useState, useEffect } from 'react'
-import Navbar from './components/HeaderNav/NavBar'
+import Navbar from './components/headernav/NavBar'
 import AnimatedRoutes from './AnimatedRoutes'
 import LocalStorage from './LocalStorage'
 import Auth from './auth/AuthApi.js'
@@ -11,7 +11,7 @@ import { useJwt, isExpired, decodeToken } from "react-jwt";
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './ToastChildTheme.css';
+import './toastChildTheme.css';
 
 
 function App() {

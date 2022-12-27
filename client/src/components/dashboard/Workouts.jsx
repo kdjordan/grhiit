@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { useQuery } from 'react-query';
-import UserContext from '../../../UserContext';
+import UserContext from '../../UserContext';
 import Card from './Card';
-import Grhiit from '../../../Api';
+import Grhiit from '../../Api';
 
 export default function Workouts() {
     const { currentUser } = useContext(UserContext)
-    
+  
     async function getWorkouts() {
       const res = await Grhiit.getAllWorkouts(currentUser.id);
       return res

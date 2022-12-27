@@ -3,9 +3,9 @@ import Home from "./views/Home";
 import Signup from "./views/Signup"
 import Login from "./views/Login"
 import Logout from "./views/Logout";
-import Dashboard from "./views/auth/Dashboard/Dashboard";
-import Play from "./views/auth/play/Play";
-import Create from "./views/auth/create/Create";
+import Dashboard from "./views/auth/Dashboard";
+import Play from "./views/auth/Play";
+import Create from "./views/auth/Create";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AnimatePresence } from 'framer-motion'
 

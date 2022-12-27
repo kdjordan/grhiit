@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
-import UserContext from '../../../UserContext';
-import Grhiit from '../../../Api';
+import UserContext from '../../UserContext';
+import Grhiit from '../../Api';
 import { toast } from 'react-toastify';
 
 export default function UpdateProfile({ user }) {
