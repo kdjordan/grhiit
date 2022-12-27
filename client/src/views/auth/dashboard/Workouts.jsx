@@ -6,18 +6,19 @@ import Grhiit from '../../../Api';
 
 export default function Workouts() {
     const { currentUser } = useContext(UserContext)
-
+    
     async function getWorkouts() {
       const res = await Grhiit.getAllWorkouts(currentUser.id);
       return res
     }
 
-    const { data, status } = useQuery('workouts', getWorkouts)
+    const { data, status } = useQuery('workout', getWorkouts)
+    
 
     return (
         <>
-          {status === "error" && <p>Error fetching data</p>}
-          {status === "loading" && <p>Fetching data...</p>}
+          {status === "error" && <span className="text-center text-lg">Error fetching data</span>}
+          {status === "loading" && <span className="text-center text-lg">Fetching data...</span>}
           {status === "success" && data.length > 0 ? (
             <div className="flex gap-2 flex-wrap align-center justify-center">
               {data.map((d) => (

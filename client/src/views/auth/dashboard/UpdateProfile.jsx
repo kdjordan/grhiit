@@ -6,14 +6,14 @@ import { toast } from 'react-toastify';
 export default function UpdateProfile({ user }) {
     const { setCurrentUser } = useContext(UserContext)
     const [errors, setErrors] = useState([])
-
+    
     const [form, setForm] = useState({
         firstName: `${user.firstName}`,
         lastName: `${user.lastName}`,
         username: `${user.username}`,
         email: `${user.email}`,
-        password: `${user.email}`,
-        confirmPassword: `${user.email}`
+        password: ``,
+        confirmPassword: ``
       })
 
       function handleChange(e) {

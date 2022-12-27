@@ -7,7 +7,7 @@ import UpdateProfile from './UpdateProfile';
 
 
 export default function Dashboard() {
-  
+    
   const { currentUser } = useContext(UserContext)
   const navigate = useNavigate()
 
