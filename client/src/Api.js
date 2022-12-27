@@ -51,6 +51,7 @@ class Grhiit {
   }
 
   static async getUser(username) {
+    console.log('***')
     let res = await this.request(`users/${username}`)
     return res.user
   }

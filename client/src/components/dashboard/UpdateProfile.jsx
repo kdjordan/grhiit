@@ -22,8 +22,8 @@ export default function UpdateProfile({ user }) {
         lastName: `${user.lastName}`,
         username: `${user.username}`,
         email: `${user.email}`,
-        password: ``,
-        confirmPassword: ``
+        password: '',
+        confirmPassword: ''
       })
 
       function handleChange(e) {
@@ -46,6 +46,9 @@ export default function UpdateProfile({ user }) {
         if (validateEmail(form.email) && checkPasswordForMatch(form.password, form.confirmPassword)) {
             try {
                 const newForm = Object.assign({}, form)
+                if (form.password.length === 0) {
+                    delete newForm.password
+                }
                 delete newForm.confirmPassword
                 let user = await Grhiit.patchUser(form.username, newForm)
                 toast("Profile Updated")
@@ -131,21 +134,18 @@ export default function UpdateProfile({ user }) {
                         <div className="flex align-center gap-8">
                             <div className="flex flex-col align-start w-full">
                                 <label className="block text-grwhite text-left mb-2" 
-                                    htmlFor="password">Username
+                                    htmlFor="username">Username
                                 </label>
                                 <input 
                                     type="text"
                                     className="block border bg-grred text-grgrey border-grred  w-full p-3 rounded mb-4"
                                     name="username"
                                     value={form.username}
-                                    onChange={handleChange}
-                                    onFocus={handleFocus}
-                                    disabled
-                                    placeholder="Username" />
+                                    disabled />
                             </div>
                             <div className="flex flex-col align-start w-full">
                                 <label className="block text-grwhite text-left mb-2" 
-                                    htmlFor="lastName">Email
+                                    htmlFor="email">Email
                                 </label>
                                 <input 
                                     type="email"
