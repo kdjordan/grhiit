@@ -75,7 +75,7 @@ class Workout {
         WHERE id = $1`,
       [id]
     );
-    console.log('in SQL ', result)
+    
     const workout = result.rows[0].data;
   
     return workout;

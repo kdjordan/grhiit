@@ -28,6 +28,7 @@ export default function Login({ login }) {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        console.log('lggin ')
         let res = await login(form)
         if (res.success) {
             navigate("/dashboard")

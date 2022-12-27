@@ -188,6 +188,7 @@ class User {
                                 username,
                                 first_name AS "firstName",
                                 last_name AS "lastName",
+                                username AS "userName",
                                 email,
                                 is_admin AS "isAdmin"`;
     const result = await db.query(querySql, [...values, username]);

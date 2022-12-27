@@ -4,9 +4,7 @@
   "type": "object",
   "properties": {
     "password": {
-      "type": "string",
-      "minLength": 5,
-      "maxLength": 20
+      "type": "string"
     },
     "firstName": {
       "type": "string",
