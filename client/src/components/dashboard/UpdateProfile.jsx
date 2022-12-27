@@ -3,6 +3,16 @@ import UserContext from '../../UserContext';
 import Grhiit from '../../Api';
 import { toast } from 'react-toastify';
 
+/** *
+ * PARENT COMPONENT Create.jsx
+ * PROPS : user
+ * the information in the user object prop is useed to populate all form fields
+ * passwords are intentionally left out
+ * 
+ * RETURNS -> form that handles all user interaction to update user profile
+*/
+
+
 export default function UpdateProfile({ user }) {
     const { setCurrentUser } = useContext(UserContext)
     const [errors, setErrors] = useState([])
@@ -47,12 +57,10 @@ export default function UpdateProfile({ user }) {
 
         //check form for entry errors : email
         if (!validateEmail(form.email)) {
-            // console.log('setting email error', errors)
             setErrors(e => [...e, 'Invalid email address'])
         }
         //check form for passwords not matching
         if (!checkPasswordForMatch(form.password, form.confirmPassword)) {
-            // console.log('setting password error', errors)
             setErrors(e => [...e, 'Passwords do not match'])
         }
       }

@@ -1,10 +1,17 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+
+/**
+ * PARENT VIEW => Create.jsx
+ * FUNCTION - contains form for adding an interval
+ * PROPS  - addInterval is a fn that when fired saves the interval data in the parent state
+ * RENDERS - form for adding an individaul interval's information : name, abbreviation, work, rest, rounds
+ */
 
 export default function AddInterval({ addInterval }) {
     const INITIAL_STATE ={
-        movementName: "",
-        movementAbbrv: "",
+        movementName: '',
+        movementAbbrv: '',
         work: '',
         rest: '',
         rounds: '',
@@ -28,7 +35,9 @@ export default function AddInterval({ addInterval }) {
         e.preventDefault()
         //make sure from(interval) is ready for DB
         const formattedForm = formatForm()
+        //reset form data to blanks
         setForm(INITIAL_STATE)
+        //send interval thorugh prop function to parent's state to store
         addInterval(formattedForm)
       }
 

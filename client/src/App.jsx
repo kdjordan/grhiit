@@ -11,13 +11,12 @@ import { useJwt, isExpired, decodeToken } from "react-jwt";
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './toastChildTheme.css';
+import './ToastChildTheme.css';
 
 
 function App() {
   const [token, setToken] = useState(LocalStorage.getLocalStorage());
   const [currentUser, setCurrentUser] = useState(null);
-  const [toast, setToast] = useState({status: false, message:''})
 
   async function login(form) {
     // got a user logging in  => grab their token and put in localstorage
