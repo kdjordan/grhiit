@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-
 /** *
  * component to render popup  modal to save Workout Name and Description
  * PARENT COMPONENT Create.jsx
@@ -15,6 +12,8 @@ import { AnimatePresence, motion } from "framer-motion";
  * from the parent when the Workout is being saved.
 */
 
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Modal({ handleWorkoutAdd, toggleOpen, open }) {
     const [isOpen, setIsOpen] = useState(open)

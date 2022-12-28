@@ -1,3 +1,11 @@
+/** *
+ * PARENT COMPONENT : Create.jsx (routed rendered in AnimatedRoutes)
+ * PROPS : all information about an interval that has been added and is 
+ * being tracked in the "items" state in parent Create.jsx
+ * 
+ * RETURNS => an individual item that is DND ready
+*/
+
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 import { Item } from './Item';

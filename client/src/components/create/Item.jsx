@@ -6,6 +6,7 @@
  * props are spread to break out the remove FN which deletes the display and interval on double click
  * NOTE - couldn't use single click becuase that's the listener for rearranging in DND
  */
+
 import { forwardRef } from "react";
 import { useState } from "react";
 
