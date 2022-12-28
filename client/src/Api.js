@@ -51,7 +51,6 @@ class Grhiit {
   }
 
   static async getUser(username) {
-    console.log('***')
     let res = await this.request(`users/${username}`)
     return res.user
   }
@@ -72,8 +71,10 @@ class Grhiit {
   }
 
   static async getWorkoutById(id) {
-    let res = await this.request(`workouts/workout/${id}`)
-    return res.workout
+    if (id) {
+      let res = await this.request(`workouts/workout/${id}`)
+      return res.workout
+    }
   }
 }
 

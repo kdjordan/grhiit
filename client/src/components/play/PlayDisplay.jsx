@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Timer from './Timer'
 
 export default function PlayDisplay({ data }) {
+    console.log('got data ', data)
     //need hsl not tailwind classes for animating backgroundColor
     const waitBackground = "hsl(43,96%,56%)"
     const restBackground = "hsl(141,74%,37%)"

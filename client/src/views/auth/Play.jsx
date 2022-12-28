@@ -6,6 +6,7 @@ import UserContext from '../../UserContext';
 import PlayDisplay from '../../components/play/PlayDisplay'
 import Grhiit from '../../Api';
 
+
 export default function Play() {
     const { currentUser } = useContext(UserContext)
     const [ play, setPlay ] = useState(false)
@@ -14,7 +15,22 @@ export default function Play() {
 
     async function getWorkout() {
         const res = await Grhiit.getWorkoutById(id);
-        console.log('got res ', res)
+        //add wait interval at begining
+        res.unshift({
+            type: 'wait',
+            movementName: 'GET READY',
+            work: 0,
+            rest: 10,
+            rounds: 1
+        })
+        //add cooldown interval at end
+        res.push({
+            type: 'end',
+            movementName: 'COOL DOWN',
+            work: 0,
+            rest: 30,
+            rounds: 1
+        })
         return res
       }
 
@@ -25,10 +41,11 @@ export default function Play() {
     }
 
     async function runSession() {
+        console.log('data ', data)
         setPlay(true)
         for (let i=0 ; i < data.length ; i++) {
             setCurrentInterval(data[i])
-            await delay(((+data[i].work + +data[i].rest) * +data[i].rounds)* 1000) 
+            await delay(((data[i].work + data[i].rest) * data[i].rounds)* 1000) 
         }
         setPlay(false)
     }
