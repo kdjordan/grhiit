@@ -1,3 +1,11 @@
+/**
+ * PARENT COMPONENT : App.jsx (route rendered in AnimatedRoutes)
+ * PROPS : none
+ * This controls the dashboard view and utilizes both Workouts.jsx and UpdateProfile.jsx
+ * 
+ * RETURNS => the Dashboard View
+ */
+
 import { useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'

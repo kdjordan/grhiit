@@ -1,3 +1,10 @@
+/**
+ * PARENT COMPONENT : Dashboard.jsx (route rendered in AnimatedRoutes)
+ * PROPS : none
+ * RETURNS => the Cards (Cards.jsx) which show the workout specs (not workout data though)
+ * id, name, date, and description
+ */
+
 import { useContext } from 'react';
 import { useQuery } from 'react-query';
 import UserContext from '../../UserContext';
@@ -12,6 +19,7 @@ export default function Workouts() {
       return res
     }
 
+    //quert to grab the individual workout from the DB 
     const { data, status } = useQuery('workout', getWorkouts)
     
 

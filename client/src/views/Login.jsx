@@ -1,14 +1,15 @@
+/**
+ * PARENT COMPONENT : App.jsx (route rendered in AnimatedRoutes)
+ * PROPS : login fn that will call API in parent so we can set global state 
+ * that is passed through UseContext to the rest of the App
+ * 
+ * RETURNS => the login form
+ */
+
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-/**
- * PARENT COMPONENT : App.js (route rendered in AnimatedRoutes)
- * PROPS : login fn that will call API in parent so we can set global state 
- * that is passed through UseContext
- * 
- * RETURNS => the login form
- */
 export default function Login({ login }) {
     const navigate = useNavigate();
 

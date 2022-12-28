@@ -1,10 +1,5 @@
-import { useState, useContext } from 'react';
-import UserContext from '../../UserContext';
-import Grhiit from '../../Api';
-import { toast } from 'react-toastify';
-
 /** *
- * PARENT COMPONENT Create.jsx
+ * PARENT COMPONENT : Create.jsx
  * PROPS : user
  * the information in the user object prop is useed to populate all form fields
  * passwords are intentionally left out
@@ -12,6 +7,10 @@ import { toast } from 'react-toastify';
  * RETURNS -> form that handles all user interaction to update user profile
 */
 
+import { useState, useContext } from 'react';
+import UserContext from '../../UserContext';
+import Grhiit from '../../Api';
+import { toast } from 'react-toastify';
 
 export default function UpdateProfile({ user }) {
     const { setCurrentUser } = useContext(UserContext)

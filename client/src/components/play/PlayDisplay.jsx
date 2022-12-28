@@ -1,18 +1,26 @@
+/**
+ * PARENT COMPONENT : Play.jsx 
+ * PROPS : data which is an individual round in an interval
+ * destructured the data provides for the child component Timer.jsx  : 
+ * type for controlling background color, 
+ * rounds for displaying rounds left,
+ * prompt which instructs user what movement is current, 
+ * and duration which is the time remaining
+ * 
+ * RETURNS => the background color and Child PROP Timer showing the countdown clock on screen and other 
+ * instructions for the user
+ */
+
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import Timer from './Timer'
 
 export default function PlayDisplay({ data }) {
-    console.log('got data ', data)
     //need hsl not tailwind classes for animating backgroundColor
     const waitBackground = "hsl(43,96%,56%)"
     const restBackground = "hsl(141,74%,37%)"
     const workBackground = "hsl(357,77%,50%)"
     const endBackground = "hsl(217,91%,60%)"
-    // const waitBackground = "from-grblack via-pink-600 to-blue-600"
-    // const restBackground = "hsl(141,74%,37%)"
-    // const workBackground = "hsl(357,77%,50%)"
-    // const endBackground = "hsl(217,91%,60%)"
 
     //state for all controls
     const [ background, setBackground ] = useState(waitBackground)

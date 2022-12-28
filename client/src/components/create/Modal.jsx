@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 /** *
- * component to render pop modal to save Workout Name and desription
+ * component to render popup  modal to save Workout Name and Description
  * PARENT COMPONENT Create.jsx
  * PROPS :
  * handleWorkout => fn that takes the workout name and description and adds the intervals 

@@ -1,3 +1,11 @@
+/**
+ * PARENT COMPONENT : Dashboard.jsx (route rendered in AnimatedRoutes)
+ * PROPS : none
+ * This component controls Play view and utilizes the PlayDisplay.jsx to show and coach the user through 
+ * the workout.
+ * 
+ * RETURNS => the Play view
+ */
 import { useState, useContext } from 'react'
 import { useQuery } from 'react-query';
 import { AnimatePresence, motion } from 'framer-motion'
@@ -13,6 +21,7 @@ export default function Play() {
     const [ currentInterval, setCurrentInterval ] = useState({})
     const { id } = useParams()
 
+    //get theindividual workout and prepare it to run
     async function getWorkout() {
         const res = await Grhiit.getWorkoutById(id);
         //add wait interval at begining
@@ -36,12 +45,14 @@ export default function Play() {
 
     const { data, status } = useQuery('workouts', getWorkout)
 
+    //delay function to slow down loops and control when data is passed to the PlayDisplay component
     function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms))
     }
 
+    //start the workout and loop throug the retrieved workout.data from the DB
+    //one iteration at a time
     async function runSession() {
-        console.log('data ', data)
         setPlay(true)
         for (let i=0 ; i < data.length ; i++) {
             setCurrentInterval(data[i])

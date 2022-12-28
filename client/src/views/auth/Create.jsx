@@ -1,3 +1,12 @@
+/**
+ * PARENT COMPONENT : App.jsx (route rendered in AnimatedRoutes)
+ * PROPS : none
+ * This compnent controls the create workout functionality and uses the Modal.jsx and AddInterval.jsx
+ * components to handle that
+ * It has drag and drop fn to rearrange the order of the intervals until the workout is ready to be saved.
+ * It hen launches the Modal to allow the user to add additional information about the workout (Name, Description) 
+ */
+
 import { motion } from 'framer-motion'
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
