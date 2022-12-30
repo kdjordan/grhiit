@@ -1,3 +1,13 @@
+/**
+ * BASE COMPONENT FOR APPLICATION
+ * Functions :
+ * User State -> checks if token is present in local storage and logs user in if so
+ * -> passes user information in useContext so other components can use
+ * Login -> calls API to log in user and thus set token / fn also shared in Context for Login component
+ * Logout -> logs out use through a 'callback' compnenet rendered in Animated Routes / clears local storage of token
+ * React Query -> used for fetching workouts in Dashboard component
+ * Toast -> makes toast notifications available globally
+ */
 import { QueryClient, QueryClientProvider } from 'react-query';
 const queryClient = new QueryClient();
 import { useState, useEffect } from 'react'

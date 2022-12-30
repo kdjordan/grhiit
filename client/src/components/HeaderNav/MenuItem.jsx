@@ -1,3 +1,11 @@
+/**
+ * PARENT COMPONENT : Navigation.jsx 
+ * PROPS : toggle -> passes the click up to the parent to switch state open or !open
+ * name -> derived from the items in Navigation which are the links that are to be displayed / used to route the click on menu item 
+ * 
+ * RETURNS -> the links within the menu when open
+*/
+ 
 import { motion } from "framer-motion";
 import { useContext } from 'react';
 import UserContext from "../../UserContext";

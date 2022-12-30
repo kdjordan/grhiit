@@ -1,3 +1,10 @@
+/**
+ * PARENT COMPONENT : NavBar.jsx 
+ * PROPS : toggle -> passes the click up to the parent to switch state open or !open
+ * Code implemeted based on demo : https://codesandbox.io/s/framer-motion-side-menu-mx2rw?from-embed
+ * RETURNS -> menu display : hamburger menu in red circle
+*/
+
 import { motion } from "framer-motion";
 
 const Path = props => (

@@ -1,3 +1,11 @@
+/**
+ * PARENT COMPONENT : NavBar.jsx 
+ * PROPS : toggle -> passes the click up to the parent to switch state open or !open
+ * Defines the paths (menu items) that are avaialable based on user logged in or out status
+ * Passes items down to MenuItem for display
+ * RETURNS -> the menu items based on user logged in or out
+ */
+
 import { motion } from "framer-motion";
 import { MenuItem } from "./MenuItem";
 import { useContext } from 'react';

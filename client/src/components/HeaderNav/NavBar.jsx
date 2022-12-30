@@ -1,3 +1,14 @@
+/**
+ * PARENT COMPONENT : App.jsx 
+ * PROPS : none
+ * This compnent handles the Header portion of the site and is shared across all views
+ * Displays logo on the left and the menu on the right
+ * It also sets up the animations and state used for opening and closing the menu
+ * Relies on Navigation.jsx and Menutoggle.jsx chiild components for rendering of that interaction
+ * 
+ * RETURNS -> complete header consistent across all pages
+ */
+
 import { motion, useCycle } from "framer-motion";
 import { useRef } from "react";
 import { MenuToggle } from "./MenuToggle";
@@ -5,9 +16,12 @@ import { useDimensions } from "./use-dimensions"
 import { Navigation } from "./Navigation";
 
 export default function Header() {
-    const [ isOpen, toggleOpen ] = useCycle(false, true);
-    const containerRef = useRef(null);
-    const { height } = useDimensions(containerRef);
+  //state where menu is open or not
+  const [ isOpen, toggleOpen ] = useCycle(false, true);
+  //share container across child components
+  const containerRef = useRef(null);
+  //calculates the viewport to consistently render the sidebar
+  const { height } = useDimensions(containerRef);
     
     const sidebar = {
         open: (height = 1000) => ({
