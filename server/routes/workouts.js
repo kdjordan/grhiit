@@ -59,13 +59,12 @@ router.get("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
 /** GET /  =>
  *   all individual workout for Play by workout ID
  *
- * Authorization required: loggedin check JWT present in header 
+ * JWT required: check JWT present in header 
  */
 
 router.get("/workout/:id", authenticateJWT, async function (req, res, next) {
   try {
     const workout = await Workout.getWorkout(req.params.id);
-    console.log('got workouts ', workout)
     return res.json({ workout });
 
   } catch (err) {
