@@ -3,18 +3,15 @@ import axios from "axios";
 
 // const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 const BASE_URL = "http://localhost:3001";
-
-
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoia2Rqb3JkYW4iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjcyMzgwNDgxfQ.oitHsaR_CQEWuhHlegLDiD65OvzPmY5b9m98V-pgnU8
 /* 
-  controls all API calls
-
+  controls all Auth API calls
 */
 
 class Auth {
   static token 
   
   static async request(endpoint, data = {}, method = "get") {
-
 
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
@@ -35,6 +32,7 @@ class Auth {
 
   static async login(user) {
     let res = await this.request(`auth/token`, user, 'POST')
+    console.log('set token ', res.token)
     return res.token;
   }
   static async signup(user) {
