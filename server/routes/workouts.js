@@ -1,12 +1,12 @@
 "use strict";
 
-/** Routes for companies. */
+/** Routes for Workouts. */
 
 const jsonschema = require("jsonschema");
 const express = require("express");
 
 const { BadRequestError } = require("../expressError");
-const { ensureAdmin, ensureCorrectUserOrAdmin, ensureLoggedIn, authenticateJWT } = require("../middleware/auth");
+const { ensureCorrectUserOrAdmin, authenticateJWT } = require("../middleware/auth");
 const Workout = require("../models/workout");
 
 const workoutNewSchema = require("../schemas/workoutNew.json");
@@ -17,14 +17,14 @@ const router = new express.Router();
 
 /** POST / { workout } =>  { workout }
  *
- * workout should be {  }
+ * workout should be { workoutName, workoutDesc, data : { ...intervals } }
  *
- * Returns {  }
+ * Returns { the submitted workout }
  *
- * Authorization required: loggedin
+ * Authorization required: loggedin and correct userId
  */
 
-router.post("/:id", async function (req, res, next) {
+router.post("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
     const validator = jsonschema.validate(req.body, workoutNewSchema);
     if (!validator.valid) {
@@ -42,10 +42,11 @@ router.post("/:id", async function (req, res, next) {
 /** GET /  =>
  *   all workouts by userId to populate dashboard
  *
- * Authorization required: loggedin / user only gets theor workouts
+ *  Returns { all workouts a user had }
+ * Authorization required: loggedin 
  */
 
-router.get("/:id", async function (req, res, next) {
+router.get("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
     const workouts = await Workout.findAll(req.params.id);
     return res.json({ workouts });
@@ -56,12 +57,12 @@ router.get("/:id", async function (req, res, next) {
 });
 
 /** GET /  =>
- *   all workouts by userId to populate dashboard
+ *   all individual workout for Play by workout ID
  *
- * Authorization required: loggedin / user only gets theor workouts
+ * Authorization required: loggedin check JWT present in header 
  */
 
-router.get("/workout/:id", async function (req, res, next) {
+router.get("/workout/:id", authenticateJWT, async function (req, res, next) {
   try {
     const workout = await Workout.getWorkout(req.params.id);
     console.log('got workouts ', workout)
@@ -72,62 +73,7 @@ router.get("/workout/:id", async function (req, res, next) {
   }
 });
 
-/** GET /[handle]  =>  { company }
- *
- *  Company is { handle, name, description, numEmployees, logoUrl, jobs }
- *   where jobs is [{ id, title, salary, equity }, ...]
- *
- * Authorization required: none
- */
 
-router.get("/:handle", async function (req, res, next) {
-  try {
-    const company = await Company.get(req.params.handle);
-    return res.json({ company });
-  } catch (err) {
-    return next(err);
-  }
-});
-
-/** PATCH /[handle] { fld1, fld2, ... } => { company }
- *
- * Patches company data.
- *
- * fields can be: { name, description, numEmployees, logo_url }
- *
- * Returns { handle, name, description, numEmployees, logo_url }
- *
- * Authorization required: admin
- */
-
-router.patch("/:handle", ensureAdmin, async function (req, res, next) {
-  try {
-    const validator = jsonschema.validate(req.body, companyUpdateSchema);
-    if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
-      throw new BadRequestError(errs);
-    }
-
-    const company = await Session.update(req.params.handle, req.body);
-    return res.json({ company });
-  } catch (err) {
-    return next(err);
-  }
-});
-
-/** DELETE /[handle]  =>  { deleted: handle }
- *
- * Authorization: admin
- */
-
-router.delete("/:handle", ensureAdmin, async function (req, res, next) {
-  try {
-    await Session.remove(req.params.handle);
-    return res.json({ deleted: req.params.handle });
-  } catch (err) {
-    return next(err);
-  }
-});
 
 
 module.exports = router;
