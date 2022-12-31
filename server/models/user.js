@@ -102,19 +102,19 @@ class User {
    * Returns [{ username, first_name, last_name, email, is_admin }, ...]
    **/
 
-  // static async findAll() {
-  //   const result = await db.query(
-  //         `SELECT username,
-  //                 first_name AS "firstName",
-  //                 last_name AS "lastName",
-  //                 email,
-  //                 is_admin AS "isAdmin"
-  //          FROM users
-  //          ORDER BY username`,
-  //   );
+  static async findAll() {
+    const result = await db.query(
+          `SELECT username,
+                  first_name AS "firstName",
+                  last_name AS "lastName",
+                  email,
+                  is_admin AS "isAdmin"
+           FROM users
+           ORDER BY username`,
+    );
 
-  //   return result.rows;
-  // }
+    return result.rows;
+  }
 
   /** Given a username, return data about user.
    *
@@ -168,7 +168,6 @@ class User {
    */
 
   static async update(username, data) {
-    console.log('got username and data', data)
     if (data.password) {
       data.password = await bcrypt.hash(data.password, BCRYPT_WORK_FACTOR);
     }

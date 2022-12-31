@@ -36,16 +36,16 @@ describe("POST /workouts", function () {
     }
   };
 
-//   test("ok for admin", async function () {
-//     const resp = await request(app)
-//         .post("/workouts")
-//         .send(newWorkout)
-//         .set("authorization", `Bearer ${adminToken}`);
-//     expect(resp.statusCode).toEqual(201);
-//     expect(resp.body).toEqual({
-//       company: newWorkout,
-//     });
-//   });
+  test("ok for admin", async function () {
+    const resp = await request(app)
+        .post("/workouts")
+        .send(newWorkout)
+        .set("authorization", `Bearer ${adminToken}`);
+    expect(resp.statusCode).toEqual(201);
+    expect(resp.body).toEqual({
+      workout: newWorkout,
+    });
+  });
 
 //   test("unauth for non-admin", async function () {
 //     const resp = await request(app)

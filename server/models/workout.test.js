@@ -2,7 +2,7 @@
 
 const db = require("../db.js");
 const { BadRequestError, NotFoundError } = require("../expressError");
-const Company = require("./company.js");
+const Wompany = require("./workout.js");
 const {
   commonBeforeAll,
   commonBeforeEach,
@@ -19,7 +19,7 @@ afterAll(commonAfterAll);
 /************************************** create */
 
 describe("create", function () {
-  const newCompany = {
+  const newWorkout = {
     handle: "new",
     name: "New",
     description: "New Description",
