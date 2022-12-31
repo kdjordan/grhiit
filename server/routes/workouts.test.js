@@ -9,9 +9,9 @@ const {
   commonBeforeEach,
   commonAfterEach,
   commonAfterAll,
-  testJobIds,
   u1Token,
   adminToken,
+  user1
 } = require("./_testCommon");
 
 beforeAll(commonBeforeAll);
@@ -19,7 +19,7 @@ beforeEach(commonBeforeEach);
 afterEach(commonAfterEach);
 afterAll(commonAfterAll);
 
-/************************************** POST /companies */
+/************************************** POST /workouts */
 
 describe("POST /workouts", function () {
   const newWorkout = {
@@ -38,7 +38,7 @@ describe("POST /workouts", function () {
 
   test("ok for admin", async function () {
     const resp = await request(app)
-        .post("/workouts")
+        .post("/workouts/12")
         .send(newWorkout)
         .set("authorization", `Bearer ${adminToken}`);
     expect(resp.statusCode).toEqual(201);

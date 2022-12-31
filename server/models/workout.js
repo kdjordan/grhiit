@@ -15,6 +15,7 @@ class Workout {
    *
    * */
   static async create(userId, obj) {
+    console.log('recieved ', obj, userId)
     const newData = JSON.stringify(obj.data)
     
     const result = await db.query(

@@ -91,7 +91,6 @@ class User {
           isAdmin,
         ],
     );
-
     const user = result.rows[0];
 
     return user;

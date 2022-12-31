@@ -46,7 +46,7 @@ router.post("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
  * Authorization required: loggedin 
  */
 
-router.get("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
+router.get("/:id", async function (req, res, next) {
   try {
     const workouts = await Workout.findAll(req.params.id);
     return res.json({ workouts });
@@ -62,7 +62,7 @@ router.get("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
  * JWT required: check JWT present in header 
  */
 
-router.get("/workout/:id", authenticateJWT, async function (req, res, next) {
+router.get("/workout/:id", async function (req, res, next) {
   try {
     const workout = await Workout.getWorkout(req.params.id);
     return res.json({ workout });
