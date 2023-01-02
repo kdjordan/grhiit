@@ -32,6 +32,7 @@ function App() {
     // got a user logging in  => grab their token and put in localstorage
     try {
       let token = await Auth.login(form) 
+      console.log(token)
       setToken(token)
       LocalStorage.setLocalStorage(token)
       return { success: true }
@@ -44,6 +45,7 @@ function App() {
     // got a user signing up => grab their token and put in localstorage
     try {
       let token = await Auth.signup(form) 
+      console.log(token)
       setToken(token)
       LocalStorage.setLocalStorage(token)
       return { success: true }

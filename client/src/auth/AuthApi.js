@@ -3,7 +3,7 @@ import axios from "axios";
 
 // const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 const BASE_URL = "http://localhost:3001";
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoia2Rqb3JkYW4iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjcyMzgwNDgxfQ.oitHsaR_CQEWuhHlegLDiD65OvzPmY5b9m98V-pgnU8
+
 /* 
   controls all Auth API calls
 */
@@ -32,7 +32,6 @@ class Auth {
 
   static async login(user) {
     let res = await this.request(`auth/token`, user, 'POST')
-    console.log('set token ', res.token)
     return res.token;
   }
   static async signup(user) {

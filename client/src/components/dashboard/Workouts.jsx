@@ -13,7 +13,7 @@ import Grhiit from '../../Api';
 
 export default function Workouts() {
     const { currentUser } = useContext(UserContext)
-  
+    console.log('current user', currentUser)
     async function getWorkouts() {
       const res = await Grhiit.getAllWorkouts(currentUser.id);
       return res
@@ -25,7 +25,7 @@ export default function Workouts() {
 
     return (
         <>
-          {status === "error" && <span className="text-center text-lg">Error fetching data</span>}
+          {status === "error" && <span className="text-center text-lg">Error fetching data</span>} 
           {status === "loading" && <span className="text-center text-lg">Fetching data...</span>}
           {status === "success" && data.length > 0 ? (
             <div className="flex gap-2 flex-wrap align-center justify-center">

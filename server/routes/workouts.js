@@ -48,6 +48,7 @@ router.post("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
  */
 
 router.get("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
+  console.log('******** getting workouts', req.params.id)
   try {
     const workouts = await Workout.findAll(req.params.id);
     return res.json({ workouts });
