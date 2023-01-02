@@ -33,6 +33,7 @@ router.post("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
     }
     
     const workout = await Workout.create(req.params.id, req.body);
+    console.log('sending back ', workout)
     return res.status(201).json({ workout });
   } catch (err) {
     return next(err);
@@ -46,7 +47,7 @@ router.post("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
  * Authorization required: loggedin 
  */
 
-router.get("/:id", async function (req, res, next) {
+router.get("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
     const workouts = await Workout.findAll(req.params.id);
     return res.json({ workouts });
@@ -62,7 +63,7 @@ router.get("/:id", async function (req, res, next) {
  * JWT required: check JWT present in header 
  */
 
-router.get("/workout/:id", async function (req, res, next) {
+router.get("/workout/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
     const workout = await Workout.getWorkout(req.params.id);
     return res.json({ workout });

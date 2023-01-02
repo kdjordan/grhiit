@@ -6,7 +6,6 @@ const User = require("../models/user");
 const Workout = require("../models/workout");
 const { createToken } = require("../helpers/tokens");
 
-let count = 1
 async function commonBeforeAll() {
   // noinspection SqlWithoutWhere
   await db.query("DELETE FROM users");
@@ -37,90 +36,83 @@ async function commonBeforeAll() {
       password: "password3",
       isAdmin: false,
     });
-    console.log('users ', user1, user2, user3)
+    
+    await Workout.create(user1.userId,
+        {
+          workoutName: "W1",
+          workoutDesc: "Workout1",
+          data : [
+            {
+              movementName : "test",
+              movementAbbrv: "TST",
+              type : "regular",
+              rest: 2,
+              work: 2,
+              rounds: 1,
+              id: "id1"
+            },
+            {
+              movementName : "test2",
+              movementAbbrv: "TST2",
+              type : "regular",
+              rest: 2,
+              work: 2,
+              rounds: 1,
+              id: "id2"
+            }
+        ]
+        });
+    await Workout.create(user2.userId,
+        {
+          workoutName: "W2",
+          workoutDesc: "Workout2",
+          data : [
+            {
+              movementName : "test2",
+              movementAbbrv: "TST2",
+              type : "regular",
+              rest: 2,
+              work: 2,
+              rounds: 1,
+              id: "id3"
+            },
+            {
+              movementName : "test3",
+              movementAbbrv: "TST3",
+              type : "regular",
+              rest: 2,
+              work: 2,
+              rounds: 1,
+              id: "id4"
+            }
+        ]
+        });
+    await Workout.create(user3.userId,
+        {
+          workoutName: "W3",
+          workoutDesc: "Workout3",
+          data : [
+            {
+              movementName : "test2",
+              movementAbbrv: "TST2",
+              type : "regular",
+              rest: 2,
+              work: 2,
+              rounds: 1,
+              id: "id5"
+            },
+            {
+              movementName : "test3",
+              movementAbbrv: "TST3",
+              type : "regular",
+              rest: 2,
+              work: 2,
+              rounds: 1,
+              id: "id6"
+            }
+        ]
+        });
 }
-
-
-// async function registerWorkouts() {
-//   await Workout.create(user1.userId,
-//       {
-//         workoutName: "W1",
-//         workoutDesc: "Workout1",
-//         data : [
-//           {
-//             movementName : "test",
-//             movementAbbrv: "TST",
-//             type : "regular",
-//             rest: 2,
-//             work: 2,
-//             rounds: 1,
-//             id: "id1"
-//           },
-//           {
-//             movementName : "test2",
-//             movementAbbrv: "TST2",
-//             type : "regular",
-//             rest: 2,
-//             work: 2,
-//             rounds: 1,
-//             id: "id2"
-//           }
-//       ]
-//       });
-//   await Workout.create(user2.userId,
-//       {
-//         workoutName: "W2",
-//         workoutDesc: "Workout2",
-//         data : [
-//           {
-//             movementName : "test2",
-//             movementAbbrv: "TST2",
-//             type : "regular",
-//             rest: 2,
-//             work: 2,
-//             rounds: 1,
-//             id: "id1"
-//           },
-//           {
-//             movementName : "test3",
-//             movementAbbrv: "TST3",
-//             type : "regular",
-//             rest: 2,
-//             work: 2,
-//             rounds: 1,
-//             id: "id2"
-//           }
-//       ]
-//       });
-
-//   // await Workout.create(
-//   //     {
-//   //       name: "W2",
-//   //       description: "Workout1",
-//   //       data : [
-//   //         {
-//   //           movementName : "test",
-//   //           movementAbbrv: "TST",
-//   //           type : "regular",
-//   //           rest: 2,
-//   //           work: 2,
-//   //           rounds: 1,
-//   //           id: "id1"
-//   //         },
-//   //         {
-//   //           movementName : "test2",
-//   //           movementAbbrv: "TST2",
-//   //           type : "regular",
-//   //           rest: 2,
-//   //           work: 2,
-//   //           rounds: 1,
-//   //           id: "id2"
-//   //         }
-//   //     ]
-//   //     });
-  
-
-// }
 
 async function commonBeforeEach() {
   await db.query("BEGIN");
@@ -138,6 +130,7 @@ const u1Token = createToken({ username: "u1", isAdmin: false });
 const u2Token = createToken({ username: "u2", isAdmin: false });
 const adminToken = createToken({ username: "admin", isAdmin: true });
 
+
 module.exports = {
   commonBeforeAll,
   commonBeforeEach,
@@ -145,5 +138,5 @@ module.exports = {
   commonAfterAll,
   u1Token,
   u2Token,
-  adminToken,
+  adminToken
 };
