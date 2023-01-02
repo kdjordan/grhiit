@@ -6,51 +6,40 @@ const User = require("../models/user");
 const Workout = require("../models/workout");
 const { createToken } = require("../helpers/tokens");
 
-
+let count = 1
 async function commonBeforeAll() {
   // noinspection SqlWithoutWhere
-  let res = await db.query("DELETE FROM users");
-  console.log(res)
+  await db.query("DELETE FROM users");
   // noinspection SqlWithoutWhere
   await db.query("DELETE FROM workouts");
 
-  // const user1 = await User.register({
-  //   username: "u2",
-  //   firstName: "U2F",
-  //   lastName: "U2L",
-  //   email: "user2@user.com",
-  //   password: "password2",
-  //   isAdmin: false,
-  // });
-  // console.log('registered ', user1)
+    const user1 = await User.register({
+      username: "u1",
+      firstName: "U1F",
+      lastName: "U1L",
+      email: "user1@user.com",
+      password: "password1",
+      isAdmin: false,
+    });
+    const user2 = await User.register({
+      username: "u2",
+      firstName: "U2F",
+      lastName: "U2L",
+      email: "user2@user.com",
+      password: "password2",
+      isAdmin: false,
+    });
+    const user3 = await User.register({
+      username: "u3",
+      firstName: "U3F",
+      lastName: "U3L",
+      email: "user3@user.com",
+      password: "password3",
+      isAdmin: false,
+    });
+    console.log('users ', user1, user2, user3)
 }
 
-// async function registerUsers() {
-//   user1 = await User.register({
-//     username: "u2",
-//     firstName: "U2F",
-//     lastName: "U2L",
-//     email: "user2@user.com",
-//     password: "password2",
-//     isAdmin: false,
-//   });
-//   user2 = await User.register({
-//     username: "u3",
-//     firstName: "U3F",
-//     lastName: "U3L",
-//     email: "user3@user.com",
-//     password: "password3",
-//     isAdmin: false,
-//   });
-//   user3 = await User.register({
-//     username: "u1",
-//     firstName: "U1F",
-//     lastName: "U1L",
-//     email: "user1@user.com",
-//     password: "password1",
-//     isAdmin: false,
-//   });
-// }
 
 // async function registerWorkouts() {
 //   await Workout.create(user1.userId,
@@ -145,19 +134,9 @@ async function commonAfterAll() {
   await db.end();
 }
 
-//register Users
-
-
-//register Workouts for Users
-
-
-
-
 const u1Token = createToken({ username: "u1", isAdmin: false });
 const u2Token = createToken({ username: "u2", isAdmin: false });
 const adminToken = createToken({ username: "admin", isAdmin: true });
-
-commonBeforeAll()
 
 module.exports = {
   commonBeforeAll,

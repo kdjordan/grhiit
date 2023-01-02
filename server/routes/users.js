@@ -54,6 +54,7 @@ router.post("/", ensureAdmin, async function (req, res, next) {
 router.get("/", ensureAdmin, async function (req, res, next) {
   try {
     const users = await User.findAll();
+    console.log('returning **', users)
     return res.json({ users });
   } catch (err) {
     return next(err);

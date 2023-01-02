@@ -111,6 +111,7 @@ class User {
            FROM users
            ORDER BY username`,
     );
+    
     return result.rows;
   }
 
