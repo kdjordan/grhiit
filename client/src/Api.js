@@ -39,6 +39,7 @@ class Grhiit {
     let res = await this.request(`companies/${handle}`)
     return res.company;
   }
+  
 
   static async getCompanies(name) {
     let res = await this.request('companies', {name})
