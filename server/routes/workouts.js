@@ -6,7 +6,7 @@ const jsonschema = require("jsonschema");
 const express = require("express");
 
 const { BadRequestError } = require("../expressError");
-const { ensureCorrectUserOrAdmin, authenticateJWT } = require("../middleware/auth");
+const { ensureCorrectUserOrAdmin, ensureLoggedIn } = require("../middleware/auth");
 const Workout = require("../models/workout");
 
 const workoutNewSchema = require("../schemas/workoutNew.json");
@@ -33,7 +33,6 @@ router.post("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
     }
     
     const workout = await Workout.create(req.params.id, req.body);
-    console.log('sending back ', workout)
     return res.status(201).json({ workout });
   } catch (err) {
     return next(err);
@@ -48,7 +47,6 @@ router.post("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
  */
 
 router.get("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
-  console.log('******** getting workouts', req.params.id)
   try {
     const workouts = await Workout.findAll(req.params.id);
     return res.json({ workouts });
@@ -64,7 +62,8 @@ router.get("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
  * JWT required: check JWT present in header 
  */
 
-router.get("/workout/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
+router.get("/workout/:id", ensureLoggedIn, async function (req, res, next) {
+  console.log('getting here')
   try {
     const workout = await Workout.getWorkout(req.params.id);
     return res.json({ workout });

@@ -47,6 +47,9 @@ export const MenuItem = ({ name, toggle }) => {
       case('DASHBOARD'):
         navigate('/dashboard')
         break;
+      case('PROFILE'):
+        navigate('/profile')
+        break;
       case('LOGIN'):
         navigate('/login')
         break;

@@ -6,16 +6,17 @@
  * RETURNS => the Dashboard View
  */
 
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'
 import UserContext from '../../UserContext';
 import Workouts from '../../components/dashboard/Workouts';
-import UpdateProfile from '../../components/dashboard/UpdateProfile';
 
 
 export default function Dashboard() {
   const { currentUser } = useContext(UserContext)
+  console.log('in dash ', currentUser)
+  const [user, setUSer] = useState(currentUser)
   const navigate = useNavigate()
   
 
@@ -39,8 +40,7 @@ export default function Dashboard() {
                             className="w-1/2 md:w-1/3 self-center text-center text-xl  py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"
                         >CREATE NEW SESSION</button>
                   </div>
-                    </div>
-                    <UpdateProfile user={currentUser} />
+                </div>
                 </>
             ) : (
                 <h2>Loading</h2>

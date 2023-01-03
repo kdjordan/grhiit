@@ -46,6 +46,10 @@ export const Navigation = ({ toggle }) => {
         path: "/create"
       },
       {
+        name: "PROFILE",
+        path: "/profile"
+      },
+      {
         name: "LOGOUT",
         path: "/logout"
       },

@@ -13,9 +13,11 @@ import Grhiit from '../../Api';
 
 export default function Workouts() {
     const { currentUser } = useContext(UserContext)
-    console.log('current user', currentUser)
+    console.log('surrentUSer', currentUser)
     async function getWorkouts() {
-      const res = await Grhiit.getAllWorkouts(currentUser.id);
+      console.log('gettiung workouts in ')
+      const res = await Grhiit.getAllWorkouts(currentUser.userId);
+      console.log(res)
       return res
     }
 

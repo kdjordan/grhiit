@@ -1,7 +1,8 @@
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Home from "./views/Home";
-import Signup from "./views/Signup"
-import Login from "./views/Login"
+import Signup from "./views/Signup";
+import Login from "./views/Login";
+import Profile from './views/auth/Profile';
 import Logout from "./views/Logout";
 import Dashboard from "./views/auth/Dashboard";
 import Play from "./views/auth/Play";
@@ -35,6 +36,12 @@ export default function AnimatedRoutes({ signup, login, logout }) {
               element={
                 <ProtectedRoute>
                   <Play />
+                </ProtectedRoute> 
+            } />
+            <Route path="/profile" 
+              element={
+                <ProtectedRoute>
+                  <Profile />
                 </ProtectedRoute> 
             } />
             <Route path="*" element={<Navigate to="/" replace />} />

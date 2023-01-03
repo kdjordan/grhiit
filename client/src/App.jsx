@@ -32,8 +32,7 @@ function App() {
     // got a user logging in  => grab their token and put in localstorage
     try {
       let token = await Auth.login(form) 
-      console.log(token)
-      setToken(token)
+      setCurrentUser(decodeToken(token))
       LocalStorage.setLocalStorage(token)
       return { success: true }
     } catch (error) {
@@ -45,8 +44,8 @@ function App() {
     // got a user signing up => grab their token and put in localstorage
     try {
       let token = await Auth.signup(form) 
-      console.log(token)
       setToken(token)
+      setCurrentUser(decodeToken(token))
       LocalStorage.setLocalStorage(token)
       return { success: true }
     } catch (error) {
@@ -57,19 +56,19 @@ function App() {
   function logout() {
     LocalStorage.setLocalStorage(null)
     setCurrentUser(null)
-
   }
 
   useEffect(() => {
+    console.log('in App ', token)
     async function getUser() {
       if (token) {
+        console.log('gettting user')  
         let { username }  = decodeToken(token)
         Grhiit.token = token
         let user = await Grhiit.getUser(username)
+        console.log('got user ', user)
         setCurrentUser(user)
       }
-      // setIsLoading(false)
-  
     }
     getUser()
   }, [token])

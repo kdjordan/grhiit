@@ -15,7 +15,6 @@ class Workout {
    *
    * */
   static async create(userId, obj) {
-    // console.log('recieved ', obj, userId)
     const newData = JSON.stringify(obj.data)
     
     const result = await db.query(
@@ -70,6 +69,7 @@ class Workout {
    * */
 
   static async getWorkout(id) {
+    console.log('getting workout ', id)
     const result = await db.query(
       `SELECT data 
         FROM workouts 

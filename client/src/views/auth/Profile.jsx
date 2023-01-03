@@ -7,23 +7,54 @@
  * RETURNS -> form that handles all user interaction to update user profile
 */
 
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useQuery } from 'react-query';
 import UserContext from '../../UserContext';
 import Grhiit from '../../Api';
 import { toast } from 'react-toastify';
 
-export default function UpdateProfile({ user }) {
-    const { setCurrentUser } = useContext(UserContext)
+export default function Profile() {
     const [errors, setErrors] = useState([])
+    const [form, setForm] = useState({})
     
-    const [form, setForm] = useState({
-        firstName: `${user.firstName}`,
-        lastName: `${user.lastName}`,
-        username: `${user.username}`,
-        email: `${user.email}`,
-        password: '',
-        confirmPassword: ''
-      })
+    useEffect(() => {
+        function setInitialForm() {
+            const { currentUser, setCurrentUser } = useContext(UserContext)
+            console.log(currentUser)
+            setForm({
+                firstName: `${currentUser.firstName}`,
+                lastName: `${currentUser.lastName}`,
+                username: `${currentUser.username}`,
+                email: `${currentUser.email}`,
+                password: '',
+                confirmPassword: ''
+            })
+        }
+        setInitialForm()
+    },[])
+    
+    // useEffect(() => {
+    //     async function getUser
+    // }, [])
+
+    // async function getUser() {
+    //     console.log('gettiung user in ', currentUser)
+    //     const res = await Grhiit.getUser(currentUser.username);
+    //     console.log(res)
+    //     setForm({
+    //         firstName: `${res.firstName}`,
+    //         lastName: `${res.lastName}`,
+    //         username: `${res.username}`,
+    //         email: `${res.email}`,
+    //         password: '',
+    //         confirmPassword: ''
+    //       })
+    //     return res
+    //   }
+
+    // const { data, status } = useQuery('user', getUser)
+
 
       function handleChange(e) {
         const { name, value } = e.target
@@ -79,6 +110,12 @@ export default function UpdateProfile({ user }) {
 
     return (
         <>
+        <motion.div 
+            className="container mx-auto text-3xl md:text-5xl  text-grwhite flex flex-col items-center"
+            initial={{opacity:0}}
+            animate={{opacity:1}}
+            exit={{opacity:0, transition: {duration: 0.5}}}        
+            >
         
         <div className="px-2 content-center mt-4 w-full lg:w-4/5 ">
             <div className="flex flex-col content-center text-lg 
@@ -198,6 +235,7 @@ export default function UpdateProfile({ user }) {
                     </form>
             </div>
         </div>
+        </motion.div>
         </>
     )
 }

@@ -46,6 +46,7 @@ export default function Signup({ signup }) {
             delete newForm.passwordConfirm
             let res = await signup(newForm)
             if(res.success) {
+                console.log('going')
                 navigate('/dashboard')
             } else {
                 setErrors(result.error)

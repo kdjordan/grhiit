@@ -84,7 +84,7 @@ export default function Create() {
 
     async function saveWorkout(obj) {
         try {
-            await Grhiit.saveWorkout(currentUser.id, obj)
+            await Grhiit.saveWorkout(currentUser.userId, obj)
             setTimeout(() => {
                 toast("Workout Saved !")
                 navigate('/dashboard')
