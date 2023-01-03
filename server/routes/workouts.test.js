@@ -14,97 +14,97 @@ const {
   adminToken,
 } = require("./_testCommon");
 
+
 beforeAll(commonBeforeAll);
 beforeEach(commonBeforeEach);
 afterEach(commonAfterEach);
 afterAll(commonAfterAll);
 /************************************** POST /workouts */
+let user1
 
+describe("POST /workouts", function () {
+  const newWorkout = {
+    workoutName: "new",
+    workoutDesc: "New",
+    data : [{
+      movementName: "Squat",
+      movementAbbrv: "SQT",
+      type: "regular",
+      rest: 5,
+      work: 5,
+      rounds: 2,
+      id: crypto.randomUUID()
+    }]
+  };
 
-// describe("POST /workouts", function () {
-//   let user1
-//   test('example test', async () => {
-//     user1 = await User.get('u1')
-//   });
-//   const newWorkout = {
-//     workoutName: "new",
-//     workoutDesc: "New",
-//     data : [{
-//       movementName: "Squat",
-//       movementAbbrv: "SQT",
-//       type: "regular",
-//       rest: 5,
-//       work: 5,
-//       rounds: 2,
-//       id: crypto.randomUUID()
-//     }]
-//   };
+  test("ok for admin", async function () {
+    user1 = await User.get('u1')
+    const resp = await request(app)
+        .post(`/workouts/${user1.userId}`)
+        .send(newWorkout)
+        .set("authorization", `Bearer ${adminToken}`);
+    expect(resp.statusCode).toEqual(201);
+    expect(resp.body).toEqual(expect.objectContaining({
+      workout: {
+          workoutId: expect.any(Number),
+          createdAt: expect.any(String),
+        }
+    }));
+  });
 
-//   test("ok for admin", async function () {
-//     const resp = await request(app)
-//         .post(`/workouts/${user1.id}`)
-//         .send(newWorkout)
-//         .set("authorization", `Bearer ${adminToken}`);
-//     expect(resp.statusCode).toEqual(201);
-//     console.log(resp.body)
-//     expect(resp.body).toEqual({
-//       workout: {
-//         createdAt: expect.any(String),
-//         workoutId: expect.any(Number)
-//       }
-//     });
-//   });
+  test("unauth for non-admin", async function () {
+    const resp = await request(app)
+        .post("/workouts")
+        .send(newWorkout)
+        .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(404);
+  });
 
-//   test("unauth for non-admin", async function () {
-//     const resp = await request(app)
-//         .post("/workouts")
-//         .send(newWorkout)
-//         .set("authorization", `Bearer ${u1Token}`);
-//     expect(resp.statusCode).toEqual(404);
-//   });
+  test("bad request with missing data", async function () {
+    const resp = await request(app)
+        .post("/workouts")
+        .send({
+          userId: 12
+        })
+        .set("authorization", `Bearer ${adminToken}`);
+    expect(resp.statusCode).toEqual(404);
+  });
 
-//   test("bad request with missing data", async function () {
-//     const resp = await request(app)
-//         .post("/workouts")
-//         .send({
-//           userId: 12
-//         })
-//         .set("authorization", `Bearer ${adminToken}`);
-//     expect(resp.statusCode).toEqual(404);
-//   });
-
-//   test("bad request with invalid data", async function () {
-//     const resp = await request(app)
-//         .post("/companies")
-//         .send({
-//           ...newWorkout,
-//           logoUrl:''
-//         })
-//         .set("authorization", `Bearer ${adminToken}`);
-//     expect(resp.statusCode).toEqual(404);
-//   });
-// });
+  test("bad request with invalid data", async function () {
+    const resp = await request(app)
+        .post("/companies")
+        .send({
+          ...newWorkout,
+          name: 'fake'
+        })
+        .set("authorization", `Bearer ${adminToken}`);
+    expect(resp.statusCode).toEqual(404);
+  });
+});
 
 /************************************** GET /workouts */
 
 describe("GET /workouts", function () {
-  let user1
-  test('example test', async () => {
-    user1 = await User.get('u1')
-  });
   test("ok for admin", async function () {
-    const resp = await request(app).get(`/workouts/${user1.id}`)
+    const resp = await request(app).get(`/workouts/${user1.userId}`)
     .set("authorization", `Bearer ${adminToken}`);;
-    console.log(resp.body)
     expect(resp.body).toEqual({
-      workouts: {
-        workoutId: expect.any(Number),
-        createdAt: expect.any(String),
-        data: expect.any(Array)
-      }
+      workouts: [
+        {
+          id: expect.any(Number),
+          user_id: user1.userId,
+          name: 'W1',
+          description: 'Workout1',
+          created_at: expect.any(String),
+          data: expect.any(Array)
+        }
+      ]
     });
   });
-
+    test("not found for no such workout", async function () {
+      const resp = await request(app).get(`/workouts/nope`);
+      expect(resp.statusCode).toEqual(401);
+    });
 });
 
 /************************************** GET /companies/:handle */
@@ -142,9 +142,5 @@ describe("GET /workouts", function () {
 //     });
 //   });
 
-//   test("not found for no such company", async function () {
-//     const resp = await request(app).get(`/companies/nope`);
-//     expect(resp.statusCode).toEqual(404);
-//   });
-// });
+
 

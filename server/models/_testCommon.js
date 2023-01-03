@@ -8,19 +8,19 @@ async function commonBeforeAll() {
   await db.query("DELETE FROM workouts");
   // noinspection SqlWithoutWhere
   await db.query("DELETE FROM users");
+  
 
   await db.query(`
-    INSERT INTO workouts(workoutName, workoutDesc, data)
-    VALUES ('w1, 'W1', data: [{
-          "movementName" : "test",
-          "movementAbbrv": "TST",
-          "type" : "regular",
-          "rest": 2,
-          "work": 2,
-          "rounds": 1,
-          "id": "hhh4444"
-        }]),
-        `);
+    INSERT INTO workouts(name, description, data)
+    VALUES ('w1', 'W1', [{
+        "movementName" : "test",
+        "movementAbbrv": "TST",
+        "type" : "regular",
+        "rest": 2,
+        "work": 2,
+        "rounds": 1,
+        "id": "hhh4444"
+      }])`);
 
   await db.query(`
         INSERT INTO users(username,
@@ -54,7 +54,5 @@ module.exports = {
   commonBeforeAll,
   commonBeforeEach,
   commonAfterEach,
-  commonAfterAll,
-  testJobIds,
-  any
+  commonAfterAll
 };
