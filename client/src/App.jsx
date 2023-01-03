@@ -8,8 +8,6 @@
  * React Query -> used for fetching workouts in Dashboard component
  * Toast -> makes toast notifications available globally
  */
-import { QueryClient, QueryClientProvider } from 'react-query';
-const queryClient = new QueryClient();
 import { useState, useEffect } from 'react'
 import Navbar from './components/headernav/NavBar'
 import AnimatedRoutes from './AnimatedRoutes'
@@ -32,8 +30,7 @@ function App() {
     // got a user logging in  => grab their token and put in localstorage
     try {
       let token = await Auth.login(form) 
-      setCurrentUser(decodeToken(token))
-      LocalStorage.setLocalStorage(token)
+      setToken(token)
       return { success: true }
     } catch (error) {
       return { success: false, error }
@@ -46,7 +43,6 @@ function App() {
       let token = await Auth.signup(form) 
       setToken(token)
       setCurrentUser(decodeToken(token))
-      LocalStorage.setLocalStorage(token)
       return { success: true }
     } catch (error) {
       return { success: false, error }
@@ -54,39 +50,36 @@ function App() {
   }
   
   function logout() {
-    LocalStorage.setLocalStorage(null)
+    LocalStorage.emptyLocalStorage(null)
     setCurrentUser(null)
   }
 
   useEffect(() => {
-    console.log('in App ', token)
     async function getUser() {
       if (token) {
-        console.log('gettting user')  
         let { username }  = decodeToken(token)
         Grhiit.token = token
         let user = await Grhiit.getUser(username)
-        console.log('got user ', user)
         setCurrentUser(user)
+        LocalStorage.setLocalProfile(user)
+        LocalStorage.setLocalStorage(token)
       }
     }
     getUser()
   }, [token])
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <UserContext.Provider value={{currentUser, setCurrentUser, logout}}>
-      <div className="App">
-        <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true}/>
-        <Router>
-          <Navbar />
-          <div className="main min-h-screen font-osPrimary py-32 bg-gradient-primary">
-            <AnimatedRoutes signup={signup} login={login} logout={logout}/>
-          </div>
-        </Router>
-      </div>
-      </UserContext.Provider>
-    </QueryClientProvider>
+    <UserContext.Provider value={{currentUser, setCurrentUser, logout}}>
+    <div className="App">
+      <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true}/>
+      <Router>
+        <Navbar />
+        <div className="main min-h-screen font-osPrimary py-32 bg-gradient-primary">
+          <AnimatedRoutes signup={signup} login={login} logout={logout} />
+        </div>
+      </Router>
+    </div>
+    </UserContext.Provider>
   )
 }
 export default App

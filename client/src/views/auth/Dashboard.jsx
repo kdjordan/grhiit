@@ -6,7 +6,7 @@
  * RETURNS => the Dashboard View
  */
 
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'
 import UserContext from '../../UserContext';
@@ -15,8 +15,6 @@ import Workouts from '../../components/dashboard/Workouts';
 
 export default function Dashboard() {
   const { currentUser } = useContext(UserContext)
-  console.log('in dash ', currentUser)
-  const [user, setUSer] = useState(currentUser)
   const navigate = useNavigate()
   
 
@@ -34,7 +32,7 @@ export default function Dashboard() {
                     <div className="container mx-auto flex flex-col align-center justify-content-center gap-8">
                         <h4 className="text-4xl text-center">YOUR TRAINING SESSIONS</h4>
                         {currentUser && (
-                            <Workouts />
+                            <Workouts user={currentUser}/>
                         )}
                         <button onClick={() => navigate("/create")}
                             className="w-1/2 md:w-1/3 self-center text-center text-xl  py-3 rounded bg-grred text-grwhite hover:bg-grwhite hover:text-grred duration-300 focus:outline-none my-1"

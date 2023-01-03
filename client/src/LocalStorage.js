@@ -13,5 +13,16 @@ class LocalStorage{
     static emptyLocalStorage() {
         localStorage.clear()
     }
+    static setLocalProfile(profile) {
+        localStorage.setItem('profile', JSON.stringify(profile))
+    }
+    static getLocalProfile() {
+        try {
+            const profile = JSON.parse(localStorage.getItem('profile'))
+            return profile
+        } catch (error) {
+            return false
+        }
+    }
 }
 export default LocalStorage

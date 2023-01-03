@@ -35,21 +35,6 @@ class Grhiit {
   }
 
   // Individual API routes
-  static async getCompany(handle) {
-    let res = await this.request(`companies/${handle}`)
-    return res.company;
-  }
-
-  static async getCompanies(name) {
-    let res = await this.request('companies', {name})
-    return res.companies;
-  }
-
-  static async getJobs(title) {
-    let res = await this.request('jobs', { title })
-    return res.jobs;
-  }
-
   static async getUser(username) {
     let res = await this.request(`users/${username}`)
     return res.user
@@ -71,10 +56,8 @@ class Grhiit {
   }
 
   static async getWorkoutById(id) {
-    if (id) {
       let res = await this.request(`workouts/workout/${id}`)
       return res.workout
-    }
   }
 }
 

@@ -7,43 +7,44 @@
  * RETURNS => the Play view
  */
 import { useState, useContext } from 'react'
-import { useQuery } from 'react-query';
 import { AnimatePresence, motion } from 'framer-motion'
 import { useParams } from "react-router-dom"
 import UserContext from '../../UserContext';
 import PlayDisplay from '../../components/play/PlayDisplay'
 import Grhiit from '../../Api';
+import { useEffect } from 'react';
 
 
 export default function Play() {
     const { currentUser } = useContext(UserContext)
+    const [data, setData] = useState([])
     const [ play, setPlay ] = useState(false)
     const [ currentInterval, setCurrentInterval ] = useState({})
     const { id } = useParams()
 
-    //get theindividual workout and prepare it to run
-    async function getWorkout() {
-        const res = await Grhiit.getWorkoutById(id);
-        //add wait interval at begining
-        res.unshift({
-            type: 'wait',
-            movementName: 'GET READY',
-            work: 0,
-            rest: 10,
-            rounds: 1
-        })
-        //add cooldown interval at end
-        res.push({
-            type: 'end',
-            movementName: 'COOL DOWN',
-            work: 0,
-            rest: 30,
-            rounds: 1
-        })
-        return res
-      }
-
-    const { data, status } = useQuery('workouts', getWorkout)
+      useEffect(() => {
+        async function getWorkout() {
+            const res = await Grhiit.getWorkoutById(id);
+            //add wait interval at begining
+            res.unshift({
+                type: 'wait',
+                movementName: 'GET READY',
+                work: 0,
+                rest: 10,
+                rounds: 1
+            })
+            //add cooldown interval at end
+            res.push({
+                type: 'end',
+                movementName: 'COOL DOWN',
+                work: 0,
+                rest: 10,
+                rounds: 1
+            })
+            setData(res)
+          }
+          getWorkout()
+      }, [])
 
     //delay function to slow down loops and control when data is passed to the PlayDisplay component
     function delay(ms) {
@@ -75,7 +76,7 @@ export default function Play() {
             
             {currentUser ? (
                 <>
-                {data.map((int, i) => (
+                {data && data.map((int, i) => (
                         <div 
                         className='text-center w-1/2 mb-2 text-xl text-grgrey shadow-2xl hover:bg-gray-700'
                         key={i}

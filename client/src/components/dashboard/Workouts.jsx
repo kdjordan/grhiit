@@ -5,31 +5,25 @@
  * id, name, date, and description
  */
 
-import { useContext } from 'react';
-import { useQuery } from 'react-query';
-import UserContext from '../../UserContext';
+import { useState, useEffect } from 'react';
 import Card from './Card';
 import Grhiit from '../../Api';
 
-export default function Workouts() {
-    const { currentUser } = useContext(UserContext)
-    console.log('surrentUSer', currentUser)
-    async function getWorkouts() {
-      console.log('gettiung workouts in ')
-      const res = await Grhiit.getAllWorkouts(currentUser.userId);
-      console.log(res)
-      return res
-    }
-
-    //quert to grab the individual workout from the DB 
-    const { data, status } = useQuery('workout', getWorkouts)
+export default function Workouts({user}) {
+    const [data, setData] = useState([])
+  
+    useEffect(() => { 
+      async function getWorkouts() {
+        const res = await Grhiit.getAllWorkouts(user.userId);
+        setData(res)
+      }
+        getWorkouts()
+    }, [user])  
     
-
     return (
         <>
-          {status === "error" && <span className="text-center text-lg">Error fetching data</span>} 
-          {status === "loading" && <span className="text-center text-lg">Fetching data...</span>}
-          {status === "success" && data.length > 0 ? (
+         
+          {data && data.length > 0  ? (
             <div className="flex gap-2 flex-wrap align-center justify-center">
               {data.map((d) => (
                 <Card 

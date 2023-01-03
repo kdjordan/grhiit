@@ -62,8 +62,7 @@ router.get("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
  * JWT required: check JWT present in header 
  */
 
-router.get("/workout/:id", ensureLoggedIn, async function (req, res, next) {
-  console.log('getting here')
+router.get("/workout/:id",  async function (req, res, next) {
   try {
     const workout = await Workout.getWorkout(req.params.id);
     return res.json({ workout });
