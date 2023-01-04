@@ -9,18 +9,26 @@ async function commonBeforeAll() {
   // noinspection SqlWithoutWhere
   await db.query("DELETE FROM users");
   
+  const data = [{
+    "movementName" : "test",
+    "movementAbbrv": "TST",
+    "type" : "regular",
+    "rest": 2,
+    "work": 2,
+    "rounds": 1,
+    "id": "hhh4444"
+  }]
 
-  await db.query(`
-    INSERT INTO workouts(name, description, data)
-    VALUES ('w1', 'W1', [{
-        "movementName" : "test",
-        "movementAbbrv": "TST",
-        "type" : "regular",
-        "rest": 2,
-        "work": 2,
-        "rounds": 1,
-        "id": "hhh4444"
-      }])`);
+  const dataArray = JSON.stringify(data)
+
+  // await db.query({
+  //   text: 'INSERT INTO workouts(user_id, name, description, data) VALUES ($1, $2, $3, $4)',
+  //   values: [389, 'w1', 'W1', dataArray]
+  // });
+
+  // await db.query(`
+  //   INSERT INTO workouts(user_id, name, description, data)
+  //   VALUES (389, 'w1', 'W1', ${dataArray})`);
 
   await db.query(`
         INSERT INTO users(username,
