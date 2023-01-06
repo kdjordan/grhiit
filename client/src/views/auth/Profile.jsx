@@ -17,7 +17,7 @@ import { toast } from 'react-toastify';
 
 export default function Profile() {
     const navigate = useNavigate();
-    const { currentUser, setCurrentUser } = useContext(UserContext)
+    const { currentUser, setCurrentUser, logout } = useContext(UserContext)
     const [user, setUser] = useState()
     const [form, setForm] = useState(null);
 
@@ -56,10 +56,9 @@ export default function Profile() {
 
     async function deleteProfile() {
         console.log('deleting ', user.userId)
-        let res = await Grhiit.deleteUser(user.userId)
-        if (res) {
-            navigate('/')
-        }
+        await Grhiit.deleteUser(user.username)
+        logout()
+        navigate('/')
     }
 
     function handleFocus() {

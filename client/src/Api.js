@@ -45,8 +45,8 @@ class Grhiit {
     return res.user
   }
 
-  static async deleteUser(userId) {
-    let res = await this.request(`users/${userId}`, {}, 'delete')
+  static async deleteUser(username) {
+    let res = await this.request(`users/${username}`, {}, 'delete')
     return res.user
   }
 
@@ -55,8 +55,8 @@ class Grhiit {
     return res.workout
   }
 
-  static async getAllWorkouts(userId) {
-    let res = await this.request(`workouts/${userId}`)
+  static async getAllWorkouts(username) {
+    let res = await this.request(`workouts/${username}`)
     return res.workouts
   }
 
