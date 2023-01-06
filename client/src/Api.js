@@ -45,6 +45,11 @@ class Grhiit {
     return res.user
   }
 
+  static async deleteUser(userId) {
+    let res = await this.request(`users/${userId}`, {}, 'delete')
+    return res.user
+  }
+
   static async saveWorkout(userId, data) {
     let res = await this.request(`workouts/${userId}`, data, 'post')
     return res.workout

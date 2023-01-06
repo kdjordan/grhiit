@@ -4,14 +4,14 @@ const request = require("supertest");
 const crypto = require('crypto');
 const app = require("../app");
 const User = require("../models/user");
+const { createToken } = require("../helpers/tokens");
 
 const {
   commonBeforeAll,
   commonBeforeEach,
   commonAfterEach,
   commonAfterAll,
-  u1Token,
-  adminToken,
+  adminToken
 } = require("./_testCommon");
 
 
@@ -21,7 +21,7 @@ afterEach(commonAfterEach);
 afterAll(commonAfterAll);
 /************************************** POST /workouts */
 let user1
-
+let u1Token
 describe("POST /workouts", function () {
   const newWorkout = {
     workoutName: "new",
@@ -52,21 +52,23 @@ describe("POST /workouts", function () {
     }));
   });
 
-  test("unauth for non-admin", async function () {
+  test("correct user", async function () {
+    u1Token = createToken(user1)
     const resp = await request(app)
-        .post("/workouts")
+        .post(`/workouts/${user1.userId}`)
         .send(newWorkout)
         .set("authorization", `Bearer ${u1Token}`);
-    expect(resp.statusCode).toEqual(404);
+    expect(resp.statusCode).toEqual(201);
   });
 
   test("bad request with missing data", async function () {
     const resp = await request(app)
         .post("/workouts")
         .send({
-          userId: 12
+          workoutName: "new",
+          workoutDesc: "New",
         })
-        .set("authorization", `Bearer ${adminToken}`);
+        .set("authorization", `Bearer ${u1Token}`);
     expect(resp.statusCode).toEqual(404);
   });
 
@@ -74,8 +76,9 @@ describe("POST /workouts", function () {
     const resp = await request(app)
         .post("/companies")
         .send({
-          ...newWorkout,
-          name: 'fake'
+          workoutName: "new",
+          workoutDesc: "New",
+          data: ['1', 2, 'test']
         })
         .set("authorization", `Bearer ${adminToken}`);
     expect(resp.statusCode).toEqual(404);
@@ -101,46 +104,24 @@ describe("GET /workouts", function () {
       ]
     });
   });
-    test("not found for no such workout", async function () {
-      const resp = await request(app).get(`/workouts/nope`);
-      expect(resp.statusCode).toEqual(401);
-    });
+
+  test("not found for no such workout", async function () {
+    const resp = await request(app).get(`/workouts/nope`);
+    expect(resp.statusCode).toEqual(401);
+  });
+
+  test("ok for correct user", async function () {
+    const resp = await request(app).get(`/workouts/${user1.userId}`)
+      .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(200);
+  });
 });
 
-/************************************** GET /companies/:handle */
 
-// describe("GET /companies/:handle", function () {
-//   test("works for anon", async function () {
-//     const resp = await request(app).get(`/companies/c1`);
-//     expect(resp.body).toEqual({
-//       company: {
-//         handle: "c1",
-//         name: "C1",
-//         description: "Desc1",
-//         numEmployees: 1,
-//         logoUrl: "http://c1.img",
-//         jobs: [
-//           { id: testJobIds[0], title: "J1", equity: "0.1", salary: 1 },
-//           { id: testJobIds[1], title: "J2", equity: "0.2", salary: 2 },
-//           { id: testJobIds[2], title: "J3", equity: null, salary: 3 },
-//         ],
-//       },
-//     });
-//   });
-
-//   test("works for anon: company w/o jobs", async function () {
-//     const resp = await request(app).get(`/companies/c2`);
-//     expect(resp.body).toEqual({
-//       company: {
-//         handle: "c2",
-//         name: "C2",
-//         description: "Desc2",
-//         numEmployees: 2,
-//         logoUrl: "http://c2.img",
-//         jobs: [],
-//       },
-//     });
-//   });
-
-
-
+// try {
+//   await Workout.getWorkout(999999);
+//   fail();
+// } catch (err) {
+//   console.log('err', err)
+//   expect(err instanceof NotFoundError).toBeTruthy();
+// }

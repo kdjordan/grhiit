@@ -47,13 +47,8 @@ router.post("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
  */
 
 router.get("/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
-  try {
     const workouts = await Workout.findAll(req.params.id);
-    return res.json({ workouts });
-
-  } catch (err) {
-    return next(err);
-  }
+    return res.json({ workouts })
 });
 
 /** GET /  =>

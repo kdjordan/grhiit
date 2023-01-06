@@ -8,6 +8,7 @@
 */
 
 import { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion';
 import UserContext from '../../UserContext';
 import Grhiit from '../../Api';
@@ -15,6 +16,7 @@ import LocalStorage from '../../LocalStorage';
 import { toast } from 'react-toastify';
 
 export default function Profile() {
+    const navigate = useNavigate();
     const { currentUser, setCurrentUser } = useContext(UserContext)
     const [user, setUser] = useState()
     const [form, setForm] = useState(null);
@@ -45,19 +47,28 @@ export default function Profile() {
     const [errors, setErrors] = useState([])
 
     function handleChange(e) {
-    const { name, value } = e.target
-    setForm(f => ({
-        ...f,
-        [name]: value
-    })) 
+        const { name, value } = e.target
+        setForm(f => ({
+            ...f,
+            [name]: value
+        })) 
     }
-    
+
+    async function deleteProfile() {
+        console.log('deleting ', user.userId)
+        let res = await Grhiit.deleteUser(user.userId)
+        if (res) {
+            navigate('/')
+        }
+    }
+
     function handleFocus() {
     // Clear errors for the input field that was focused
     setErrors([])
     }
 
     async function handleSubmit(e) {
+        console.log(e.target)
     // Prevent default form submission
     e.preventDefault()
     // Make sure email is valid format and passwords match
@@ -210,7 +221,7 @@ export default function Profile() {
                                      placeholder="Confirm New Password" />
                              </div>
                          </div>
-                         <div className="flex align-center">
+                         <div className="flex align-center justify-center">
                              <button
                                  type="submit"
                                  className="w-1/3 mx-auto self-center text-center text-base 
@@ -218,6 +229,16 @@ export default function Profile() {
                                      hover:text-grred duration-300 focus:outline-none my-1"
                              >
                                  UPDATE PROFILE
+                             </button>
+                             <button
+                                type="button"
+                                onClick={deleteProfile}
+                                id="delete"
+                                className="w-1/3 mx-auto self-center text-center text-base 
+                                    sm:text-sm py-3 rounded bg-grblack text-grred hover:bg-grwhite 
+                                hover:text-grred duration-300 focus:outline-none my-1"
+                            >
+                                 DELETE PROFILE
                              </button>
                          </div>
                      </form>
