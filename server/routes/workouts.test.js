@@ -22,6 +22,7 @@ afterAll(commonAfterAll);
 /************************************** POST /workouts */
 let user1
 let u1Token
+
 describe("POST /workouts", function () {
   const newWorkout = {
     workoutName: "new",
@@ -63,34 +64,36 @@ describe("POST /workouts", function () {
 
   test("bad request with missing data", async function () {
     const resp = await request(app)
-        .post("/workouts")
+        .post(`/workouts/${user1.userId}`)
         .send({
           workoutName: "new",
           workoutDesc: "New",
         })
         .set("authorization", `Bearer ${u1Token}`);
-    expect(resp.statusCode).toEqual(404);
+    expect(resp.statusCode).toEqual(400);
   });
 
   test("bad request with invalid data", async function () {
     const resp = await request(app)
-        .post("/companies")
+        .post(`/workouts/${user1.userId}`)
         .send({
           workoutName: "new",
           workoutDesc: "New",
           data: ['1', 2, 'test']
         })
-        .set("authorization", `Bearer ${adminToken}`);
-    expect(resp.statusCode).toEqual(404);
+        .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(400);
   });
 });
 
 /************************************** GET /workouts */
 
 describe("GET /workouts", function () {
+  let workoutId
   test("ok for admin", async function () {
     const resp = await request(app).get(`/workouts/${user1.userId}`)
-    .set("authorization", `Bearer ${adminToken}`);;
+    .set("authorization", `Bearer ${adminToken}`);
+    workoutId = resp.body.workouts[0].id
     expect(resp.body).toEqual({
       workouts: [
         {
@@ -106,22 +109,15 @@ describe("GET /workouts", function () {
   });
 
   test("not found for no such workout", async function () {
-    const resp = await request(app).get(`/workouts/nope`);
+    const resp = await request(app).get(`/workouts/0002`)
+      .set("authorization", `Bearer ${u1Token}`);
     expect(resp.statusCode).toEqual(401);
   });
 
   test("ok for correct user", async function () {
-    const resp = await request(app).get(`/workouts/${user1.userId}`)
+    const resp = await request(app).get(`/workouts/workout/${workoutId}`)
       .set("authorization", `Bearer ${u1Token}`);
     expect(resp.statusCode).toEqual(200);
   });
 });
 
-
-// try {
-//   await Workout.getWorkout(999999);
-//   fail();
-// } catch (err) {
-//   console.log('err', err)
-//   expect(err instanceof NotFoundError).toBeTruthy();
-// }

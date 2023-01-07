@@ -63,6 +63,7 @@ router.get("/workout/:id",  async function (req, res, next) {
     return res.json({ workout });
 
   } catch (err) {
+    console.log('returning err ', err)
     return next(err);
   }
 });

@@ -36,8 +36,8 @@ async function commonBeforeAll() {
                           first_name,
                           last_name,
                           email)
-        VALUES ('u1', $1, 'U1F', 'U1L', 'u1@email.com'),
-               ('u2', $2, 'U2F', 'U2L', 'u2@email.com')
+        VALUES ('u11', $1, 'U11F', 'U11L', 'u1@email.com'),
+               ('u12', $2, 'U12F', 'U12L', 'u2@email.com')
         RETURNING username`,
       [
         await bcrypt.hash("password1", BCRYPT_WORK_FACTOR),
