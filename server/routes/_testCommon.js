@@ -126,8 +126,6 @@ async function commonAfterAll() {
   await db.end();
 }
 
-
-
 const adminToken = createToken({ username: "admin", isAdmin: true });
 
 module.exports = {

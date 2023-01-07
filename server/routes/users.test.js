@@ -1,21 +1,19 @@
 "use strict";
 
-const { any } = require('@jest/types');
 const request = require("supertest");
-
 const db = require("../db.js");
 const app = require("../app");
 const User = require("../models/user");
+const { createToken } = require("../helpers/tokens");
 
 const {
   commonBeforeAll,
   commonBeforeEach,
   commonAfterEach,
   commonAfterAll,
-  u1Token,
-  u2Token,
   adminToken,
 } = require("./_testCommon");
+
 
 beforeAll(commonBeforeAll);
 beforeEach(commonBeforeEach);
@@ -23,9 +21,16 @@ afterEach(commonAfterEach);
 afterAll(commonAfterAll);
 
 /************************************** POST /users */
+let user1, user2
+let u1Token, u2Token
 
 describe("POST /users", function () {
   test("works for admins: create non-admin", async function () {
+    user1 = await User.get('u1')
+    user2 = await User.get('u2')
+    u1Token = createToken(user1)
+    u2Token = createToken(user2)
+    
     const resp = await request(app)
         .post("/users")
         .send({
@@ -347,3 +352,39 @@ describe("PATCH /users/:username", () => {
   });
 });
 
+/************************************** DELETE /users/:username */
+
+describe("DELETE /users/:username", () => {
+  test("works for admins", async function () {
+    const resp = await request(app)
+        .delete(`/users/u1`)
+        .set("authorization", `Bearer ${adminToken}`);  
+    expect(resp.body).toEqual({
+      deleted : 'u1'
+    });
+  });
+
+  test("works for same user", async function () {
+    const resp = await request(app)
+        .delete(`/users/u1`)
+        .set("authorization", `Bearer ${u1Token}`);  
+    expect(resp.body).toEqual({
+      deleted : 'u1'
+    });
+  });
+
+  test("unauth if not same user", async function () {
+    const resp = await request(app)
+      .delete(`/users/u1`)
+      .set("authorization", `Bearer ${u2Token}`);  
+    expect(resp.statusCode).toEqual(401);
+  });
+
+  test("fails is username is not valid", async function () {
+    const resp = await request(app)
+      .delete(`/users/u99`)
+      .set("authorization", `Bearer ${adminToken}`);  
+    expect(resp.statusCode).toEqual(404);
+  });
+
+});

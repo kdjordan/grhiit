@@ -55,7 +55,6 @@ export default function Profile() {
     }
 
     async function deleteProfile() {
-        console.log('deleting ', user.userId)
         await Grhiit.deleteUser(user.username)
         logout()
         navigate('/')
@@ -67,7 +66,6 @@ export default function Profile() {
     }
 
     async function handleSubmit(e) {
-        console.log(e.target)
     // Prevent default form submission
     e.preventDefault()
     // Make sure email is valid format and passwords match
