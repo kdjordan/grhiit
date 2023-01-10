@@ -55,9 +55,9 @@ export default function AddInterval({ addInterval }) {
         form.rounds = Number(form.rounds)
         
         //add unique id to object
-        const newForm = Object.assign({}, form)
-        newForm.id = uuidv4()
-        return newForm
+        // const newForm = Object.assign({}, form)
+        form.id = uuidv4()
+        return form
       }
 
       function handleFocus() {

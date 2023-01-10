@@ -9,12 +9,13 @@ import { useState, useEffect } from 'react';
 import Card from './Card';
 import Grhiit from '../../Api';
 
-export default function Workouts({user}) {
+export default function Workouts() {
+  const { currentUser } = useContext(UserContext)
     const [data, setData] = useState([])
   
     useEffect(() => { 
       async function getWorkouts() {
-        const res = await Grhiit.getAllWorkouts(user.userId);
+        const res = await Grhiit.getAllWorkouts(currentUser.userId);
         setData(res)
       }
         getWorkouts()
