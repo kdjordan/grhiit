@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+
+/* Ensure dark theme applies globally */
+html, body {
+  background-color: #202124;
+  color: white;
+}
