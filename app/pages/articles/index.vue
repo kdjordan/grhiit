@@ -32,5 +32,9 @@
 </template>
 
 <script setup lang="ts">
-const { data: articles } = await useContent('articles').find()
+// For now, create a placeholder until we have actual content
+const articles = []
+
+// When we have content, we can use:
+// const articles = await queryContent('articles').find()
 </script>
