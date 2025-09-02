@@ -3,7 +3,7 @@
     <!-- Program Hero -->
     <section class="py-20 bg-grhiit-black border-b border-grhiit-gray">
       <div class="container mx-auto px-4">
-        <h1 class="text-5xl md:text-6xl font-display font-bold mb-6">
+        <h1 class="text-5xl md:text-6xl font-primary font-bold mb-6">
           THE <span class="text-grhiit-red">GRHIIT</span> METHOD
         </h1>
         <p class="text-xl text-gray-300 max-w-3xl">
@@ -16,7 +16,7 @@
     <!-- How It Works -->
     <section class="py-20 bg-grhiit-gray">
       <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-display font-bold mb-12">HOW IT WORKS</h2>
+        <h2 class="text-4xl font-primary font-bold mb-12">HOW IT WORKS</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div class="border-l-4 border-grhiit-red pl-6">
             <h3 class="text-xl font-bold mb-3 text-grhiit-red">STEP 1</h3>
@@ -45,7 +45,7 @@
     <!-- Workout Structure -->
     <section class="py-20 bg-grhiit-black">
       <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-display font-bold mb-12">WORKOUT STRUCTURE</h2>
+        <h2 class="text-4xl font-primary font-bold mb-12">WORKOUT STRUCTURE</h2>
         <div class="grid md:grid-cols-3 gap-8">
           <div class="bg-grhiit-gray p-8">
             <h3 class="text-2xl font-bold text-grhiit-red mb-4">20:10</h3>
@@ -84,7 +84,7 @@
     <!-- Core Movements -->
     <section class="py-20 bg-grhiit-gray">
       <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-display font-bold mb-12">CORE MOVEMENTS</h2>
+        <h2 class="text-4xl font-primary font-bold mb-12">CORE MOVEMENTS</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div>
             <h3 class="text-xl font-bold text-grhiit-red mb-3">SQUATS</h3>
@@ -117,7 +117,7 @@
     <!-- Why It Works -->
     <section class="py-20 bg-grhiit-black">
       <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-display font-bold mb-12">WHY IT WORKS</h2>
+        <h2 class="text-4xl font-primary font-bold mb-12">WHY IT WORKS</h2>
         <div class="max-w-4xl">
           <div class="space-y-6">
             <div class="flex items-start">
@@ -156,7 +156,7 @@
     <!-- CTA -->
     <section class="py-20 bg-grhiit-gray border-t border-grhiit-light-gray">
       <div class="container mx-auto px-4 text-center">
-        <h2 class="text-4xl font-display font-bold mb-6">
+        <h2 class="text-4xl font-primary font-bold mb-6">
           READY TO DO <span class="text-grhiit-red">HARD THINGS</span>?
         </h2>
         <p class="text-xl text-gray-300 mb-8">

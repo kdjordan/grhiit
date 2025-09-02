@@ -4,7 +4,7 @@
     <section class="relative min-h-screen flex items-center justify-center bg-grhiit-black">
       <div class="absolute inset-0 bg-gradient-to-b from-transparent to-grhiit-black opacity-50"></div>
       <div class="relative z-10 container mx-auto px-4 text-center">
-        <h1 class="text-6xl md:text-8xl font-display font-bold mb-6 tracking-wider">
+        <h1 class="text-6xl md:text-8xl font-primary font-bold mb-6 tracking-wider">
           GRHIIT
         </h1>
         <p class="text-xl md:text-2xl mb-2 text-gray-300">
@@ -18,13 +18,13 @@
           ALL IT TAKES IS ALL YOU'VE GOT
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <GButton size="lg" @click="openWaitlistModal">
+          <UiGButton size="lg" @click="openUiWaitlistModal">
             Join the First 1,000
-          </GButton>
+          </UiGButton>
           <NuxtLink to="/program">
-            <GButton variant="outline" size="lg">
+            <UiGButton variant="outline" size="lg">
               Learn the Method
-            </GButton>
+            </UiGButton>
           </NuxtLink>
         </div>
       </div>
@@ -63,7 +63,7 @@
       <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 class="text-4xl md:text-5xl font-display font-bold mb-8">
+            <h2 class="text-4xl md:text-5xl font-primary font-bold mb-8">
               DO HARD THINGS<br>
               <span class="text-grhiit-red">ON PURPOSE</span>
             </h2>
@@ -111,19 +111,19 @@
       <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-4 gap-8 text-center">
           <div>
-            <div class="text-5xl font-display font-bold text-grhiit-red mb-2">02</div>
+            <div class="text-5xl font-primary font-bold text-grhiit-red mb-2">02</div>
             <div class="text-gray-400 uppercase">Rest</div>
           </div>
           <div>
-            <div class="text-5xl font-display font-bold text-grhiit-red mb-2">20</div>
+            <div class="text-5xl font-primary font-bold text-grhiit-red mb-2">20</div>
             <div class="text-gray-400 uppercase">Mindset</div>
           </div>
           <div>
-            <div class="text-5xl font-display font-bold text-grhiit-red mb-2">10</div>
+            <div class="text-5xl font-primary font-bold text-grhiit-red mb-2">10</div>
             <div class="text-gray-400 uppercase">Focus</div>
           </div>
           <div>
-            <div class="text-5xl font-display font-bold text-grhiit-red mb-2">8</div>
+            <div class="text-5xl font-primary font-bold text-grhiit-red mb-2">8</div>
             <div class="text-gray-400 uppercase">Week Cycles</div>
           </div>
         </div>
@@ -133,16 +133,16 @@
     <!-- CTA Section -->
     <section class="py-20 bg-grhiit-black border-t border-grhiit-gray">
       <div class="container mx-auto px-4 text-center">
-        <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">
+        <h2 class="text-4xl md:text-5xl font-primary font-bold mb-6">
           JOIN THE FIRST <span class="text-grhiit-red">1,000</span>
         </h2>
         <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
           Get early access, live session invites, and the 8 Weeks of GRHIIT starter PDF.
         </p>
         <div class="max-w-md mx-auto">
-          <GButton size="lg" full-width @click="openWaitlistModal">
+          <UiGButton size="lg" full-width @click="openUiWaitlistModal">
             Join Now
-          </GButton>
+          </UiGButton>
         </div>
         <p class="text-sm text-gray-500 mt-4">
           One day. One second. One rep at a time.
@@ -151,23 +151,23 @@
     </section>
 
     <!-- Waitlist Modal -->
-    <WaitlistModal 
-      :is-open="isWaitlistModalOpen" 
-      @close="closeWaitlistModal"
+    <UiWaitlistModal 
+      :is-open="isUiWaitlistModalOpen" 
+      @close="closeUiWaitlistModal"
       @submit="handleWaitlistSubmit"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-const isWaitlistModalOpen = ref(false)
+const isUiWaitlistModalOpen = ref(false)
 
-const openWaitlistModal = () => {
-  isWaitlistModalOpen.value = true
+const openUiWaitlistModal = () => {
+  isUiWaitlistModalOpen.value = true
 }
 
-const closeWaitlistModal = () => {
-  isWaitlistModalOpen.value = false
+const closeUiWaitlistModal = () => {
+  isUiWaitlistModalOpen.value = false
 }
 
 const handleWaitlistSubmit = (data: { email: string; name: string }) => {

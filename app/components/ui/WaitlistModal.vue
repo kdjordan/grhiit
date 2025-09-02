@@ -68,12 +68,12 @@
                 </div>
 
                 <div class="flex gap-3 mt-8">
-                  <GButton type="submit" :disabled="loading" full-width>
+                  <UiGButton type="submit" :disabled="loading" full-width>
                     {{ loading ? 'JOINING...' : 'JOIN NOW' }}
-                  </GButton>
-                  <GButton variant="outline" @click="closeModal" type="button">
+                  </UiGButton>
+                  <UiGButton variant="outline" @click="closeModal" type="button">
                     CLOSE
-                  </GButton>
+                  </UiGButton>
                 </div>
               </form>
 

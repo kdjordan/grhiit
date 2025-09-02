@@ -2,7 +2,7 @@
   <div>
     <section class="py-20 bg-grhiit-black border-b border-grhiit-gray">
       <div class="container mx-auto px-4">
-        <h1 class="text-5xl font-display font-bold mb-6">ARTICLES</h1>
+        <h1 class="text-5xl font-primary font-bold mb-6">ARTICLES</h1>
         <p class="text-xl text-gray-300">Evidence-based training insights. No fluff.</p>
       </div>
     </section>

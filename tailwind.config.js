@@ -1,16 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: {
-    files: [
-      "./app/**/*.{js,vue,ts}",
-      "./components/**/*.{js,vue,ts}",
-      "./layouts/**/*.vue",
-      "./pages/**/*.vue",
-      "./plugins/**/*.{js,ts}",
-      "./app.vue",
-      "./error.vue",
-    ]
-  },
+  content: [
+    "./app/**/*.{js,vue,ts}",
+    "./app/**/*.vue",
+    "./components/**/*.{js,vue,ts}",
+    "./layouts/**/*.vue", 
+    "./pages/**/*.vue",
+    "./plugins/**/*.{js,ts}",
+    "./app.vue",
+    "./error.vue",
+  ],
   theme: {
     extend: {
       colors: {
@@ -20,8 +19,8 @@ export default {
         'grhiit-light-gray': '#F5F5F5',
       },
       fontFamily: {
-        'display': ['Anton', 'Arial Black', 'sans-serif'],
-        'body': ['Inter', 'Arial', 'sans-serif'],
+        'primary': ['Anton', 'Arial Black', 'sans-serif'],
+        'secondary': ['Inter', 'Arial', 'sans-serif'],
       },
     },
   },

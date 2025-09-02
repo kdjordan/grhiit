@@ -1,15 +1,15 @@
 <template>
-  <div class="min-h-screen bg-grhiit-black text-white font-body">
+  <div class="min-h-screen bg-grhiit-black text-white font-secondary">
     <header class="bg-grhiit-black border-b border-grhiit-gray">
       <nav class="container mx-auto px-4 py-4">
         <div class="flex items-center justify-between">
-          <NuxtLink to="/" class="text-4xl font-display tracking-wider uppercase">GRHIIT</NuxtLink>
+          <NuxtLink to="/" class="text-4xl font-primary uppercase">GRHIIT</NuxtLink>
           <div class="flex gap-8 items-center">
             <NuxtLink to="/" class="text-white hover:text-grhiit-red transition-colors uppercase tracking-wide text-sm font-bold">Home</NuxtLink>
             <NuxtLink to="/program" class="text-white hover:text-grhiit-red transition-colors uppercase tracking-wide text-sm font-bold">Program</NuxtLink>
             <NuxtLink to="/articles" class="text-white hover:text-grhiit-red transition-colors uppercase tracking-wide text-sm font-bold">Articles</NuxtLink>
             <NuxtLink to="/about" class="text-white hover:text-grhiit-red transition-colors uppercase tracking-wide text-sm font-bold">About</NuxtLink>
-            <GButton size="sm" @click="openWaitlistModal">Join Waitlist</GButton>
+            <UiGButton size="sm" @click="openWaitlistModal">Join Waitlist</UiGButton>
           </div>
         </div>
       </nav>
@@ -21,7 +21,7 @@
       <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 class="text-2xl font-display font-bold mb-4">GRHIIT</h3>
+            <h3 class="text-2xl font-primary font-bold mb-4">GRHIIT</h3>
             <p class="text-gray-400">High-intensity interval training built on real science. No equipment. No fluff.</p>
           </div>
           <div>
@@ -35,7 +35,7 @@
           <div>
             <h4 class="text-white font-bold uppercase mb-4">Connect</h4>
             <p class="text-gray-400 mb-4">All it takes is all you've got.</p>
-            <GButton size="md" @click="openWaitlistModal">Get Started</GButton>
+            <UiGButton size="md" @click="openWaitlistModal">Get Started</UiGButton>
           </div>
         </div>
         <div class="border-t border-grhiit-light-gray pt-8 text-center text-gray-500">
@@ -45,7 +45,7 @@
     </footer>
 
     <!-- Waitlist Modal -->
-    <WaitlistModal 
+    <UiWaitlistModal 
       :is-open="isWaitlistModalOpen" 
       @close="closeWaitlistModal"
       @submit="handleWaitlistSubmit"
