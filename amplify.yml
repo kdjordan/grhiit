@@ -1,0 +1,20 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Install pnpm
+        - npm install -g pnpm
+        - pnpm install
+    build:
+      commands:
+        - pnpm run generate
+  artifacts:
+    baseDirectory: apps/web/.output/public
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .pnpm-store/**/*
+      - apps/web/node_modules/**/*

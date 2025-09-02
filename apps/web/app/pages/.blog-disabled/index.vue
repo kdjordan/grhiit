@@ -22,5 +22,5 @@
 </template>
 
 <script setup lang="ts">
-const { data: posts } = await useContent('blog').find()
+const posts = await queryContent('blog').find()
 </script>

@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "composite": true,
+    "paths": {
+      "@db/*": ["./src/db/*"],
+      "@api/*": ["./src/api/*"],
+      "@utils/*": ["./src/utils/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}

@@ -11,4 +11,23 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwind()],
   },
+  
+  // SSG Configuration for AWS Amplify
+  nitro: {
+    preset: "static", // Use static for now, Amplify will handle it
+    serveStatic: true,
+  },
+  
+  // Ensure all routes are pre-rendered
+  routeRules: {
+    "/**": { prerender: true }
+  },
+  
+  // Optional: Configure for better SEO
+  app: {
+    head: {
+      htmlAttrs: { lang: "en" },
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    }
+  }
 });

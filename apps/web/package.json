@@ -1,0 +1,29 @@
+{
+  "name": "@grhiit/web",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.23",
+    "@nuxt/content": "^3.6.3",
+    "@nuxt/fonts": "^0.11.4",
+    "@tailwindcss/vite": "^4.1.12",
+    "better-sqlite3": "^12.2.0",
+    "nuxt": "^4.0.3",
+    "sqlite3": "^5.1.7",
+    "vue": "^3.5.20",
+    "vue-router": "^4.5.1",
+    "@grhiit/core": "workspace:*"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.12"
+  }
+}
