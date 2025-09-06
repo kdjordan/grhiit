@@ -1,0 +1,4 @@
+## Goals
+- Fix AWS Amplify deployment issues with Nuxt Content and sqlite3
+- Replace better-sqlite3 with sqlite3 in the web project
+- Resolve workspace dependency errors during Amplify build
